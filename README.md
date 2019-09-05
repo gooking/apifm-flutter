@@ -8,6 +8,12 @@ apifm 为你提供了 Flutter 的云开发支持，无需服务器，无需开�
 
 QQ交流群: 577126347
 
+# 平台支持
+
+* [微信小程序开发](https://github.com/gooking/apifm-wxapi)
+* [web/h5 网站开发](https://github.com/gooking/apifm-webapi)
+* [Flutter 开发](https://github.com/gooking/apifm-flutter)
+
 # 使用方法
 
 ## 引入 package
