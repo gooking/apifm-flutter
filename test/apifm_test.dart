@@ -5,8 +5,6 @@ mockHoldon() async {
 }
 
 main() async{
-    print("start");
-
   // Apifm.request('', false, '', '').then((res) {
   //   print(res);
   // });
@@ -19,7 +17,25 @@ main() async{
   // print(await Apifm.request('/common/mobile-segment/next', false, 'post', {'segment': '0'}));
   // print(await Apifm.request('/score/send/rule', true, 'post'));
   
-  print(await Apifm.queryMobileLocation("13500000000"));
+  // var res = await Apifm.login_username('zansan', '123456', '33010500879931234', 'iphone8 Plus');
+  // print(res);
+  // int uid = res['data']['uid'];
+  // String token = res['data']['token'];
+  // print('uid: $uid, token is : $token');
+
+  var res = Apifm.graphValidateCodeUrl();
+  print(res);
+  print(res['key']);
+  print(res['imageUrl']);
+
+  var res2 = await Apifm.graphValidateCodeCheck('0.31748667168061806', '2010');
+  print(res2);
+  // print(await Apifm.login_username({
+  //   'username': 'zansan',
+  //   'pwd': '123456',    
+  //   'deviceId': '33010500879931234',    
+  //   'deviceName': 'iphone8 Plus',    
+  // }));
 
 
   // await mockHoldon();  // 防止主进程结束

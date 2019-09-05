@@ -53,6 +53,11 @@ Apifm.queryMobileLocation("13500000000").then((res) {
 2. msg 如果上面的code不为0，那么 msg 将会返回具体的错误说明描述
 3. data 字段保存了 code 为0 时候的数据，一起你需要的数据，都保存在 data 中返回给你
 
+# 相关资源
+
+[「功能说明文档」](instructions.md)
+[「api接口文档」](https://api.it120.cc/doc.html)
+
 # 授权协议
 
 [MIT License](LICENSE)

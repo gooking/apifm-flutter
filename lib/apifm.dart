@@ -1,9 +1,8 @@
 library apifm;
 
-import 'package:http/http.dart'
-as http;
-import 'dart:convert'
-as convert;
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'dart:math';
 
 var _API_BASE_URL = 'https://api.it120.cc';
 var _SUB_DOMAIN = 'tz';
@@ -43,10 +42,7 @@ request(url, needSubDomain, method, [data = '']) async {
     throw Exception('api server response error with statusCode ${response.statusCode}');
   }
   if (method.toLowerCase() == 'post') {
-    var response = await http.post(_url, headers: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      body: data);
+    var response = await http.post(_url, body: data);
     if (response.statusCode == 200) {
       return convert.jsonDecode(response.body);
     }
@@ -60,30 +56,30 @@ queryMobileLocation(mobile) {
     'mobile': mobile
   });
 }
-// nextMobileSegment (data) {
-//   return request('/common/mobile-segment/next', false, 'post', data);
-// }
-// queryConfigValue (key) {
-//   return request('/config/value', true, 'get', {
-//     key
-//   });
-// }
-// queryConfigBatch (keys) {
-//   return request('/config/values', true, 'get', {
-//     keys
-//   });
-// }
-// scoreRules (data) {
-//   return request('/score/send/rule', true, 'post', data);
-// }
-// scoreSignRules () {
-//   return request('/score/sign/rules', true, 'get', {});
-// }
-// scoreSign (token) {
-//   return request('/score/sign', true, 'post', {
-//     token
-//   });
-// }
+nextMobileSegment (data) {
+  return request('/common/mobile-segment/next', false, 'post', data);
+}
+queryConfigValue (key) {
+  return request('/config/value', true, 'get', {
+    'key': key
+  });
+}
+queryConfigBatch (keys) {
+  return request('/config/values', true, 'get', {
+    'keys': keys
+  });
+}
+scoreRules ([data]) {
+  return request('/score/send/rule', true, 'post', data);
+}
+scoreSignRules () {
+  return request('/score/sign/rules', true, 'get');
+}
+scoreSign (token) {
+  return request('/score/sign', true, 'post', {
+    'token': token
+  });
+}
 // scoreSignLogs (data) {
 //   return request('/score/sign/logs', true, 'post', data);
 // }
@@ -179,9 +175,14 @@ queryMobileLocation(mobile) {
 //     type: 2
 //   });
 // }
-// login_username (data) {
-//   return request('/user/username/login', true, 'post', data);
-// }
+login_username (username, pwd, deviceId, deviceName) {
+  return request('/user/username/login', true, 'post', {
+    'username': username,
+    'pwd': pwd,
+    'deviceId': deviceId,
+    'deviceName': deviceName,
+  });
+}
 // bindUsername (token, username, [pwd = '']) {
 //   return request('/user/username/bindUsername', true, 'post', {
 //     token,
@@ -189,14 +190,14 @@ queryMobileLocation(mobile) {
 //     pwd
 //   });
 // }
-// login_mobile (mobile, pwd, [deviceId = '', deviceName = '']) {
-//   return request('/user/m/login', true, 'post', {
-//     mobile,
-//     pwd,
-//     deviceId,
-//     deviceName
-//   });
-// }
+login_mobile (mobile, pwd, deviceId, deviceName) {
+  return request('/user/m/login', true, 'post', {
+    'mobile': mobile,
+    'pwd': pwd,
+    'deviceId': deviceId,
+    'deviceName': deviceName,
+  });
+}
 // resetPwd (mobile, pwd, code) {
 //   return request('/user/m/reset-pwd', true, 'post', {
 //     mobile,
@@ -204,18 +205,12 @@ queryMobileLocation(mobile) {
 //     code
 //   });
 // }
-// register_complex (data) {
-//   return request('/user/wxapp/register/complex', true, 'post', data);
-// }
-// register_simple (data) {
-//   return request('/user/wxapp/register/simple', true, 'post', data);
-// }
-// register_username (data) {
-//   return request('/user/username/register', true, 'post', data);
-// }
-// register_mobile (data) {
-//   return request('/user/m/register', true, 'post', data);
-// }
+register_username (data) {
+  return request('/user/username/register', true, 'post', data);
+}
+register_mobile (data) {
+  return request('/user/m/register', true, 'post', data);
+}
 // banners (data) {
 //   return request('/banner/list', true, 'get', data);
 // }
@@ -712,16 +707,20 @@ queryMobileLocation(mobile) {
 //     id
 //   });
 // }
-// graphValidateCodeUrl ([key = Math.random()]) {
-//   const _url = API_BASE_URL + '/' + subDomain + '/verification/pic/get?key=' + key;
-//   return _url;
-// }
-// graphValidateCodeCheck (code, [key = Math.random()]) {
-//   return request('/verification/pic/check', true, 'post', {
-//     key,
-//     code
-//   });
-// }
+graphValidateCodeUrl () {
+  var key = Random().nextDouble().toString();
+  var imageUrl = _API_BASE_URL + '/' + _SUB_DOMAIN + '/verification/pic/get?key=' + key;
+  return {
+    'key': key,
+    'imageUrl': imageUrl,
+  };
+}
+graphValidateCodeCheck (key, code) {
+  return request('/verification/pic/check', true, 'post', {
+    'key': key,
+    'code': code
+  });
+}
 // shortUrl ([url = '']) {
 //   return request('/common/short-url/shorten', false, 'post', {
 //     url
