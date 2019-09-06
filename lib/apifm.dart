@@ -22,6 +22,9 @@ init2(a, b) {
 }
 
 request(url, needSubDomain, method, [data = '']) async {
+  if (data == null) {
+    data = {};
+  }
   // await _mockHoldon();
   String _url = _API_BASE_URL + (needSubDomain ? '/' + _SUB_DOMAIN : '') + url;
   if (method.toLowerCase() == 'get') {
@@ -148,11 +151,11 @@ scoreSign (token) {
 //     token
 //   });
 // }
-// checkToken (token) {
-//   return request('/user/check-token', true, 'get', {
-//     token
-//   });
-// }
+checkToken (token) {
+  return request('/user/check-token', true, 'get', {
+    'token': token
+  });
+}
 // addTempleMsgFormid (token, type, formId) {
 //   return request('/template-msg/wxa/formId', true, 'post', {
 //     token,
@@ -198,22 +201,22 @@ login_mobile (mobile, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
-// resetPwd (mobile, pwd, code) {
-//   return request('/user/m/reset-pwd', true, 'post', {
-//     mobile,
-//     pwd,
-//     code
-//   });
-// }
+resetPwd (mobile, pwd, code) {
+  return request('/user/m/reset-pwd', true, 'post', {
+    'mobile': mobile,
+    'pwd': pwd,
+    'code': code
+  });
+}
 register_username (data) {
   return request('/user/username/register', true, 'post', data);
 }
 register_mobile (data) {
   return request('/user/m/register', true, 'post', data);
 }
-// banners (data) {
-//   return request('/banner/list', true, 'get', data);
-// }
+banners ([data]) {
+  return request('/banner/list', true, 'get', data);
+}
 // goodsCategory () {
 //   return request('/shop/goods/category/all', true, 'get');
 // }
@@ -800,11 +803,11 @@ smsValidateCodeCheck (mobile, code) {
 //     idCardNo
 //   });
 // }
-// loginout (token) {
-//   return request('/user/loginout', true, 'get', {
-//     token
-//   });
-// }
+loginout (token) {
+  return request('/user/loginout', true, 'get', {
+    'token': token
+  });
+}
 // userLevelList (data) {
 //   return request('/user/level/list', true, 'post', data);
 // }

@@ -252,7 +252,11 @@
 
 ## 读取 Banner 列表
 
->  Apifm.banners(Map<String, String> params)
+```js
+Apifm.banners([Map<String, String> params])
+```
+
+读取后台设置的Banner数据，可用于展示App启动图、轮播图等
 
 ## 公告管理
 
@@ -392,6 +396,15 @@ Apifm.register_username({
 
 最常用的一种注册方式，输入手机号码，获取短信验证码，回填校验通过后即可完成注册
 
+**示例代码:**
+```js
+Apifm.register_mobile({
+  'mobile': '13500000000',
+  'pwd': '123456',
+  'nick': '张三'
+})
+```
+
 ## 用户登录
 
 ### 用户名登录
@@ -435,26 +448,26 @@ print('uid: $uid, token is : $token');
 ## 检测登录 token 是否有效
 
 ```js
- Apifm.checkToken(token)
+ Apifm.checkToken(String token)
 ```
 
 ## 重置登录密码
 
 ```js
- Apifm.resetPwd(mobile, pwd, code)
+ Apifm.resetPwd(String mobile, String pwd, String code)
 ```
 
-> 用于忘记密码找回，重置密码时候使用
-> 
-> 填写手机号码，系统下发短信验证码，回填正确的验证码后完成新密码的设置
+用于忘记密码找回，重置密码时候使用
+
+填写手机号码，系统下发短信验证码，回填正确的验证码后完成新密码的设置
 
 ## 退出登录
 
 ```js
- Apifm.loginout(token)
+ Apifm.loginout(String token)
 ```
 
-> 退出后，当前token将立刻失效
+退出后，当前token将立刻失效
 
 # 用户信息
 

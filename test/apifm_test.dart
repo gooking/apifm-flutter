@@ -23,19 +23,26 @@ main() async{
   // String token = res['data']['token'];
   // print('uid: $uid, token is : $token');
 
-  var res = Apifm.graphValidateCodeUrl();
-  print(res);
-  print(res['key']);
-  print(res['imageUrl']);
+  // String token = "c81cef4c-faa0-4c9d-a73d-f52570cbe31a";
+  // print(await Apifm.checkToken(token));
+  // print(await Apifm.loginout(token));
 
-  var res2 = await Apifm.graphValidateCodeCheck('0.31748667168061806', '2010');
-  print(res2);
+  // var res = Apifm.graphValidateCodeUrl();
+  // print(res);
+  // print(res['key']);
+  // print(res['imageUrl']);
+
+  // var res2 = await Apifm.graphValidateCodeCheck('0.31748667168061806', '2010');
+  // print(res2);
+
   // print(await Apifm.login_username({
   //   'username': 'zansan',
   //   'pwd': '123456',    
   //   'deviceId': '33010500879931234',    
   //   'deviceName': 'iphone8 Plus',    
   // }));
+
+  print(await Apifm.banners());
 
 
   // await mockHoldon();  // 防止主进程结束
