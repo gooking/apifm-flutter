@@ -347,21 +347,21 @@ code 为用户输入的验证码内容
 
 ### 获取验证码(发送短信)
 
+```js
+ Apifm.smsValidateCode(String mobile, [String key, String picCode])
 ```
- Apifm.smsValidateCode(mobile, key, picCode)
-```
-> 短信验证码自动下发到 mobile 对应的手机号码；
-> 
-> 当后台设置了发送短信验证码必须开启图形验证码校验时，必须传 key 和 picCode 参数，否则不用传；
-> 
-> key 和 picCode 参数，请查阅图形验证码接口
+短信验证码自动下发到 mobile 对应的手机号码；
+
+当后台设置了发送短信验证码必须开启图形验证码校验时，必须传 key 和 picCode 参数，否则不用传；
+
+key 和 picCode 参数，请查阅图形验证码使用说明
 
 ### 校验输入验证码是否正确
 
+```js
+ Apifm.smsValidateCodeCheck(String mobile, String code)
 ```
- Apifm.smsValidateCodeCheck(mobile, code)
-```
-> code 为用户手机上收到的验证码
+code 为用户手机上收到的验证码
 
 # 登录 & 注册
 

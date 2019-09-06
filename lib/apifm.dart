@@ -726,19 +726,19 @@ graphValidateCodeCheck (key, code) {
 //     url
 //   });
 // }
-// smsValidateCode (mobile, [key = '', picCode = '']) {
-//   return request('/verification/sms/get', true, 'get', {
-//     mobile,
-//     key,
-//     picCode
-//   });
-// }
-// smsValidateCodeCheck (mobile, code) {
-//   return request('/verification/sms/check', true, 'post', {
-//     mobile,
-//     code
-//   });
-// }
+smsValidateCode (mobile, [key = '', picCode = '']) {
+  return request('/verification/sms/get', true, 'get', {
+    'mobile': mobile,
+    'key': key,
+    'picCode': picCode
+  });
+}
+smsValidateCodeCheck (mobile, code) {
+  return request('/verification/sms/check', true, 'post', {
+    'mobile': mobile,
+    'code': code
+  });
+}
 // mapDistance (lat1, lng1, lat2, lng2) {
 //   return request('/common/map/distance', false, 'get', {
 //     lat1,
