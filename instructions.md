@@ -151,7 +151,6 @@
     - [读取今日签到信息](#读取今日签到信息)
     - [签到记录](#签到记录)
   - [使用积分券兑换积分](#使用积分券兑换积分)
-  - [转发微信群获得积分奖励](#转发微信群获得积分奖励)
   - [积分明细](#积分明细)
 - [资金 / 财务 相关](#资金--财务-相关)
   - [获取资产信息（余额、可用积分）](#获取资产信息余额可用积分)
@@ -180,9 +179,6 @@
 - [小程序工具类](#小程序工具类)
   - [无限获取二维码](#无限获取二维码)
   - [小程序数据解密](#小程序数据解密)
-  - [模板消息](#模板消息)
-    - [保存 formid/预支付Id](#保存-formid预支付id)
-    - [给用户发送模板消息](#给用户发送模板消息)
 - [知识付费【虚拟交易】](#知识付费虚拟交易)
   - [获取产品列表](#获取产品列表)
   - [获取产品详情](#获取产品详情)
@@ -401,7 +397,7 @@ Apifm.register_username({
 Apifm.register_mobile({
   'mobile': '13500000000',
   'pwd': '123456',
-  'nick': '张三'
+  'code': '9978'
 })
 ```
 
@@ -2207,7 +2203,7 @@ print('uid: $uid, token is : $token');
  Apifm.scoreDeductionRules()
 ```
 
-> 通过该方法读取后台设置的积分抵扣规则
+通过该方法读取后台设置的积分抵扣规则
 
 ## 读取积分赠送规则
 
@@ -2238,12 +2234,12 @@ print('uid: $uid, token is : $token');
 ### 读取今日签到信息
 
 ```js
- Apifm.scoreTodaySignedInfo(token)
+ Apifm.scoreTodaySignedInfo(String token)
 ```
 
-> 判断今天有没有签到
-> 
-> 错误码返回 700 表示未签到；错误码返回 0 表示已经签到
+判断今天有没有签到
+
+错误码返回 700 表示未签到；错误码返回 0 表示已经签到
 
 ### 签到记录
 
@@ -2251,35 +2247,15 @@ print('uid: $uid, token is : $token');
  Apifm.scoreSignLogs(Map<String, String> params)
 ```
 
-> 读取历史签到记录
-> 
-> 分页展示，具体参数详见接口文档说明
+读取历史签到记录
 
 ## 使用积分券兑换积分
 
 ```js
- Apifm.scoreExchange(token, number)
+ Apifm.scoreExchange(String token, String number)
 ```
 
-> 使用积分券的券号，兑换积分
-
-## 转发微信群获得积分奖励
-
-```js
- Apifm.shareGroupGetScore(referrer, encryptedData, iv)
-```
-
-**referrer**
-
-*分享人的用户id*
-
-**encryptedData**
-
-*小程序api:wx.getShareInfo 获得*
-
-**iv**
-
-*小程序api:wx.getShareInfo 获得*
+使用积分券的券号，兑换积分
 
 ## 积分明细
 
@@ -2287,7 +2263,7 @@ print('uid: $uid, token is : $token');
  Apifm.scoreLogs(Map<String, String> params)
 ```
 
-> 详细记录你的每一次积分变动
+用户的每一次积分变动，都会详细记录积分明细
 
 # 资金 / 财务 相关
 
@@ -2438,40 +2414,6 @@ print('uid: $uid, token is : $token');
 > 类似微信运动之类的数据，都可以通过该方法解密成明文
 > 
 > code 为登录临时凭证
-
-## 模板消息
-
-### 保存 formid/预支付Id
-
-```js
- Apifm.addTempleMsgFormid(token, type, formId)
-```
-
-> type: form/pay ，分别代表支付还是表单提交
-> 
-> formId: 表单提交场景下，为 submit 事件带上的 formId；支付场景下，为支付的 prepay_id
-
-小程序给用户发送模板消息有特殊规定：
-[https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/template-message.html](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/template-message.html)
-
-1. 当用户在小程序内完成过支付行为，可允许开发者向用户在7天内推送有限条数的模板消息（1次支付可下发3条，多次支付下发条数独立，互相不影响）
-2. 当用户在小程序内发生过提交表单行为且该表单声明为要发模板消息的，开发者需要向用户提供服务时，可允许开发者向用户在7天内推送有限条数的模板消息（1次提交表单可下发1条，多次提交下发条数独立，相互不影响）
-
-*所以为了突破这个数量限制，我们预先收集很多的 formid/预支付Id ，这样就可以不受限制的给用户发送模板消息了*
-
-**小程序模板消息调试请使用手机，开发工具获取到的formid 是一个 mock（模拟的），无法用来真正发送模板消息**
-
-### 给用户发送模板消息
-
-```js
- Apifm.sendTempleMsg(Map<String, String> params)
-```
-
-> 具体参数说明详见接口文档
-> 
-> 可实现立即发送消息；按照条件触发发送消息
-
-本方法可以指定一个 formid/预支付Id ，也可以不传该参数，那么系统将自动从上面的方法存储的 formid/预支付Id 里面获取一个用来发送模板消息
 
 # 知识付费【虚拟交易】
 

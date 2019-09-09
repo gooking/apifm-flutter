@@ -7,10 +7,10 @@ import 'dart:math';
 var _API_BASE_URL = 'https://api.it120.cc';
 var _SUB_DOMAIN = 'tz';
 
-_mockHoldon() async {
-  // 模拟接口等待5秒
-  return Future.delayed(Duration(seconds: 5), () {});
-}
+// _mockHoldon() async {
+//   // 模拟接口等待5秒
+//   return Future.delayed(Duration(seconds: 5), () {});
+// }
 
 init(b) {
   _SUB_DOMAIN = b;
@@ -83,30 +83,23 @@ scoreSign (token) {
     'token': token
   });
 }
-// scoreSignLogs (data) {
-//   return request('/score/sign/logs', true, 'post', data);
-// }
-// scoreTodaySignedInfo (token) {
-//   return request('/score/today-signed', true, 'get', {
-//     token
-//   });
-// }
-// scoreExchange (token, number) {
-//   return request('/score/exchange', true, 'post', {
-//     number,
-//     token
-//   });
-// }
-// scoreLogs (data) {
-//   return request('/score/logs', true, 'post', data);
-// }
-// shareGroupGetScore (referrer, encryptedData, iv) {
-//   return request('/score/share/wxa/group', true, 'post', {
-//     referrer,
-//     encryptedData,
-//     iv
-//   });
-// }
+scoreSignLogs (data) {
+  return request('/score/sign/logs', true, 'post', data);
+}
+scoreTodaySignedInfo (token) {
+  return request('/score/today-signed', true, 'get', {
+    'token': token
+  });
+}
+scoreExchange (token, number) {
+  return request('/score/exchange', true, 'post', {
+    'number': number,
+    'token': token
+  });
+}
+scoreLogs (data) {
+  return request('/score/logs', true, 'post', data);
+}
 // kanjiaSet (goodsId) {
 //   return request('/shop/goods/kanjia/set', true, 'get', {
 //     goodsId
@@ -156,16 +149,6 @@ checkToken (token) {
     'token': token
   });
 }
-// addTempleMsgFormid (token, type, formId) {
-//   return request('/template-msg/wxa/formId', true, 'post', {
-//     token,
-//     type,
-//     formId
-//   });
-// }
-// sendTempleMsg (data) {
-//   return request('/template-msg/put', true, 'post', data);
-// }
 // wxpay (data) {
 //   return request('/pay/wx/wxapp', true, 'post', data);
 // }
@@ -861,9 +844,9 @@ loginout (token) {
 //     iv
 //   });
 // }
-// scoreDeductionRules () {
-//   return request('/score/deduction/rules', true, 'get', {});
-// }
+scoreDeductionRules () {
+  return request('/score/deduction/rules', true, 'get');
+}
 // voteItems (data) {
 //   return request('/vote/items', true, 'post', data);
 // }

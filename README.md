@@ -35,7 +35,7 @@ Apifm.init("gooking");
 
 这里以查询手机号码归属地(queryMobileLocation)的调用后台接口为例子说明如何在 Flutter 中使用 apifm ，其他接口，你可以根据使用文档的说明调用相应的方法即可
 
-### await 方式调用：
+### await 方式调用「推荐」：
 
 ```js
 var res = await Apifm.queryMobileLocation("13500000000");
@@ -61,6 +61,7 @@ Apifm.queryMobileLocation("13500000000").then((res) {
 
 # 相关资源
 
+[「Demo程序」](https://github.com/gooking/apifm-flutter-demo)
 [「功能说明文档」](instructions.md)
 [「api接口文档」](https://api.it120.cc/doc.html)
 
