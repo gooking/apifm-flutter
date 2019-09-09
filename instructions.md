@@ -296,15 +296,38 @@ Apifm.queryConfigBatch(String keys)
 
 ### 设置 JSON 数据
 
-> jsonSet(Map<String, String> params)
+```js
+Apifm.jsonSet(Map<String, String> params)
+```
+
+参数说明：
+
+1. type 自定义类型，最大长度为32个字
+2. refId 关联数据编号（数字类型）
+3. content Json数据内容（必传）
+
+如果要修改某一条 Json 记录，则需要再传一个参数 （id） ，代表你要修改的记录ID
 
 ### 读取设置的 JSON 数据列表
 
-> jsonList(Map<String, String> params)
+```js
+Apifm.jsonList([Map<String, String> params])
+```
+
+支持以下参数：
+
+1. page 读取第几页数据，不传该参数默认为1；
+2. pageSize 每页读取几条数据，不传该参数默认取50；
+3. type 只读取该类型的Json记录；
+4. refId 只读取该数据的所有Json记录；
 
 ### 删除 JSON 数据
 
-> jsonDelete(token, id)
+```js
+Apifm.jsonDelete(int id[, String token])
+```
+
+删除指定id的Json记录
 
 ## 分布式文件管理
 
@@ -901,15 +924,15 @@ print('uid: $uid, token is : $token');
 
 ## 商品分类
 
-```
+```js
  Apifm.goodsCategory()
 ```
 
-> 读取后台设置的所有分类数据，分类之间的上下级关系请使用 level 和 pid 进行管理
-> 
-> level = 1 表示 1级类目；2 表示 2级类目，以此类推
-> 
-> pid 代表该类目的上级类目ID（一级类目的 pid = 0）
+读取后台设置的所有分类数据，分类之间的上下级关系请使用 level 和 pid 进行管理
+
+level = 1 表示 1级类目；2 表示 2级类目，以此类推
+
+pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 
 *分类的目录树，可以根据上述2个字段，采用 js 在本地实现*
 
@@ -1069,12 +1092,10 @@ print('uid: $uid, token is : $token');
 ### 获取商品列表
 
 ```js
- Apifm.goods(Map<String, String> params)
+ Apifm.goods([Map<String, String> params])
 ```
 
-> 读取所有的商品数据，以分页的形式展示，支持按照多种方式进行排序
-> 
-> 具体参数的说明，请查阅接口文档
+读取所有的商品数据，以分页的形式展示，支持按照多种方式进行排序
 
 **接口返回示例：**
 

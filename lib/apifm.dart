@@ -200,12 +200,12 @@ register_mobile (data) {
 banners ([data]) {
   return request('/banner/list', true, 'get', data);
 }
-// goodsCategory () {
-//   return request('/shop/goods/category/all', true, 'get');
-// }
-// goods (data) {
-//   return request('/shop/goods/list', true, 'post', data);
-// }
+goodsCategory () {
+  return request('/shop/goods/category/all', true, 'get');
+}
+goods ([data]) {
+  return request('/shop/goods/list', true, 'post', data);
+}
 // goodsDetail (id) {
 //   return request('/shop/goods/detail', true, 'get', {
 //     id
@@ -681,18 +681,18 @@ banners ([data]) {
 // luckyInfoJoinLogs (data) {
 //   return request('/luckyInfo/join/logs', true, 'post', data);
 // }
-// jsonList (data) {
-//   return request('/json/list', true, 'post', data);
-// }
-// jsonSet (data) {
-//   return request('/json/set', true, 'post', data);
-// }
-// jsonDelete (id, [token = '']) {
-//   return request('/json/delete', true, 'post', {
-//     token,
-//     id
-//   });
-// }
+jsonList ([data]) {
+  return request('/json/list', true, 'post', data);
+}
+jsonSet (data) {
+  return request('/json/set', true, 'post', data);
+}
+jsonDelete (id, [token = '']) {
+  return request('/json/delete', true, 'post', {
+    'token': token,
+    'id': id
+  });
+}
 graphValidateCodeUrl () {
   var key = Random().nextDouble().toString();
   var imageUrl = _API_BASE_URL + '/' + _SUB_DOMAIN + '/verification/pic/get?key=' + key;

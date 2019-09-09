@@ -16,6 +16,18 @@ QQ交流群: 577126347
 
 # 使用方法
 
+## pubspec.yaml 文件增加依赖
+```
+dependencies:
+  apifm: ^0.0.5
+```
+
+## 安装依赖
+
+```bash
+$ flutter pub get
+```
+
 ## 引入 package
 ```
 import 'package:apifm/apifm.dart' as Apifm;
