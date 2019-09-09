@@ -169,6 +169,14 @@ login_username (username, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
+loginEmail(email, pwd, deviceId, deviceName) {
+  return request('/user/email/login', true, 'post', {
+    'email': email,
+    'pwd': pwd,
+    'deviceId': deviceId,
+    'deviceName': deviceName,
+  });
+}
 // bindUsername (token, username, [pwd = '']) {
 //   return request('/user/username/bindUsername', true, 'post', {
 //     token,
@@ -725,6 +733,17 @@ smsValidateCodeCheck (mobile, code) {
     'code': code
   });
 }
+mailValidateCode(mail) {
+  return request('/verification/mail/get', true, 'get', {
+    'mail': mail
+  });
+}
+mailValidateCodeCheck(mail, code) {
+  return request('/verification/mail/check', true, 'post', {
+    'mail': mail,
+    'code': code
+  });
+}
 // mapDistance (lat1, lng1, lat2, lng2) {
 //   return request('/common/map/distance', false, 'get', {
 //     lat1,
@@ -919,3 +938,13 @@ scoreDeductionRules () {
 // yuyueTeamDeleteMember (token, joinId) {
 //   return request('/yuyue/info/team/members/del', true, 'post', data);
 // }
+registerEmail(data) {
+  return request('/user/email/register', true, 'post', data);
+}
+bindEmail(token, email, [pwd]) {
+  return request('/user/email/bindUsername', true, 'post', {
+    'token': token,
+    'email': email,
+    'pwd': pwd
+  });
+}

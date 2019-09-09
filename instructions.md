@@ -29,12 +29,17 @@
   - [短信验证码](#短信验证码)
     - [获取验证码(发送短信)](#获取验证码发送短信)
     - [校验输入验证码是否正确](#校验输入验证码是否正确-1)
+  - [邮箱验证码](#邮箱验证码)
+    - [获取验证码(发送邮件)](#获取验证码发送邮件)
+    - [校验输入验证码是否正确](#校验输入验证码是否正确-2)
 - [登录 & 注册](#登录--注册)
   - [用户注册](#用户注册)
     - [用户名注册](#用户名注册)
+    - [邮箱注册](#邮箱注册)
     - [手机号注册](#手机号注册)
   - [用户登录](#用户登录)
     - [用户名登录](#用户名登录)
+    - [邮箱登录](#邮箱登录)
     - [手机号码登录](#手机号码登录)
   - [检测登录 token 是否有效](#检测登录-token-是否有效)
   - [重置登录密码](#重置登录密码)
@@ -44,6 +49,7 @@
     - [小程序](#小程序)
     - [短信验证码认证](#短信验证码认证)
   - [设置用户名](#设置用户名)
+  - [设置邮箱地址](#设置邮箱地址)
   - [绑定小程序](#绑定小程序)
   - [获取用户信息](#获取用户信息)
   - [获取用户id、openid、unionid](#获取用户idopenidunionid)
@@ -386,6 +392,20 @@ key 和 picCode 参数，请查阅图形验证码使用说明
 ```
 code 为用户手机上收到的验证码
 
+## 邮箱验证码
+
+### 获取验证码(发送邮件)
+
+```js
+Apifm.mailValidateCode(String mail)
+```
+
+### 校验输入验证码是否正确
+
+```js
+Apifm.mailValidateCodeCheck(String mail, String code)
+```
+
 # 登录 & 注册
 
 ## 用户注册
@@ -406,6 +426,11 @@ Apifm.register_username({
 })
 ```
 
+### 邮箱注册
+
+```js
+Apifm.registerEmail(Map<String, String> params)
+```
 
 ### 手机号注册
 
@@ -436,6 +461,26 @@ Apifm.register_mobile({
 
 ```js
 var res = await Apifm.login_username('zansan', '123456', '33010500879931234', 'iphone8 Plus');
+int uid = res['data']['uid'];
+String token = res['data']['token'];
+print('uid: $uid, token is : $token');
+```
+
+*deviceId 建议读取手机序列号；*
+
+*deviceName 建议读取手机型号;*
+
+
+### 邮箱登录
+
+```js
+Apifm.loginEmail(String email, String pwd, String deviceId, String deviceName)
+```
+
+**示例代码：**
+
+```js
+var res = await Apifm.loginEmail('zansan@163.com', '123456', '33010500879931234', 'iphone8 Plus');
 int uid = res['data']['uid'];
 String token = res['data']['token'];
 print('uid: $uid, token is : $token');
@@ -525,6 +570,12 @@ print('uid: $uid, token is : $token');
 > 设置用户名后，将可使用该用户名进行登录；用户名在系统中是唯一的；
 > 
 > pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
+
+## 设置邮箱地址
+
+```js
+Apifm.bindEmail(String token, String email, [String pwd])
+```
 
 ## 绑定小程序
 
