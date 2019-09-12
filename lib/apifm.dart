@@ -161,7 +161,7 @@ checkToken (token) {
 //     type: 2
 //   });
 // }
-login_username (username, pwd, deviceId, deviceName) {
+loginUsername (username, pwd, deviceId, deviceName) {
   return request('/user/username/login', true, 'post', {
     'username': username,
     'pwd': pwd,
@@ -184,7 +184,7 @@ loginEmail(email, pwd, deviceId, deviceName) {
 //     pwd
 //   });
 // }
-login_mobile (mobile, pwd, deviceId, deviceName) {
+loginMobile (mobile, pwd, deviceId, deviceName) {
   return request('/user/m/login', true, 'post', {
     'mobile': mobile,
     'pwd': pwd,
@@ -192,17 +192,24 @@ login_mobile (mobile, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
-resetPwd (mobile, pwd, code) {
+resetPwdUseMobileCode (mobile, pwd, code) {
   return request('/user/m/reset-pwd', true, 'post', {
     'mobile': mobile,
     'pwd': pwd,
     'code': code
   });
 }
-register_username (data) {
+resetPwdUseEmailCode (email, pwd, code) {
+  return request('/user/email/reset-pwd', true, 'post', {
+    'email': email,
+    'pwd': pwd,
+    'code': code
+  });
+}
+registerUsername (data) {
   return request('/user/username/register', true, 'post', data);
 }
-register_mobile (data) {
+registerMobile (data) {
   return request('/user/m/register', true, 'post', data);
 }
 banners ([data]) {
@@ -851,9 +858,9 @@ loginout (token) {
 // }
 // bindOpenid (token, code) {
 //   return request('/user/wxapp/bindOpenid', true, 'post', {
-//     token,
-//     code,
-//     type: 2
+//     'token': token,
+//     'code': code,
+//     'type': 2
 //   });
 // }
 // encryptedData (code, encryptedData, iv) {
@@ -941,10 +948,29 @@ scoreDeductionRules () {
 registerEmail(data) {
   return request('/user/email/register', true, 'post', data);
 }
-bindEmail(token, email, [pwd]) {
+bindEmail(token, email, code, [pwd]) {
   return request('/user/email/bindUsername', true, 'post', {
     'token': token,
     'email': email,
+    'code': code,
     'pwd': pwd
+  });
+}
+registerQQConnect(data) {
+  return request('/user/qqconnect/register', true, 'post', data);
+}
+loginQQConnect(oauthConsumerKey, openid, accessToken) {
+  return request('/user/qqconnect/login', true, 'post', {
+    'oauthConsumerKey': oauthConsumerKey,
+    'openid': openid,
+    'accessToken': accessToken,
+  });
+}
+bindQQConnectOpenid (token, oauthConsumerKey, openid, accessToken) {
+  return request('/user/qqconnect/bindOpenid', true, 'post', {
+    'token': token,
+    'oauthConsumerKey': oauthConsumerKey,
+    'openid': openid,
+    'accessToken': accessToken,
   });
 }

@@ -37,12 +37,16 @@
     - [用户名注册](#用户名注册)
     - [邮箱注册](#邮箱注册)
     - [手机号注册](#手机号注册)
+    - [QQ互联一键注册](#qq互联一键注册)
   - [用户登录](#用户登录)
     - [用户名登录](#用户名登录)
     - [邮箱登录](#邮箱登录)
     - [手机号码登录](#手机号码登录)
+    - [QQ互联一键登录](#qq互联一键登录)
   - [检测登录 token 是否有效](#检测登录-token-是否有效)
-  - [重置登录密码](#重置登录密码)
+  - [重置密码](#重置密码)
+    - [用手机找回密码](#用手机找回密码)
+    - [用邮箱找回密码](#用邮箱找回密码)
   - [退出登录](#退出登录)
 - [用户信息](#用户信息)
   - [绑定手机号码](#绑定手机号码)
@@ -50,6 +54,7 @@
     - [短信验证码认证](#短信验证码认证)
   - [设置用户名](#设置用户名)
   - [设置邮箱地址](#设置邮箱地址)
+  - [绑定QQ便于后期QQ互联一键登录](#绑定qq便于后期qq互联一键登录)
   - [绑定小程序](#绑定小程序)
   - [获取用户信息](#获取用户信息)
   - [获取用户id、openid、unionid](#获取用户idopenidunionid)
@@ -413,13 +418,13 @@ Apifm.mailValidateCodeCheck(String mail, String code)
 ### 用户名注册
 
 ```js
- Apifm.register_username(Map<String, String> params)
+ Apifm.registerUsername(Map<String, String> params)
 ```
 最简单的注册模式，只要提供用户名和密码即可完成注册
 
 **示例代码:**
 ```js
-Apifm.register_username({
+Apifm.registerUsername({
   'username': 'zansan',
   'pwd': '123456',
   'nick': '张三'
@@ -435,32 +440,42 @@ Apifm.registerEmail(Map<String, String> params)
 ### 手机号注册
 
 ```js
- Apifm.register_mobile(Map<String, String> params)
+ Apifm.registerMobile(Map<String, String> params)
 ```
 
 最常用的一种注册方式，输入手机号码，获取短信验证码，回填校验通过后即可完成注册
 
-**示例代码:**
+### QQ互联一键注册
+
 ```js
-Apifm.register_mobile({
-  'mobile': '13500000000',
-  'pwd': '123456',
-  'code': '9978'
-})
+ Apifm.registerQQConnect(Map<String, String> params)
 ```
+
+**QQ互联的一键注册功能，需要以下参数：**
+
+*QQ授权后返回的参数：*
+
+oauthConsumerKey、openid、accessToken
+
+具体请查阅QQ互联的接口文档说明
+
+*可选参数：*
+
+referrer 邀请人，邀请你注册的用户id
+postJsonString 注册的扩展信息，Json数据格式
 
 ## 用户登录
 
 ### 用户名登录
 
 ```js
- Apifm.login_username(String username, String pwd, String deviceId, String deviceName)
+ Apifm.loginUsername(String username, String pwd, String deviceId, String deviceName)
 ```
 
 **示例代码：**
 
 ```js
-var res = await Apifm.login_username('zansan', '123456', '33010500879931234', 'iphone8 Plus');
+var res = await Apifm.loginUsername('zansan', '123456', '33010500879931234', 'iphone8 Plus');
 int uid = res['data']['uid'];
 String token = res['data']['token'];
 print('uid: $uid, token is : $token');
@@ -493,13 +508,13 @@ print('uid: $uid, token is : $token');
 ### 手机号码登录
 
 ```js
- Apifm.login_mobile(String mobile, String pwd, String deviceId, String deviceName)
+ Apifm.loginMobile(String mobile, String pwd, String deviceId, String deviceName)
 ```
 
 **示例代码：**
 
 ```js
-var res = await Apifm.login_mobile('13500000000', '123456', '33010500879931234', 'iphone8 Plus');
+var res = await Apifm.loginMobile('13500000000', '123456', '33010500879931234', 'iphone8 Plus');
 int uid = res['data']['uid'];
 String token = res['data']['token'];
 print('uid: $uid, token is : $token');
@@ -509,21 +524,41 @@ print('uid: $uid, token is : $token');
 
 *deviceName 建议读取手机型号;*
 
+### QQ互联一键登录
+
+```js
+ Apifm.loginQQConnect(String oauthConsumerKey, String openid, String accessToken)
+```
+
+登录的3个参数，请查阅QQ互联的接口文档返回值说明
+
 ## 检测登录 token 是否有效
 
 ```js
  Apifm.checkToken(String token)
 ```
 
-## 重置登录密码
+## 重置密码
+
+### 用手机找回密码
 
 ```js
- Apifm.resetPwd(String mobile, String pwd, String code)
+ Apifm.resetPwdUseMobileCode(String mobile, String pwd, String code)
 ```
 
 用于忘记密码找回，重置密码时候使用
 
 填写手机号码，系统下发短信验证码，回填正确的验证码后完成新密码的设置
+
+### 用邮箱找回密码
+
+```js
+Apifm.resetPwdUseEmailCode(String email, String pwd, String code)
+```
+
+用于忘记密码找回，重置密码时候使用
+
+填写邮箱地址，系统下发邮件验证码，回填正确的验证码后完成新密码的设置
 
 ## 退出登录
 
@@ -574,8 +609,20 @@ print('uid: $uid, token is : $token');
 ## 设置邮箱地址
 
 ```js
-Apifm.bindEmail(String token, String email, [String pwd])
+Apifm.bindEmail(String token, String email, String code, [String pwd])
 ```
+
+通过邮箱验证码校验后，绑定用户的邮箱地址
+
+## 绑定QQ便于后期QQ互联一键登录
+
+```js
+ Apifm.bindQQConnectOpenid(String token, String oauthConsumerKey, String openid, String accessToken)
+```
+
+token 为当前用户的登录token；
+
+剩下3个参数，请查看QQ互联组件的接口文档
 
 ## 绑定小程序
 
@@ -1006,132 +1053,6 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
       "pid": 0,
       "type": "",
       "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-12 11:07:48",
-      "dateUpdate": "2019-04-10 11:25:21",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/5bfffd6ad0d4483870f024a3ed936528.png",
-      "id": 1873,
-      "isUse": true,
-      "key": "2",
-      "level": 1,
-      "name": "裤装",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-12 11:08:14",
-      "dateUpdate": "2019-04-10 11:26:00",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/8d32c254e2cb86d2d42c99b768d136b6.png",
-      "id": 1875,
-      "isUse": true,
-      "key": "4",
-      "level": 1,
-      "name": "特价区",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-13 09:37:53",
-      "dateUpdate": "2019-04-10 11:26:24",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/d800327091f216e2c83db8af7b6be306.png",
-      "id": 1906,
-      "isUse": true,
-      "key": "5",
-      "level": 1,
-      "name": "裙装",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-13 10:06:52",
-      "dateUpdate": "2019-04-10 11:26:48",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/cfee29650d6ae58a4bb1f84a3d899450.png",
-      "id": 1907,
-      "isUse": true,
-      "key": "6",
-      "level": 1,
-      "name": "套装",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-16 14:03:08",
-      "dateUpdate": "2019-04-10 11:27:28",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/6b3136cda73c99453ac93a1c5a9deebf.png",
-      "id": 2016,
-      "isUse": true,
-      "key": "7",
-      "level": 1,
-      "name": "外套",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-17 19:55:09",
-      "dateUpdate": "2019-04-10 11:27:49",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/9a7356187fce687ce568ba7381685299.png",
-      "id": 2054,
-      "isUse": true,
-      "key": "8",
-      "level": 1,
-      "name": "秒杀",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-25 09:07:38",
-      "dateUpdate": "2019-04-10 11:28:06",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/7773b4c204280ba194514594f7070ac9.png",
-      "id": 2245,
-      "isUse": true,
-      "key": "9",
-      "level": 1,
-      "name": "内裤",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-09-25 09:07:58",
-      "dateUpdate": "2019-04-10 11:28:22",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/60f41bf042d201b48a7115d22344320f.png",
-      "id": 2246,
-      "isUse": true,
-      "key": "10",
-      "level": 1,
-      "name": "袜子",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
-    },
-    {
-      "dateAdd": "2017-10-18 11:13:56",
-      "dateUpdate": "2019-04-10 11:28:39",
-      "icon": "https://cdn.it120.cc/apifactory/2019/04/09/cdb16ac9c66bc211b82bd947452526f4.png",
-      "id": 2787,
-      "isUse": true,
-      "key": "11",
-      "level": 1,
-      "name": "鞋",
-      "paixu": 0,
-      "pid": 0,
-      "type": "",
-      "userId": 951
     }
   ],
   "msg": "success"
@@ -1189,43 +1110,6 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
       "stores": 9999998,
       "userId": 951,
       "views": 15955,
-      "weight": 0
-    },
-    {
-      "categoryId": 2054,
-      "commission": 0,
-      "commissionType": 0,
-      "dateAdd": "2019-03-11 13:02:39",
-      "dateUpdate": "2019-08-14 09:36:24",
-      "gotScore": 0,
-      "gotScoreType": 0,
-      "id": 122843,
-      "kanjia": false,
-      "kanjiaPrice": 0,
-      "limitation": false,
-      "logisticsId": 386,
-      "miaosha": false,
-      "minPrice": 600,
-      "minScore": 0,
-      "name": "WIFI 58mm 热敏打印机工厂定制版",
-      "numberFav": 0,
-      "numberGoodReputation": 8,
-      "numberOrders": 894,
-      "numberSells": 872,
-      "originalPrice": 800,
-      "paixu": 0,
-      "pic": "https://cdn.it120.cc/apifactory/2019/03/07/133eb6294e3853ebe4eb8551359a26dc.png",
-      "pingtuan": false,
-      "pingtuanPrice": 0,
-      "recommendStatus": 1,
-      "recommendStatusStr": "推荐",
-      "shopId": 0,
-      "status": 0,
-      "statusStr": "上架",
-      "stores": 9999984,
-      "tags": "打印机",
-      "userId": 951,
-      "views": 18044,
       "weight": 0
     }
   ],
