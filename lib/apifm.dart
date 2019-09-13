@@ -974,3 +974,17 @@ bindQQConnectOpenid (token, oauthConsumerKey, openid, accessToken) {
     'accessToken': accessToken,
   });
 }
+registerWX(data) {
+  return request('/user/wxsns/register', true, 'post', data);
+}
+loginWX(code) {
+  return request('/user/wxsns/login', true, 'post', {
+    'code': code,
+  });
+}
+bindWXOpenid (token, code) {
+  return request('/user/wxsns/bindOpenid', true, 'post', {
+    'token': token,
+    'code': code,
+  });
+}

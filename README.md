@@ -29,7 +29,8 @@ $ flutter pub get
 ```
 
 ## 引入 package
-```
+
+```js
 import 'package:apifm/apifm.dart' as Apifm;
 ```
 
