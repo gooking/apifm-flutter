@@ -100,50 +100,50 @@ scoreExchange (token, number) {
 scoreLogs (data) {
   return request('/score/logs', true, 'post', data);
 }
-// kanjiaSet (goodsId) {
-//   return request('/shop/goods/kanjia/set', true, 'get', {
-//     goodsId
-//   });
-// }
-// kanjiaJoin (token, kjid) {
-//   return request('/shop/goods/kanjia/join', true, 'post', {
-//     kjid,
-//     token
-//   });
-// }
-// kanjiaDetail (kjid, joiner) {
-//   return request('/shop/goods/kanjia/info', true, 'get', {
-//     kjid,
-//     joiner
-//   });
-// }
-// kanjiaHelp (token, kjid, joiner, [remark = '']) {
-//   return request('/shop/goods/kanjia/help', true, 'post', {
-//     kjid,
-//     'joinerUser': joiner,
-//     token,
-//     remark
-//   });
-// }
-// kanjiaClear (token, kjid) {
-//   return request('/shop/goods/kanjia/clear', true, 'post', {
-//     kjid,
-//     token
-//   });
-// }
-// kanjiaMyJoinInfo (token, kjid) {
-//   return request('/shop/goods/kanjia/my', true, 'get', {
-//     kjid,
-//     token
-//   });
-// }
-// kanjiaHelpDetail (token, kjid, joiner) {
-//   return request('/shop/goods/kanjia/myHelp', true, 'get', {
-//     kjid,
-//     joinerUser: joiner,
-//     token
-//   });
-// }
+kanjiaSet (goodsId) {
+  return request('/shop/goods/kanjia/set', true, 'get', {
+    'goodsId': goodsId
+  });
+}
+kanjiaJoin (token, kjid) {
+  return request('/shop/goods/kanjia/join', true, 'post', {
+    'kjid': kjid,
+    'token': token
+  });
+}
+kanjiaDetail (kjid, joiner) {
+  return request('/shop/goods/kanjia/info', true, 'get', {
+    'kjid': kjid,
+    'joiner': joiner
+  });
+}
+kanjiaHelp (token, kjid, joiner, [remark = '']) {
+  return request('/shop/goods/kanjia/help', true, 'post', {
+    'kjid': kjid,
+    'joinerUser': joiner,
+    'token': token,
+    'remark': remark
+  });
+}
+kanjiaClear (token, kjid) {
+  return request('/shop/goods/kanjia/clear', true, 'post', {
+    'kjid': kjid,
+    'token': token
+  });
+}
+kanjiaMyJoinInfo (token, kjid) {
+  return request('/shop/goods/kanjia/my', true, 'get', {
+    'kjid': kjid,
+    'token': token
+  });
+}
+kanjiaHelpDetail (token, kjid, joiner) {
+  return request('/shop/goods/kanjia/myHelp', true, 'get', {
+    'kjid': kjid,
+    'joinerUser': joiner,
+    'token': token
+  });
+}
 checkToken (token) {
   return request('/user/check-token', true, 'get', {
     'token': token
@@ -154,12 +154,6 @@ checkToken (token) {
 // }
 // alipay (data) {
 //   return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
-// }
-// login_wx (code) {
-//   return request('/user/wxapp/login', true, 'post', {
-//     code,
-//     type: 2
-//   });
 // }
 loginUsername (username, pwd, deviceId, deviceName) {
   return request('/user/username/login', true, 'post', {
@@ -177,13 +171,13 @@ loginEmail(email, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
-// bindUsername (token, username, [pwd = '']) {
-//   return request('/user/username/bindUsername', true, 'post', {
-//     token,
-//     username,
-//     pwd
-//   });
-// }
+bindUsername (token, username, [pwd = '']) {
+  return request('/user/username/bindUsername', true, 'post', {
+    'token': token,
+    'username': username,
+    'pwd': pwd
+  });
+}
 loginMobile (mobile, pwd, deviceId, deviceName) {
   return request('/user/m/login', true, 'post', {
     'mobile': mobile,
@@ -421,11 +415,11 @@ goods ([data]) {
 //     token
 //   });
 // }
-// userAmount (token) {
-//   return request('/user/amount', true, 'get', {
-//     token
-//   });
-// }
+userAmount (token) {
+  return request('/user/amount', true, 'get', {
+    'token': token
+  });
+}
 // orderCreate (data) {
 //   return request('/order/create', true, 'post', data);
 // }

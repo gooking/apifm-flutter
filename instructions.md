@@ -627,12 +627,12 @@ Apifm.resetPwdUseEmailCode(String email, String pwd, String code)
 ## 设置用户名
 
 ```js
- Apifm.bindUsername(token, username, pwd)
+ Apifm.bindUsername(String token, String username, [String pwd])
 ```
 
-> 设置用户名后，将可使用该用户名进行登录；用户名在系统中是唯一的；
-> 
-> pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
+设置用户名后，将可使用该用户名进行登录；用户名在系统中是唯一的；
+
+pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
 
 ## 设置邮箱地址
 
@@ -1820,12 +1820,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品砍价设置
 
 ```js
- Apifm.kanjiaSet(goodsId)
+ Apifm.kanjiaSet(int goodsId)
 ```
 
-> 读取某个商品的砍价设置信息：总份数、底价、每次能砍掉的（随机）金额以及开始结束时间
-> 
-> 具体可前往后台砍价设置界面了解设置栏目
+读取某个商品的砍价设置信息：总份数、底价、每次能砍掉的（随机）金额以及开始结束时间
+
+具体可前往后台砍价设置界面了解设置栏目
 
 **接口返回示例：**
 
@@ -1858,12 +1858,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 发起[创建]砍价，继而邀请好友来帮自己砍到底价
 
 ```js
- Apifm.kanjiaJoin(token, kjid)
+ Apifm.kanjiaJoin(String token, int kjid)
 ```
 
-> 每个用户针对同一个 kjid 只能参与一次，多次调用本方法将返回上一次砍价的信息
-> 
-> 如果用户对上次砍价结果不太满意，可以调用下面的 **clear** 方法，清空上一次砍价记录，重新发起砍价
+每个用户针对同一个 kjid 只能参与一次，多次调用本方法将返回上一次砍价的信息
+
+如果用户对上次砍价结果不太满意，可以调用下面的 **clear** 方法，清空上一次砍价记录，重新发起砍价
 
 **接口返回示例：**
 
@@ -1884,12 +1884,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 我发起[创建]的砍价详情
 
 ```js
- Apifm.kanjiaMyJoinInfo(token, kjid)
+ Apifm.kanjiaMyJoinInfo(String token, int kjid)
 ```
 
-> 查看我发起的砍价目前的进展[进度]情况
-> 
-> 也可以作为判断是否有参与砍价的依据
+查看我发起的砍价目前的进展[进度]情况
+
+也可以作为判断是否有参与砍价的依据
 
 **接口返回示例：**
 
@@ -1915,22 +1915,22 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 放弃上一次砍价
 
 ```js
- Apifm.kanjiaClear(token, kjid)
+ Apifm.kanjiaClear(String token, int kjid)
 ```
 
-> 因为每个用户针对同一个  kjid  只能参与一次，如果用户希望再次发起砍价，则必须要先放弃前一次砍价才能进行
-> 
-> 本次操作后，你针对当前 kjid 将查不到砍价记录，砍价数据清空，你可重新调用 **kanjiaJoin** 方法创建一个新的砍价
+因为每个用户针对同一个  kjid  只能参与一次，如果用户希望再次发起砍价，则必须要先放弃前一次砍价才能进行
+
+本次操作后，你针对当前 kjid 将查不到砍价记录，砍价数据清空，你可重新调用 **kanjiaJoin** 方法创建一个新的砍价
 
 ### 砍价详情
 
 ```js
- Apifm.kanjiaDetail(kjid, joiner)
+ Apifm.kanjiaDetail(int kjid, int joiner)
 ```
 
-> joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
-> 
-> 可查看某人创建的砍价的进度情况，看看多少人参与、目前的价格砍到多少了
+joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
+
+可查看某人创建的砍价的进度情况，看看多少人参与、目前的价格砍到多少了
 
 **接口返回示例：**
 
@@ -1963,14 +1963,14 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 帮好友砍价
 
 ```js
- Apifm.kanjiaHelp(token, kjid, joiner, remark)
+ Apifm.kanjiaHelp(String token, int kjid, int joiner, [String remark])
 ```
 
-> 帮助好友砍价，调用该方法后，将使得好友的当前价格越来越接近底价
-> 
-> joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
-> 
-> 被砍到底价、或者截止时间到期后，你将无法再帮助好友进行砍价
+帮助好友砍价，调用该方法后，将使得好友的当前价格越来越接近底价
+
+joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
+
+被砍到底价、或者截止时间到期后，你将无法再帮助好友进行砍价
 
 **接口返回示例：**
 
@@ -1992,12 +1992,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 查询我帮好友砍掉的金额
 
 ```js
- Apifm.kanjiaHelpDetail(token, kjid, joiner)
+ Apifm.kanjiaHelpDetail(String token, int kjid, int joiner)
 ```
 
-> 查询针对当前 kjid ，我帮忙砍掉的金额
-> 
-> joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
+查询针对当前 kjid ，我帮忙砍掉的金额
+
+joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
 
 **接口返回示例：**
 
@@ -2264,7 +2264,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ## 获取资产信息（余额、可用积分）
 
 ```js
- Apifm.userAmount(token)
+ Apifm.userAmount(String token)
 ```
 
 ## 在线支付(充值)
