@@ -1158,14 +1158,14 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品详情信息
 
 ```js
- Apifm.goodsDetail(id)
+ Apifm.goodsDetail(int id)
 ```
 
-> id 参数为上面商品列表方法返回数据里的 id 字段
->
-> 访问该方法会增加商品的浏览量
-> 
-> 该方法获取商品基础信息、商品图文详细介绍、商品图片、可选的规格尺寸、所属分类、快递物流设置信息、商品扩展属性
+id 参数为上面商品列表方法返回数据里的 id 字段
+
+访问该方法会增加商品的浏览量
+
+该方法获取商品基础信息、商品图文详细介绍、商品图片、可选的规格尺寸、所属分类、快递物流设置信息、商品扩展属性
 
 **接口返回示例：**
 
@@ -1256,14 +1256,14 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品的限购设置
 
 ```js
- Apifm.goodsLimitations(goodsId, priceId)
+ Apifm.goodsLimitations(int goodsId, [int priceId])
 ```
 
-> 如果商品（列表、详情）信息中 **limitation** 字段为 **true**，说明该商品开启了限购，只有设置中的会员等级用户才可以在约定时间内购买不超过指定数量
-> 
-> 该方法接收2个参数，**goodsId** 参数是必填的，代表商品id； **priceId** 参数非必填，只有在用户购买时候选择了指定的规格尺寸时候才需要传
-> 
-> 你可以根据当前登录用户的会员等级，在商品详情页面进行相应的交互展示
+如果商品（列表、详情）信息中 **limitation** 字段为 **true**，说明该商品开启了限购，只有设置中的会员等级用户才可以在约定时间内购买不超过指定数量
+
+该方法接收2个参数，**goodsId** 参数是必填的，代表商品id； **priceId** 参数非必填，只有在用户购买时候选择了指定的规格尺寸时候才需要传
+
+你可以根据当前登录用户的会员等级，在商品详情页面进行相应的交互展示
 
 **接口返回示例：**
 
@@ -1315,12 +1315,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品价格「一般用在选择不同规格尺寸后需要实时显示售价」
 
 ```js
- Apifm.goodsPrice(goodsId, propertyChildIds)
+ Apifm.goodsPrice(int goodsId, String propertyChildIds)
 ```
 
-> goodsId 为商品id
-> 
-> **propertyChildIds** 参数为用户选择的规格尺寸数据，多个规格尺寸数据用因为逗号分隔，该参数的格式为： 规格id:子属性id，比如： 4:15,2:10 （分别对应了 颜色:红色，内存:256G）
+goodsId 为商品id
+
+**propertyChildIds** 参数为用户选择的规格尺寸数据，多个规格尺寸数据用因为逗号分隔，该参数的格式为： 规格id:子属性id，比如： 4:15,2:10 （分别对应了 颜色:红色，内存:256G）
 
 **接口返回示例：**
 
@@ -1346,12 +1346,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品的每日价格&每日库存「适用酒店预订、票务预订类」
 
 ```js
- Apifm.goodsPriceDaily(goodsId, priceId)
+ Apifm.goodsPriceDaily(int goodsId, int priceId)
 ```
 
-> goodsId 为商品id
-> 
-> priceId 为选择的商品规格尺寸记录id，无规格尺寸的商品，无需传该参数
+goodsId 为商品id
+
+priceId 为选择的商品规格尺寸记录id，无规格尺寸的商品，无需传该参数
 
 **接口返回示例：**
 
@@ -1386,9 +1386,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
  Apifm.goodsPriceFreight(Map<String, String> params)
 ```
 
-> 具体参数请查阅接口文档
-> 
-> 提供快递地址，本方法可计算出本次会计的计费方式
+提供快递地址，本方法可计算出本次会计的计费方式
 
 *比如： a 件（重量）内 x 元，之后每增加 b 件（重量）额外加收 y 元*
 
@@ -1410,12 +1408,12 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 拉取当前会员可以显示的折扣信息
 
 ```js
- Apifm.goodsRebate(token, goodsId)
+ Apifm.goodsRebate(String token, int goodsId)
 ```
 
-> token 为当前登录用户的登录 token
-> 
-> goodsId 为商品id
+token 为当前登录用户的登录 token
+
+goodsId 为商品id
 
 **接口返回示例：**
 
@@ -1434,9 +1432,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
  Apifm.goodsReputation(Map<String, String> params)
 ```
 
-> 读取当前商品用户的所有评价数据
-> 
-> 具体参数说明请查阅接口文档
+读取当前商品用户的所有评价数据
 
 **接口返回示例：**
 
@@ -1491,7 +1487,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 收藏某个商品
 
 ```js
- Apifm.goodsFavPut(token, goodsId)
+Apifm.goodsFavPut(String token, int goodsId)
 ```
 
 **接口返回示例：**
@@ -1506,7 +1502,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 检测当前商品是否已被收藏
 
 ```js
- Apifm.goodsFavCheck(token, goodsId)
+Apifm.goodsFavCheck(String token, int goodsId)
 ```
 
 **接口返回示例：**
@@ -1533,10 +1529,6 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
  Apifm.goodsFavList(Map<String, String> params)
 ```
 
-> 具体参数说明请查阅接口文档
-> 
-> 支持分页读取、关键词搜索商品
-
 **接口返回示例：**
 
 ```json
@@ -1559,14 +1551,14 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 删除收藏的某个商品
 
 ```js
- Apifm.goodsFavDelete(token, id, goodsId)
+ Apifm.goodsFavDelete(String token, int id, int goodsId)
 ```
 
-> id 参数为收藏列表数据中的记录id
-> 
-> goodsId 为商品id
-> 
-> 以上2个参数至少要填写1个
+id 参数为收藏列表数据中的记录id
+
+goodsId 为商品id
+
+以上2个参数至少要填写1个
 
 **接口返回示例：**
 
