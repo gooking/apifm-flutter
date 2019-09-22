@@ -52,15 +52,12 @@
   - [退出登录](#退出登录)
 - [用户信息](#用户信息)
   - [绑定手机号码](#绑定手机号码)
-    - [小程序](#小程序)
     - [短信验证码认证](#短信验证码认证)
   - [设置用户名](#设置用户名)
   - [设置邮箱地址](#设置邮箱地址)
   - [绑定QQ便于后期QQ互联一键登录](#绑定qq便于后期qq互联一键登录)
-  - [绑定小程序](#绑定小程序)
   - [绑定微信一键登录](#绑定微信一键登录)
   - [获取用户信息](#获取用户信息)
-  - [获取用户id、openid、unionid](#获取用户idopenidunionid)
   - [修改用户资料](#修改用户资料)
   - [实名认证](#实名认证)
   - [会员体系](#会员体系)
@@ -83,6 +80,11 @@
   - [文章管理](#文章管理)
     - [文章列表](#文章列表)
     - [文章详情](#文章详情)
+    - [文章点赞/踩](#文章点赞踩)
+    - [文章点赞/踩记录](#文章点赞踩记录)
+    - [获取该文章的上一篇/下一篇文章信息](#获取该文章的上一篇下一篇文章信息)
+    - [文章投稿(用户发布文章)](#文章投稿用户发布文章)
+    - [删除自己发布的文章](#删除自己发布的文章)
   - [单页信息(关于我们/联系我们/...)](#单页信息关于我们联系我们)
   - [获取文章标签列表(用于展示类似“标签云”)](#获取文章标签列表用于展示类似标签云)
   - [留言 & 反馈](#留言--反馈)
@@ -190,14 +192,6 @@
     - [读取押金列表](#读取押金列表)
     - [押金详情](#押金详情)
     - [申请退回押金](#申请退回押金)
-- [小程序工具类](#小程序工具类)
-  - [无限获取二维码](#无限获取二维码)
-  - [小程序数据解密](#小程序数据解密)
-- [知识付费【虚拟交易】](#知识付费虚拟交易)
-  - [获取产品列表](#获取产品列表)
-  - [获取产品详情](#获取产品详情)
-  - [购买产品](#购买产品)
-  - [读取成交记录](#读取成交记录)
 - [活动 & 工具](#活动--工具)
   - [分布式系统唯一ID](#分布式系统唯一id)
   - [手机号段服务](#手机号段服务)
@@ -254,11 +248,15 @@
 
 ### 读取所有省份
 
->  Apifm.province()
+```js
+Apifm.province()
+```
 
 ### 读取下级省市区数据
 
->  Apifm.nextRegion(pid)
+```js
+Apifm.nextRegion(String pid)
+```
 
 ## 读取 Banner 列表
 
@@ -272,19 +270,27 @@ Apifm.banners([Map<String, String> params])
 
 ### 读取最新的一条公告
 
->  Apifm.noticeLastOne(type)
+```js
+Apifm.noticeLastOne([String type])
+```
 
 ### 获取公告列表
 
->  Apifm.noticeList(Map<String, String> params)
+```js
+Apifm.noticeList(Map<String, String> params)
+```
 
 ### 获取公告详情
 
->  Apifm.noticeDetail(id)
+```js
+Apifm.noticeDetail(int id)
+```
 
 ## 读取后台vip等级（用于判断是免费后台还是专业后台）
 
->  Apifm.vipLevel()
+```js
+Apifm.vipLevel()
+```
 
 ## 系统参数
 
@@ -304,7 +310,11 @@ Apifm.queryConfigBatch(String keys)
 
 ## 获取友情链接/合作伙伴
 
->  Apifm.friendlyPartnerList(type)
+```js
+Apifm.friendlyPartnerList([String type])
+```
+
+获取后台指定类型的合作伙伴/友情链接数据
 
 ## JSON数据云存储
 
@@ -347,15 +357,21 @@ Apifm.jsonDelete(int id[, String token])
 
 ### 上传本地文件
 
->  Apifm.uploadFile(token, tempFilePath)
+```js
+Apifm.uploadFile(String token, File tempFilePath)
+```
 
 ### 下载远程文件
 
->  Apifm.uploadFileFromUrl(remoteFileUrl, ext)
+```js
+Apifm.uploadFileFromUrl(String remoteFileUrl, String ext)
+```
 
 ### 获取文件列表
 
->  Apifm.uploadFileList(path)
+```js
+Apifm.uploadFileList([String path])
+```
 
 # 安全中心
 
@@ -364,7 +380,7 @@ Apifm.jsonDelete(int id[, String token])
 ### 获取验证码
 
 ```js
- Apifm.graphValidateCodeUrl()
+Apifm.graphValidateCodeUrl()
 ```
 
 该方法会返回两个数据：
@@ -374,7 +390,7 @@ Apifm.jsonDelete(int id[, String token])
 ### 校验输入验证码是否正确
 
 ```js
- Apifm.graphValidateCodeCheck(key, code)
+Apifm.graphValidateCodeCheck(key, code)
 ```
 key为上面获取方法的key，必须保持一致，否则一直会显示错误；
 
@@ -385,7 +401,7 @@ code 为用户输入的验证码内容
 ### 获取验证码(发送短信)
 
 ```js
- Apifm.smsValidateCode(String mobile, [String key, String picCode])
+Apifm.smsValidateCode(String mobile, [String key, String picCode])
 ```
 短信验证码自动下发到 mobile 对应的手机号码；
 
@@ -396,7 +412,7 @@ key 和 picCode 参数，请查阅图形验证码使用说明
 ### 校验输入验证码是否正确
 
 ```js
- Apifm.smsValidateCodeCheck(String mobile, String code)
+Apifm.smsValidateCodeCheck(String mobile, String code)
 ```
 code 为用户手机上收到的验证码
 
@@ -421,7 +437,7 @@ Apifm.mailValidateCodeCheck(String mail, String code)
 ### 用户名注册
 
 ```js
- Apifm.registerUsername(Map<String, String> params)
+Apifm.registerUsername(Map<String, String> params)
 ```
 最简单的注册模式，只要提供用户名和密码即可完成注册
 
@@ -443,7 +459,7 @@ Apifm.registerEmail(Map<String, String> params)
 ### 手机号注册
 
 ```js
- Apifm.registerMobile(Map<String, String> params)
+Apifm.registerMobile(Map<String, String> params)
 ```
 
 最常用的一种注册方式，输入手机号码，获取短信验证码，回填校验通过后即可完成注册
@@ -451,7 +467,7 @@ Apifm.registerEmail(Map<String, String> params)
 ### QQ互联一键注册
 
 ```js
- Apifm.registerQQConnect(Map<String, String> params)
+Apifm.registerQQConnect(Map<String, String> params)
 ```
 
 **QQ互联的一键注册功能，需要以下参数：**
@@ -470,7 +486,7 @@ postJsonString 注册的扩展信息，Json数据格式
 ### 微信一键注册
 
 ```js
- Apifm.registerWX(Map<String, String> params)
+Apifm.registerWX(Map<String, String> params)
 ```
 
 **微信的一键注册功能，需要以下参数：**
@@ -489,7 +505,7 @@ postJsonString 注册的扩展信息，Json数据格式
 ### 用户名登录
 
 ```js
- Apifm.loginUsername(String username, String pwd, String deviceId, String deviceName)
+Apifm.loginUsername(String username, String pwd, String deviceId, String deviceName)
 ```
 
 **示例代码：**
@@ -528,7 +544,7 @@ print('uid: $uid, token is : $token');
 ### 手机号码登录
 
 ```js
- Apifm.loginMobile(String mobile, String pwd, String deviceId, String deviceName)
+Apifm.loginMobile(String mobile, String pwd, String deviceId, String deviceName)
 ```
 
 **示例代码：**
@@ -547,7 +563,7 @@ print('uid: $uid, token is : $token');
 ### QQ互联一键登录
 
 ```js
- Apifm.loginQQConnect(String oauthConsumerKey, String openid, String accessToken)
+Apifm.loginQQConnect(String oauthConsumerKey, String openid, String accessToken)
 ```
 
 登录的3个参数，请查阅QQ互联的接口文档返回值说明
@@ -555,7 +571,7 @@ print('uid: $uid, token is : $token');
 ### 微信一键登录
 
 ```js
- Apifm.loginWX(String code)
+Apifm.loginWX(String code)
 ```
 
 code 为授权成功后返回的临时凭证
@@ -563,7 +579,7 @@ code 为授权成功后返回的临时凭证
 ## 检测登录 token 是否有效
 
 ```js
- Apifm.checkToken(String token)
+Apifm.checkToken(String token)
 ```
 
 ## 重置密码
@@ -571,7 +587,7 @@ code 为授权成功后返回的临时凭证
 ### 用手机找回密码
 
 ```js
- Apifm.resetPwdUseMobileCode(String mobile, String pwd, String code)
+Apifm.resetPwdUseMobileCode(String mobile, String pwd, String code)
 ```
 
 用于忘记密码找回，重置密码时候使用
@@ -591,7 +607,7 @@ Apifm.resetPwdUseEmailCode(String email, String pwd, String code)
 ## 退出登录
 
 ```js
- Apifm.loginout(String token)
+Apifm.loginout(String token)
 ```
 
 退出后，当前token将立刻失效
@@ -600,34 +616,20 @@ Apifm.resetPwdUseEmailCode(String email, String pwd, String code)
 
 ## 绑定手机号码
 
-### 小程序
-
-```js
- Apifm.bindMobileWxa(token, encryptedData, iv, pwd)
-```
-
-> 结合小程序获取用户手机号码接口实现用户绑定手机号码
-> 
-> pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
-> 
-> 小程序规定，只有通过认证的企业身份的小程序，才能使用获取手机号码接口
-
-*如果你没法使用小程序绑定手机号码接口，你可以使用下面的短信验证码认证方式绑定手机号码*
-
 ### 短信验证码认证
 
 ```js
- Apifm.bindMobileSms(token, mobile, code, pwd)
+Apifm.bindMobileSms(String token, String mobile, String code, [String pwd])
 ```
 
-> 请结合本文档中的短信验证码安全认证相关方法实现该功能
-> 
-> pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
+请结合本文档中的短信验证码安全认证相关方法实现该功能
+
+pwd 为可选参数，如果传了该参数，当前的登录密码将会被重置成传入的新密码
 
 ## 设置用户名
 
 ```js
- Apifm.bindUsername(String token, String username, [String pwd])
+Apifm.bindUsername(String token, String username, [String pwd])
 ```
 
 设置用户名后，将可使用该用户名进行登录；用户名在系统中是唯一的；
@@ -645,27 +647,17 @@ Apifm.bindEmail(String token, String email, String code, [String pwd])
 ## 绑定QQ便于后期QQ互联一键登录
 
 ```js
- Apifm.bindQQConnectOpenid(String token, String oauthConsumerKey, String openid, String accessToken)
+Apifm.bindQQConnectOpenid(String token, String oauthConsumerKey, String openid, String accessToken)
 ```
 
 token 为当前用户的登录token；
 
 剩下3个参数，请查看QQ互联组件的接口文档
 
-## 绑定小程序
-
-```js
- Apifm.bindOpenid(token, code)
-```
-
-手机号码、用户名等方式注册的用户，通过该方法绑定小程序，后期将可以使用小程序登录
-
-code 为小程序登录的临时凭证
-
 ## 绑定微信一键登录
 
 ```js
- Apifm.bindWXOpenid(token, code)
+Apifm.bindWXOpenid(token, code)
 ```
 
 手机号码、用户名等方式注册的用户，通过该方法绑定微信，后期将可以使用微信一键登录
@@ -675,64 +667,56 @@ code 为用户授权后返回的临时凭证
 ## 获取用户信息
 
 ```js
- Apifm.userDetail(token)
+Apifm.userDetail(String token)
 ```
 
-> base 数据存放了用户的基础信息；
-> 
-> idcard 数据存放了用户的实名认证信息[如果用户有通过实名认证的话]
-> 
-> ext 数据存放了用户的扩展属性
+base 数据存放了用户的基础信息；
 
-## 获取用户id、openid、unionid
+idcard 数据存放了用户的实名认证信息[如果用户有通过实名认证的话]
 
-```js
- Apifm.userWxinfo(token)
-```
-
-> 获取当前登录用户的用户id、openid、unionid
+ext 数据存放了用户的扩展属性
 
 ## 修改用户资料
 
 ```js
- Apifm.modifyUserInfo(Map<String, String> params)
+Apifm.modifyUserInfo(Map<String, String> params)
 ```
 
 ## 实名认证
 
 ```js
- Apifm.idcardCheck(token, name, idCardNo)
+Apifm.idcardCheck(String token, String name, String idCardNo)
 ```
 
-> 身份证实名认证方法，校验姓名和身份证号码是否匹配
-> 
-> name 为真实姓名；idCardNo 为身份证号码
+身份证实名认证方法，校验姓名和身份证号码是否匹配
+
+name 为真实姓名；idCardNo 为身份证号码
 
 ## 会员体系
 
 ### 获取所有的会员等级
 
 ```js
- Apifm.userLevelList(Map<String, String> params)
+Apifm.userLevelList(Map<String, String> params)
 ```
 
-> 读取后台设置的所有的会员等级；具体参数请查阅接口文档
+读取后台设置的所有的会员等级；具体参数请查阅接口文档
 
 ### 查看会员等级详情
 
 ```js
- Apifm.userLevelDetail(levelId)
+Apifm.userLevelDetail(int levelId)
 ```
 
-> levelId 为会员等级的id
+levelId 为会员等级的id
 
 ### 会员等级收费列表
 
 ```js
- Apifm.userLevelPrices(levelId)
+Apifm.userLevelPrices(int levelId)
 ```
 
-> levelId 为会员等级的id，该方法可获得指定的某一个会员等级（比如：钻石会员）的收费列表
+levelId 为会员等级的id，该方法可获得指定的某一个会员等级（比如：钻石会员）的收费列表
 
 *比如：免费使用7天、30元一个月、70元买一个季度、200元买一年*
 
@@ -741,62 +725,57 @@ code 为用户授权后返回的临时凭证
 ### 购买会员
 
 ```js
- Apifm.userLevelBuy(token, priceId, isAutoRenew, remark)
+Apifm.userLevelBuy(String token, int priceId, [bool isAutoRenew, String remark])
 ```
 
-> priceId 为上面获取的收费列表的id
-> 
-> isAutoRenew = true / false ；用来标识会员到期后是否自动续费，开通自动续费后将会在到期日自动用可用余额完成续费
-> 
-> remark 为购买时候提交的备注信息
+priceId 为上面获取的收费列表的id
+
+isAutoRenew = true / false ；用来标识会员到期后是否自动续费，开通自动续费后将会在到期日自动用可用余额完成续费
+
+remark 为购买时候提交的备注信息
 
 ### 获取我的购买 / 续费记录
 
 ```js
- Apifm.userLevelBuyLogs(Map<String, String> params)
+Apifm.userLevelBuyLogs(Map<String, String> params)
 ```
-
-> 具体参数请查阅接口文档
-
 
 ## 收货地址管理
 
 ### 获取所有的收货地址
 
 ```js
- Apifm.queryAddress(token)
+Apifm.queryAddress(String token)
 ```
 
 ### 添加收货地址
 
 ```js
- Apifm.addAddress(Map<String, String> params)
+Apifm.addAddress(Map<String, String> params)
 ```
-
-> 你也可以结合小程序自带的读取收货地址接口，实现快速添加收货地址功能
 
 ### 更新收货地址
 
 ```js
- Apifm.updateAddress(Map<String, String> params)
+Apifm.updateAddress(Map<String, String> params)
 ```
 
 ### 获取默认的地址
 
 ```js
- Apifm.defaultAddress(token)
+Apifm.defaultAddress(String token)
 ```
 
 ### 读取地址详细
 
 ```js
- Apifm.addressDetail(token, id)
+Apifm.addressDetail(String token, int id)
 ```
 
 ### 删除收货地址
 
 ```js
- Apifm.deleteAddress(token, id)
+Apifm.deleteAddress(String token, int id)
 ```
 
 # CMS模块
@@ -805,44 +784,84 @@ code 为用户授权后返回的临时凭证
 
 ### 获取所有分类
 
->  Apifm.cmsCategories()
-> 
+```js
+Apifm.cmsCategories()
+```
+
 ### 获取分类详情
 
->  Apifm.cmsCategoryDetail(id)
+```js
+Apifm.cmsCategoryDetail(int id)
+```
 
 ## 文章管理
 
 ### 文章列表
 
 ```js
- Apifm.cmsArticles(Map<String, String> params)
+Apifm.cmsArticles(Map<String, String> params)
 ```
 
 ### 文章详情
 
->  Apifm.cmsArticleDetail(id)
+```js
+Apifm.cmsArticleDetail(int id)
+```
+
+### 文章点赞/踩
+
+```js
+Apifm.cmsArticleUseless(Map<String, String> params)
+```
+
+### 文章点赞/踩记录
+
+```js
+Apifm.cmsArticleUsefulLogs(Map<String, String> params)
+```
+
+### 获取该文章的上一篇/下一篇文章信息
+
+```js
+Apifm.cmsArticlePreNext(int id)
+```
+
+### 文章投稿(用户发布文章)
+
+```js
+Apifm.cmsArticleCreate(Map<String, String> params)
+```
+
+### 删除自己发布的文章
+
+```js
+Apifm.cmsArticleDelete(String token, int id)
+```
 
 ## 单页信息(关于我们/联系我们/...)
 
->  Apifm.cmsPage(key)
+```js
+Apifm.cmsPage(String key)
+```
 
 ## 获取文章标签列表(用于展示类似“标签云”)
 
->  Apifm.cmsTags()
+```js
+Apifm.cmsTags()
+```
 
 ## 留言 & 反馈
 
 ### 提交留言反馈
 
 ```js
- Apifm.addComment(Map<String, String> params)
+Apifm.addComment(Map<String, String> params)
 ```
 
 ### 读取留言 & 评论列表
 
 ```js
- Apifm.commentList(Map<String, String> params)
+Apifm.commentList(Map<String, String> params)
 ```
 
 # 商城模块
@@ -851,13 +870,11 @@ code 为用户授权后返回的临时凭证
 
 ### 读取所有的门店列表
 
-```
- Apifm.fetchShops(Map<String, String> params)
+```js
+Apifm.fetchShops(Map<String, String> params)
 ```
 
-> 参数详见接口文档
-> 
-> 支持根据当前用户所在地进行从近到远排序展示
+支持根据当前用户所在地进行从近到远排序展示
 
 **接口返回示例：**
 
@@ -882,123 +899,6 @@ code 为用户授权后返回的临时凭证
       "status": 0,
       "statusStr": "正常",
       "userId": 2
-    },
-    {
-      "cityId": "210500000000",
-      "dateAdd": "2019-07-18 17:23:03",
-      "dateUpdate": "2019-07-18 17:45:11",
-      "districtId": "210504000000",
-      "id": 4962,
-      "latitude": 39.916527,
-      "linkPhone": "111",
-      "longitude": 116.397128,
-      "name": "111",
-      "numberGoodReputation": 0,
-      "numberOrder": 0,
-      "paixu": 0,
-      "provinceId": "210000000000",
-      "status": 0,
-      "statusStr": "正常",
-      "userId": 2
-    },
-    {
-      "cityId": "150500000000",
-      "dateAdd": "2019-07-18 15:15:56",
-      "districtId": "150522000000",
-      "expressType": "111",
-      "id": 4961,
-      "latitude": 39.916527,
-      "linkPhone": "111",
-      "longitude": 116.397128,
-      "name": "1111",
-      "number": "222",
-      "numberGoodReputation": 0,
-      "numberOrder": 0,
-      "paixu": 0,
-      "provinceId": "150000000000",
-      "status": 0,
-      "statusStr": "正常",
-      "type": "111",
-      "userId": 2
-    },
-    {
-      "activity": "dsf\nfdg\nfgd\n\nqs",
-      "address": "222",
-      "characteristic": "555safsjfklsdfdsg\ndf",
-      "cityId": "210400000000",
-      "dateAdd": "2018-01-09 00:00:00",
-      "dateUpdate": "2019-06-10 10:02:01",
-      "districtId": "210402000000",
-      "expressType": "dada",
-      "id": 664,
-      "introduce": "\n",
-      "latitude": 39.916527,
-      "linkPhone": "333",
-      "longitude": 116.397128,
-      "name": "111cc",
-      "number": "123456",
-      "numberGoodReputation": 0,
-      "numberOrder": 0,
-      "paixu": 0,
-      "pic": "",
-      "printerSn": "1212324",
-      "provinceId": "210000000000",
-      "status": 0,
-      "statusStr": "正常",
-      "type": "",
-      "userId": 2
-    },
-    {
-      "activity": "",
-      "address": "111",
-      "characteristic": "444",
-      "cityId": "110100000000",
-      "dateAdd": "2017-05-31 00:00:00",
-      "dateUpdate": "2019-03-05 12:27:33",
-      "districtId": "110108000000",
-      "expressType": "",
-      "id": 28,
-      "introduce": "333",
-      "latitude": 39.916527,
-      "linkPhone": "13500000000",
-      "longitude": 116.397128,
-      "name": "test",
-      "number": "",
-      "numberGoodReputation": 0,
-      "numberOrder": 0,
-      "paixu": 0,
-      "pic": "",
-      "provinceId": "110000000000",
-      "status": 0,
-      "statusStr": "正常",
-      "type": "",
-      "userId": 2
-    },
-    {
-      "activity": "",
-      "address": "杭州市拱墅区登云路和赵伍路交叉口",
-      "characteristic": "量贩式水果超市",
-      "cityId": "330100000000",
-      "dateAdd": "2017-03-20 20:27:36",
-      "dateUpdate": "2019-03-05 12:27:25",
-      "districtId": "330105000000",
-      "expressType": "",
-      "id": 1,
-      "introduce": "简单介绍一下吧",
-      "latitude": 30.307559,
-      "linkPhone": "1234",
-      "longitude": 120.130023,
-      "name": "鲜丰水果登云路店",
-      "number": "",
-      "numberGoodReputation": 0,
-      "numberOrder": 0,
-      "paixu": 0,
-      "pic": "https://cdn.it120.cc/apifactory/2017/03/20/0f4b625100de82467f3e193d1bf3577d.png",
-      "provinceId": "330000000000",
-      "status": 0,
-      "statusStr": "正常",
-      "type": "",
-      "userId": 2
     }
   ],
   "msg": "success"
@@ -1008,12 +908,12 @@ code 为用户授权后返回的临时凭证
 ### 门店详情
 
 ```js
- Apifm.shopSubdetail(id)
+Apifm.shopSubdetail(int id)
 ```
 
-> id 参数为门店列表返回数据中的 id 字段
->  
-> 该方法可以读取到门店后台设置的扩展属性信息
+id 参数为门店列表返回数据中的 id 字段
+
+该方法可以读取到门店后台设置的扩展属性信息
 
 **接口返回示例：**
 
@@ -1061,7 +961,7 @@ code 为用户授权后返回的临时凭证
 ## 商品分类
 
 ```js
- Apifm.goodsCategory()
+Apifm.goodsCategory()
 ```
 
 读取后台设置的所有分类数据，分类之间的上下级关系请使用 level 和 pid 进行管理
@@ -1102,7 +1002,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品列表
 
 ```js
- Apifm.goods([Map<String, String> params])
+Apifm.goods([Map<String, String> params])
 ```
 
 读取所有的商品数据，以分页的形式展示，支持按照多种方式进行排序
@@ -1158,7 +1058,7 @@ pid 代表该类目的上级类目ID（一级类目的 pid = 0）
 ### 获取商品详情信息
 
 ```js
- Apifm.goodsDetail(int id)
+Apifm.goodsDetail(int id)
 ```
 
 id 参数为上面商品列表方法返回数据里的 id 字段
@@ -1256,7 +1156,7 @@ id 参数为上面商品列表方法返回数据里的 id 字段
 ### 获取商品的限购设置
 
 ```js
- Apifm.goodsLimitations(int goodsId, [int priceId])
+Apifm.goodsLimitations(int goodsId, [int priceId])
 ```
 
 如果商品（列表、详情）信息中 **limitation** 字段为 **true**，说明该商品开启了限购，只有设置中的会员等级用户才可以在约定时间内购买不超过指定数量
@@ -1315,7 +1215,7 @@ id 参数为上面商品列表方法返回数据里的 id 字段
 ### 获取商品价格「一般用在选择不同规格尺寸后需要实时显示售价」
 
 ```js
- Apifm.goodsPrice(int goodsId, String propertyChildIds)
+Apifm.goodsPrice(int goodsId, String propertyChildIds)
 ```
 
 goodsId 为商品id
@@ -1346,7 +1246,7 @@ goodsId 为商品id
 ### 获取商品的每日价格&每日库存「适用酒店预订、票务预订类」
 
 ```js
- Apifm.goodsPriceDaily(int goodsId, int priceId)
+Apifm.goodsPriceDaily(int goodsId, int priceId)
 ```
 
 goodsId 为商品id
@@ -1383,7 +1283,7 @@ priceId 为选择的商品规格尺寸记录id，无规格尺寸的商品，无�
 ### 计算物流/快递模板费用计算方法
 
 ```js
- Apifm.goodsPriceFreight(Map<String, String> params)
+Apifm.goodsPriceFreight(Map<String, String> params)
 ```
 
 提供快递地址，本方法可计算出本次会计的计费方式
@@ -1408,7 +1308,7 @@ priceId 为选择的商品规格尺寸记录id，无规格尺寸的商品，无�
 ### 拉取当前会员可以显示的折扣信息
 
 ```js
- Apifm.goodsRebate(String token, int goodsId)
+Apifm.goodsRebate(String token, int goodsId)
 ```
 
 token 为当前登录用户的登录 token
@@ -1429,7 +1329,7 @@ goodsId 为商品id
 ### 获取商品的评价
 
 ```js
- Apifm.goodsReputation(Map<String, String> params)
+Apifm.goodsReputation(Map<String, String> params)
 ```
 
 读取当前商品用户的所有评价数据
@@ -1526,7 +1426,7 @@ Apifm.goodsFavCheck(String token, int goodsId)
 ### 获取收藏的商品
 
 ```js
- Apifm.goodsFavList(Map<String, String> params)
+Apifm.goodsFavList(Map<String, String> params)
 ```
 
 **接口返回示例：**
@@ -1551,7 +1451,7 @@ Apifm.goodsFavCheck(String token, int goodsId)
 ### 删除收藏的某个商品
 
 ```js
- Apifm.goodsFavDelete(String token, int id, int goodsId)
+Apifm.goodsFavDelete(String token, int id, int goodsId)
 ```
 
 id 参数为收藏列表数据中的记录id
@@ -1574,10 +1474,8 @@ goodsId 为商品id
 ### 创建订单
 
 ```js
- Apifm.orderCreate(Map<String, String> params)
+Apifm.orderCreate(Map<String, String> params)
 ```
-
-> 具体参数说明请查看api接口文档
 
 **主要参数说明：**
 
@@ -1592,57 +1490,55 @@ goodsId 为商品id
 ### 关闭订单
 
 ```js
- Apifm.orderClose(token, orderId)
+Apifm.orderClose(String token, int orderId)
 ```
 
 ### 删除订单
 
 ```js
- Apifm.orderDelete(token, orderId)
+Apifm.orderDelete(String token, int orderId)
 ```
 
-> 用户删除订单，只是用户自己看不到，管理员在后台还是可以看到该订单的
+用户删除订单，只是用户自己看不到，管理员在后台还是可以看到该订单的
 
 ### 支付订单[使用余额]
 
 ```js
- Apifm.orderPay(token, orderId)
+Apifm.orderPay(String token, int orderId)
 ```
 
-> 使用用户的钱包余额完成订单的支付
-> 
-> 如果使用微信在线支付完成订单支付，请回顾 「微信在线支付章节」 ，通过传递 nextAction 参数实现
+使用用户的钱包余额完成订单的支付
 
 ### 确认收货
 
 ```js
- Apifm.orderDelivery(token, orderId)
+Apifm.orderDelivery(String token, int orderId)
 ```
 
-> 管理员针对下单进行发货操作，用户在确认收到包裹检查无误后，通过该方法来确认本次订单的收货
-> 
-> 确认收货后，订单将进入评价阶段，用户可实事求是的针对本次购物体验进行评价、买家秀截图等等
+管理员针对下单进行发货操作，用户在确认收到包裹检查无误后，通过该方法来确认本次订单的收货
+
+确认收货后，订单将进入评价阶段，用户可实事求是的针对本次购物体验进行评价、买家秀截图等等
 
 ### 订单核销
 
 ```js
- Apifm.orderHX(hxNumber)
+Apifm.orderHX(String hxNumber)
 ```
 
-> hxNumber 为核销码，所以请妥善保管，商家依据核销码进行核销
-> 
-> 订单默认不会生成核销码，如果需要开启核销功能，请在创建订单方法参数中增加 isCanHx=true 
-> 
-> 核销后，订单即交易成功，转为待评价状态
+hxNumber 为核销码，所以请妥善保管，商家依据核销码进行核销
+
+订单默认不会生成核销码，如果需要开启核销功能，请在创建订单方法参数中增加 isCanHx=true 
+
+核销后，订单即交易成功，转为待评价状态
 
 
 ### 订单汇总统计
 
 ```js
- Apifm.orderStatistics(token)
+Apifm.orderStatistics(String token)
 ```
 
-> 订单统计，用以显示订单统计或者是订单类型小红点，该方法将会返回一下几个数据：
+订单统计，用以显示订单统计或者是订单类型小红点，该方法将会返回一下几个数据：
 
 1. count_id_no_pay: 待支付订单数量
 2. count_id_no_transfer: 已支付等待商家发货订单数量
@@ -1654,114 +1550,102 @@ goodsId 为商品id
 ### 获取所有订单
 
 ```js
- Apifm.orderList(Map<String, String> params)
+Apifm.orderList(Map<String, String> params)
 ```
-
-> 具体参数请查阅api接口文档
-> 
-> 可根据订单状态、好差评等条件筛选进行分页显示
 
 ### 订单详情
 
 ```js
- Apifm.orderDetail(token, id)
+Apifm.orderDetail(String token, int id)
 ```
 
-> 读取订单详情数据：订单信息、购物清单、订单日志记录、物流跟踪信息、库存明细、扩展属性
-> 
-> 根据你自己的需要进行UI设计及合理展示
+读取订单详情数据：订单信息、购物清单、订单日志记录、物流跟踪信息、库存明细、扩展属性
+
+根据你自己的需要进行UI设计及合理展示
 
 ### 评价接口
 
 ```js
- Apifm.orderReputation(Map<String, String> params)
+Apifm.orderReputation(Map<String, String> params)
 ```
 
-> 订单评价，进行 好、中、差评；留言备注；截图买家秀
-> 
-> 具体参数请查阅接口文档说明
+订单评价，进行 好、中、差评；留言备注；截图买家秀
+
+具体参数请查阅接口文档说明
 
 ### 申请退换货[售后]
 
 ```js
- Apifm.refundApply(Map<String, String> params)
+Apifm.refundApply(Map<String, String> params)
 ```
 
-> 用户维权通道，通过该方法实现订单的退款、退货、换货等售后处理
-> 
-> 具体参数请查阅接口文档说明
+用户维权通道，通过该方法实现订单的退款、退货、换货等售后处理
 
 ### 申请退换货详情
 
 ```js
- Apifm.refundApplyDetail(token, orderId)
+Apifm.refundApplyDetail(String token, int orderId)
 ```
-
-> 用以展示退换货详细数据
 
 ### 撤销退换货申请
 
 ```js
- Apifm.refundApplyCancel(token, orderId)
+Apifm.refundApplyCancel(String token, int orderId)
 ```
-
-> 撤销 / 取消 维权
 
 ### 拉取某订单的所有售后记录
 
 ```js
- Apifm.orderRefunds(token, orderId)
+Apifm.orderRefunds(String token, int orderId)
 ```
 
-> 一个订单允许多次退换货，该方法可以拉取到所有的售后记录
+一个订单允许多次退换货，该方法可以拉取到所有的售后记录
 
 ## 虚拟物品交易[知识付费]
 
 ### 商品列表
 
 ```js
- Apifm.virtualTraderList(Map<String, String> params)
+Apifm.virtualTraderList(Map<String, String> params)
 ```
 
-> 具体参数详见接口文档
-> 
-> 建议该功能结合 CMS 系统一起使用，这样可以实现更好的购买前的信息展示，给用户足够的参考继而考虑购买
+建议该功能结合 CMS 系统一起使用，这样可以实现更好的购买前的信息展示，给用户足够的参考继而考虑购买
 
 ### 商品详情
 
 ```js
- Apifm.virtualTraderDetail(token, id)
+Apifm.virtualTraderDetail(String token, int id)
 ```
 
-> 读取商品详情数据
-> 
-> 购买后，才会返回付费属性、付费详情说明
-> 
-> 所以你可以使用该功能来实现购后阅读、购后播放的应用
+读取商品详情数据
+
+购买后，才会返回付费属性、付费详情说明
+
+所以你可以使用该功能来实现购后阅读、购后播放的应用
 
 ### 购买商品
 
 ```js
- Apifm.virtualTraderBuy(token, id)
+Apifm.virtualTraderBuy(String token, int id)
 ```
 
-> 使用用户余额购买知识付费商品
-> 
-> 如何使用在线支付，请查看在线支付功能中 nextAction 的使用说明
+使用用户余额购买知识付费商品
+
+如何使用在线支付，请查看在线支付功能中 nextAction 的使用说明
 
 ### 我的购买记录
 
 ```js
- Apifm.virtualTraderMyBuyLogs(Map<String, String> params)
+Apifm.virtualTraderMyBuyLogs(Map<String, String> params)
 ```
 
-> 具体参数详见接口文档
-> 
-> 我购买过的所有知识付费记录
+我购买过的所有知识付费记录
 
 # 根据视频编号读取视频详情
 
->  Apifm.videoDetail(videoId)
+```js
+Apifm.videoDetail(String videoId)
+```
 
 # 营销工具
 
@@ -1770,40 +1654,40 @@ goodsId 为商品id
 ### 获取系统所有优惠券列表
 
 ```js
- Apifm.coupons(Map<String, String> params)
+Apifm.coupons(Map<String, String> params)
 ```
 
 ### 查看优惠券详情
 
 ```js
- Apifm.couponDetail(id)
+Apifm.couponDetail(int id)
 ```
 
 ### 领取优惠券
 
 ```js
- Apifm.fetchCoupons(Map<String, String> params)
+Apifm.fetchCoupons(Map<String, String> params)
 ```
 
 ### 我的所有优惠券
 
 ```js
- Apifm.myCoupons(Map<String, String> params)
+Apifm.myCoupons(Map<String, String> params)
 ```
 
 ### 赠送优惠券给他人
 
 ```js
- Apifm.sendCoupons(Map<String, String> params)
+Apifm.sendCoupons(Map<String, String> params)
 ```
 
 ### 兑换优惠券
 
 ```js
- Apifm.exchangeCoupons(token, number, pwd)
+Apifm.exchangeCoupons(String token, String number, String pwd)
 ```
 
-> 使用动态口令兑换优惠券，兑换后卡密失效，请妥善保管
+使用动态口令兑换优惠券，兑换后卡密失效，请妥善保管
 
 
 
@@ -1812,7 +1696,7 @@ goodsId 为商品id
 ### 获取商品砍价设置
 
 ```js
- Apifm.kanjiaSet(int goodsId)
+Apifm.kanjiaSet(int goodsId)
 ```
 
 读取某个商品的砍价设置信息：总份数、底价、每次能砍掉的（随机）金额以及开始结束时间
@@ -1850,7 +1734,7 @@ goodsId 为商品id
 ### 发起[创建]砍价，继而邀请好友来帮自己砍到底价
 
 ```js
- Apifm.kanjiaJoin(String token, int kjid)
+Apifm.kanjiaJoin(String token, int kjid)
 ```
 
 每个用户针对同一个 kjid 只能参与一次，多次调用本方法将返回上一次砍价的信息
@@ -1876,7 +1760,7 @@ goodsId 为商品id
 ### 我发起[创建]的砍价详情
 
 ```js
- Apifm.kanjiaMyJoinInfo(String token, int kjid)
+Apifm.kanjiaMyJoinInfo(String token, int kjid)
 ```
 
 查看我发起的砍价目前的进展[进度]情况
@@ -1907,7 +1791,7 @@ goodsId 为商品id
 ### 放弃上一次砍价
 
 ```js
- Apifm.kanjiaClear(String token, int kjid)
+Apifm.kanjiaClear(String token, int kjid)
 ```
 
 因为每个用户针对同一个  kjid  只能参与一次，如果用户希望再次发起砍价，则必须要先放弃前一次砍价才能进行
@@ -1917,7 +1801,7 @@ goodsId 为商品id
 ### 砍价详情
 
 ```js
- Apifm.kanjiaDetail(int kjid, int joiner)
+Apifm.kanjiaDetail(int kjid, int joiner)
 ```
 
 joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中，joiner = 979527
@@ -1955,7 +1839,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 帮好友砍价
 
 ```js
- Apifm.kanjiaHelp(String token, int kjid, int joiner, [String remark])
+Apifm.kanjiaHelp(String token, int kjid, int joiner, [String remark])
 ```
 
 帮助好友砍价，调用该方法后，将使得好友的当前价格越来越接近底价
@@ -1984,7 +1868,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 查询我帮好友砍掉的金额
 
 ```js
- Apifm.kanjiaHelpDetail(String token, int kjid, int joiner)
+Apifm.kanjiaHelpDetail(String token, int kjid, int joiner)
 ```
 
 查询针对当前 kjid ，我帮忙砍掉的金额
@@ -2012,10 +1896,10 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 获取某一个商品的拼团配置
 
 ```js
- Apifm.pingtuanSet(goodsId)
+Apifm.pingtuanSet(int goodsId)
 ```
 
-> 读取团购的几个重要设置：几人成团、超时时间、超时未成团后如何退款等等
+读取团购的几个重要设置：几人成团、超时时间、超时未成团后如何退款等等
 
 **接口返回示例：**
 
@@ -2042,12 +1926,12 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 批量获取一组商品的拼团配置
 
 ```js
- Apifm.pingtuanSets(goodsIdArray)
+Apifm.pingtuanSets(goodsIds)
 ```
 
-> 针对上面方法的补充，在有必要的场合可以一次性的读取多个商品的团购配置信息
-> 
-> goodsIdArray 为商品ID的数组: [1,2,3,4,5]
+针对上面方法的补充，在有必要的场合可以一次性的读取多个商品的团购配置信息
+
+goodsIds 为多个商品id，用英文逗号分隔: 1,2,3,4,5
 
 **接口返回示例：**
 
@@ -2068,20 +1952,6 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
       "status": 0,
       "statusStr": "正常",
       "timeoutHours": 24
-    },
-    {
-      "dateAdd": "2018-04-27 17:39:49",
-      "dateEnd": "2028-05-12 17:39:59",
-      "goodsId": 139421,
-      "id": 2,
-      "numberDoing": 1,
-      "numberPersion": 2,
-      "numberSucccess": 0,
-      "refundType": 0,
-      "refundTypeStr": "用户钱包余额",
-      "status": 0,
-      "statusStr": "正常",
-      "timeoutHours": 24
     }
   ],
   "msg": "success"
@@ -2091,12 +1961,12 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 开团[我发起一个团购，我是团长，让别人来参加]
 
 ```js
- Apifm.pingtuanOpen(token, goodsId)
+Apifm.pingtuanOpen(String token, int goodsId)
 ```
 
-> 开团成功后，团长要先自己下单并且完成支付，团才算是真正开启成功！
-> 
-> 仅开团，团长自己不支付，后台可以看见开团信息，但是其他用户看不到该团购，团长完成支付后才可以看见并参与
+开团成功后，团长要先自己下单并且完成支付，团才算是真正开启成功！
+
+仅开团，团长自己不支付，后台可以看见开团信息，但是其他用户看不到该团购，团长完成支付后才可以看见并参与
 
 **接口返回示例：**
 
@@ -2120,73 +1990,67 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 获取某个商品当前进行中的所有拼团
 
 ```js
- Apifm.pingtuanList(Map<String, String> params)
+Apifm.pingtuanList(Map<String, String> params)
 ```
 
-> 拉取某个商品当前所有的开团列表数据，用于展示当前商品的多组进行中/已完成的团购数据，你也可以选择其中一个团购加入购买以便可以早点成团
-> 
-> 当然你也可以自己新开一个团购队列，让别人来参与，这个时候本方法将能多返回你刚刚开的团的信息 **团长必须完成支付后才能在这里显示**
+拉取某个商品当前所有的开团列表数据，用于展示当前商品的多组进行中/已完成的团购数据，你也可以选择其中一个团购加入购买以便可以早点成团
+
+当然你也可以自己新开一个团购队列，让别人来参与，这个时候本方法将能多返回你刚刚开的团的信息 **团长必须完成支付后才能在这里显示**
 
 ### 获取某个团购的参与用户列表
 
 ```js
- Apifm.pingtuanJoinUsers(tuanId)
+Apifm.pingtuanJoinUsers(int tuanId)
 ```
 
-> tuanId 为上述例子中的团号，也就是 7380，不是 2 
+tuanId 为上述例子中的团号，也就是 7380，不是 2 
 
 ### 读取我参与过的所有团购记录
 
 ```js
- Apifm.pingtuanMyJoined(Map<String, String> params)
+Apifm.pingtuanMyJoined(Map<String, String> params)
 ```
 
-> 具体参数请查阅接口文档
-> 
-> 用以展示在个人中心 --> 我参与的所有团购，可分页
+用以展示在个人中心 --> 我参与的所有团购，可分页
 
 ## 三级分销
 
 ### 申请成为分销商
 
 ```js
- Apifm.fxApply(token, name, mobile)
+Apifm.fxApply(String token, String name, String mobile)
 ```
 
 ### 申请进度查询
 
 ```js
- Apifm.fxApplyProgress(token)
+Apifm.fxApplyProgress(String token)
 ```
 
 ### 团队管理
 
 ```js
- Apifm.fxMembers(Map<String, String> params)
+Apifm.fxMembers(Map<String, String> params)
 ```
 
-> 查看你的1级/2级团队列表
-> 
-> 具体参数说明请查阅接口文档
+查看你的1级/2级团队列表
 
 *你的一级团队完成销售，你将可获得二级返佣佣金奖励；你的二级团队完成销售，你将可获得三级返佣佣金奖励*
 
 ### 佣金记录[返佣明细]
 
 ```js
- Apifm.fxCommisionLog(Map<String, String> params)
+Apifm.fxCommisionLog(Map<String, String> params)
 ```
 
-> 详细记录你的每一笔返佣佣金收录记录
-> 
-> 具体参数说明请查阅接口文档
+详细记录你的每一笔返佣佣金收录记录
 
 # 积分模块
 
 ## 读取订单积分抵扣规则
 
 ```js
- Apifm.scoreDeductionRules()
+Apifm.scoreDeductionRules()
 ```
 
 通过该方法读取后台设置的积分抵扣规则
@@ -2194,7 +2058,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ## 读取积分赠送规则
 
 ```js
- Apifm.scoreRules([Map<String, String> params])
+Apifm.scoreRules([Map<String, String> params])
 ```
 
 ## 签到送积分
@@ -2202,7 +2066,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 签到规则
 
 ```js
- Apifm.scoreSignRules()
+Apifm.scoreSignRules()
 ```
 
 读取后台设置的签到送积分规则：
@@ -2212,7 +2076,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 签到
 
 ```js
- Apifm.scoreSign(String token)
+Apifm.scoreSign(String token)
 ```
 
 当前登录用户进行签到，token为调用登录接口登录成功后返回的登录凭证
@@ -2220,7 +2084,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 读取今日签到信息
 
 ```js
- Apifm.scoreTodaySignedInfo(String token)
+Apifm.scoreTodaySignedInfo(String token)
 ```
 
 判断今天有没有签到
@@ -2230,7 +2094,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 签到记录
 
 ```js
- Apifm.scoreSignLogs(Map<String, String> params)
+Apifm.scoreSignLogs(Map<String, String> params)
 ```
 
 读取历史签到记录
@@ -2238,7 +2102,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ## 使用积分券兑换积分
 
 ```js
- Apifm.scoreExchange(String token, String number)
+Apifm.scoreExchange(String token, String number)
 ```
 
 使用积分券的券号，兑换积分
@@ -2246,7 +2110,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ## 积分明细
 
 ```js
- Apifm.scoreLogs(Map<String, String> params)
+Apifm.scoreLogs(Map<String, String> params)
 ```
 
 用户的每一次积分变动，都会详细记录积分明细
@@ -2256,7 +2120,7 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ## 获取资产信息（余额、可用积分）
 
 ```js
- Apifm.userAmount(String token)
+Apifm.userAmount(String token)
 ```
 
 ## 在线支付(充值)
@@ -2264,19 +2128,19 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 获取充值规则（满多少送多少）
 
 ```js
- Apifm.rechargeSendRules()
+Apifm.rechargeSendRules()
 ```
 
 ### 微信支付
 
 ```js
- Apifm.wxpay(Map<String, String> params)
+Apifm.wxpay(Map<String, String> params)
 ```
 
 > 调用该方法后，可获得用于发起微信支付的所有数据，请将返回值根据小程序的微信支付文档唤起支付功能即可，参考代码如下：
 
 ```js
- Apifm.wxpay({
+Apifm.wxpay({
   token: '登录token',
   money: 100,
   payName: '支付测试',
@@ -2311,13 +2175,13 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 支付宝支付(半自动)
 
 ```js
- Apifm.alipay(Map<String, String> params)`
+Apifm.alipay(Map<String, String> params)`
 ```
 
 ### 充值记录
 
 ```js
- Apifm.payLogs(Map<String, String> params)
+Apifm.payLogs(Map<String, String> params)
 ```
 
 ## 优惠买单
@@ -2327,103 +2191,97 @@ joiner 参数为发起[创建]砍价的那个用户的 uid，在上述例子中�
 ### 获取买单优惠
 
 ```js
- Apifm.payBillDiscounts()
+Apifm.payBillDiscounts()
 ```
 
-> 读取后台设置的满减设置列表
+读取后台设置的满减设置列表
 
 ### 买单
 
 ```js
- Apifm.payBill(token, money)
+Apifm.payBill(String token, double money)
 ```
 
-> money 参数请传实际的消费金额，系统自动会根据后台设置的满减规则计算实际需要支付的金额的
+money 参数请传实际的消费金额，系统自动会根据后台设置的满减规则计算实际需要支付的金额的
 
 ## 资金流水
 
 ```js
- Apifm.cashLogs(Map<String, String> params)
+Apifm.cashLogs(Map<String, String> params)
 ```
 
 ## 提现管理
 
 ### 申请提现
 
->  Apifm.withDrawApply(token, money)
+```js
+Apifm.withDrawApply(String token, double money)
+```
 
 ### 提现记录
 
->  Apifm.withDrawLogs(Map<String, String> params)
+```js
+Apifm.withDrawLogs(Map<String, String> params)
+```
 
 ### 提现记录详情
 
->  Apifm.withDrawDetail(token, id)
+```js
+Apifm.withDrawDetail(String token, int id)
+```
 
 ## 发票管理
 
 ### 申请发票
->  Apifm.invoiceApply(Map<String, String> params)
+
+```js
+Apifm.invoiceApply(Map<String, String> params)
+```
+
 ### 申请的发票列表
->  Apifm.invoiceList(Map<String, String> params)
+
+```js
+Apifm.invoiceList(Map<String, String> params)
+```
+
 ### 发票详情
->  Apifm.invoiceDetail(token, id)
+
+```js
+Apifm.invoiceDetail(String token, int id)
+```
 
 ## 押金管理
 ### 支付押金
->  Apifm.payDeposit(Map<String, String> params)
+
+```js
+Apifm.payDeposit(Map<String, String> params)
+```
+
 ### 读取押金列表
->  Apifm.depositList(Map<String, String> params)
+
+```js
+Apifm.depositList(Map<String, String> params)
+```
+
 ### 押金详情
->  Apifm.depositInfo(token, id)
+
+```js
+Apifm.depositInfo(String token, int id)
+```
+
 ### 申请退回押金
->  Apifm.depositBackApply(token, id)
-
-# 小程序工具类
-
-## 无限获取二维码
 
 ```js
- Apifm.wxaQrcode(Map<String, String> params)
+Apifm.depositBackApply(String token, int id)
 ```
-
-> 微信有规定，只有正式上线的小程序才可以获取小程序码，所以如果你获取到的小程序码无法打开，请不要惊讶
-
-*如果生成的小程序码无法打开，请将图片保存到本地后，用记事本打开来，里面就可以看到失败原因了的*
-
-## 小程序数据解密
-
-```js
- Apifm.encryptedData(code, encryptedData, iv)
-```
-
-> 类似微信运动之类的数据，都可以通过该方法解密成明文
-> 
-> code 为登录临时凭证
-
-# 知识付费【虚拟交易】
-
-## 获取产品列表
-
->  Apifm.virtualTraderList(Map<String, String> params)
-
-## 获取产品详情
-
->  Apifm.virtualTraderInfo(token, id)
-
-## 购买产品
-
->  Apifm.virtualTraderBuy(token, id)
-> 
-## 读取成交记录
-
->  Apifm.virtualTraderBuyLogs(Map<String, String> params)
 
 # 活动 & 工具
 
 ## 分布式系统唯一ID
 
->  Apifm.uniqueId(type)
+```js
+Apifm.uniqueId([String type])
+```
 
 ## 手机号段服务
 
@@ -2443,47 +2301,51 @@ Apifm.nextMobileSegment(Map<String, String> params)
 
 ### 抽奖项目详情
 
->  Apifm.luckyInfo(id)
+```js
+Apifm.luckyInfo(int id)
+```
 
 ### 参与抽奖
 
->  Apifm.luckyInfoJoin(id, token)
+```js
+Apifm.luckyInfoJoin(Sting token, int id)
+```
 
 ### 我的抽奖信息
 
->  Apifm.luckyInfoJoinMy(id, token)
+```js
+Apifm.luckyInfoJoinMy(Sting token, int id)
+```
 
 ### 抽奖项目的所有抽奖记录明细
 
->  Apifm.luckyInfoJoinLogs(Map<String, String> params)
+```js
+Apifm.luckyInfoJoinLogs(Map<String, String> params)
+```
 
 ## 预约/报名
 
 ### 读取所有的预约/报名项目
 
 ```js
- Apifm.yuyueItems(Map<String, String> params)
+Apifm.yuyueItems(Map<String, String> params)
 ```
 
-> 拉取后台设置的所有预约/报名项目，小程序端可展示所有的项目、进度等情况
-> 
-> 具体参数详见接口文档
+拉取后台设置的所有预约/报名项目，小程序端可展示所有的项目、进度等情况
 
 ### 项目详情
 
 ```js
- Apifm.yuyueItemDetail(id)
+Apifm.yuyueItemDetail(int id)
 ```
 
-> 读取指定 id 的预约/报名项目详情、后台设置的扩展属性
+读取指定 id 的预约/报名项目详情、后台设置的扩展属性
 
 ### 进行预约或者在线报名
 
 ```js
- Apifm.yuyueJoin(Map<String, String> params)
+Apifm.yuyueJoin(Map<String, String> params)
 ```
-
-> 具体参数详见接口文档
 
 **可作为团队/个人直接报名，也可以加入指定的某一个团队进行报名**
 
@@ -2514,57 +2376,55 @@ Apifm.nextMobileSegment(Map<String, String> params)
 ### 支付报名费
 
 ```js
- Apifm.yuyueJoinPay(token, joinId)
+Apifm.yuyueJoinPay(String token, int joinId)
 ```
 
-> 如果后台设置的预约/报名项目需要支付一定的费用，那么用户需要通过该方法完成报名费的支付才能完成预约/报名
+如果后台设置的预约/报名项目需要支付一定的费用，那么用户需要通过该方法完成报名费的支付才能完成预约/报名
 
 ### 更新预约/报名信息
 
 ```js
- Apifm.yuyueJoinUpdate(token, joinId, extJsonStr)
+Apifm.yuyueJoinUpdate(String token, int joinId, String extJsonStr)
 ```
 
-> 修改预约/报名的扩展信息，必须是非匿名情况下才能使用，否则没法确认修改者用户身份
+修改预约/报名的扩展信息，必须是非匿名情况下才能使用，否则没法确认修改者用户身份
 
 ### 我的报名信息
 
 ```js
- Apifm.yuyueMyJoinInfo(token, joinId)
+Apifm.yuyueMyJoinInfo(String token, int joinId)
 ```
 
 ### 我所有的预约记录/报名记录
 
 ```js
- Apifm.yuyueMyJoinLogs(Map<String, String> params)
+Apifm.yuyueMyJoinLogs(Map<String, String> params)
 ```
-
-> 该方法将分页展示用户的参与历史记录，具体参数详见接口文档
 
 ### 读取某个项目的所有报名团队列表
 
 ```js
- Apifm.yuyueTeams(Map<String, String> params)
+Apifm.yuyueTeams(Map<String, String> params)
 ```
 
 ### 查看团队详情
 
 ```js
- Apifm.yuyueTeamDetail(teamId)
+Apifm.yuyueTeamDetail(int teamId)
 ```
 
-> 上述方法中获取到的团队ID
+上述方法中获取到的团队ID
 
 ### 拉取团队成员列表
 
 ```js
- Apifm.yuyueTeamMembers(Map<String, String> params)
+Apifm.yuyueTeamMembers(Map<String, String> params)
 ```
 
 ### 团队长删除[踢]团队成员
 
 ```js
- Apifm.yuyueTeamDeleteMember(token, joinId)
+Apifm.yuyueTeamDeleteMember(String token, int joinId)
 ```
 
 ## 投票功能
@@ -2574,103 +2434,101 @@ Apifm.nextMobileSegment(Map<String, String> params)
 ### 投票项目
 
 ```js
- Apifm.voteItems(Map<String, String> params)
+Apifm.voteItems(Map<String, String> params)
 ```
 
-> 读取所有的投票项目，下面的方法均是针对其中某一个投票项目进行参与
-> 
-> 具体参数详见接口文档
+读取所有的投票项目，下面的方法均是针对其中某一个投票项目进行参与
 
 ### 投票详情
 
 ```js
- Apifm.voteItemDetail(id)
+Apifm.voteItemDetail(int id)
 ```
 
-> 投票项目的详细数据
-> 
-> 拉取当前投票项目的所有投票选项
-> 
-> 同时也将返回后台设置的当前投票项目的扩展属性数据
+投票项目的详细数据
+
+拉取当前投票项目的所有投票选项
+
+同时也将返回后台设置的当前投票项目的扩展属性数据
 
 ### 我的投票
 
 ```js
- Apifm.myVote(token, voteId)
+Apifm.myVote(String token, int voteId)
 ```
 
-> 查看针对 voteId 这个投票项目，我的投票情况
-> 
-> 如果返回 700 ，说明你还没投票，用该方法可用来判断我有没有投票
+查看针对 voteId 这个投票项目，我的投票情况
+
+如果返回 700 ，说明你还没投票，用该方法可用来判断我有没有投票
 
 ### 我要投票
 
 ```js
- Apifm.vote(token, voteId, items, remark)
+Apifm.vote(String token, int voteId, String items, String remark)
 ```
 
 > 投票动作，具体参数说明:
 
 **voteId** *上述的投票项目id*
 
-**items** *选择的投票选项数组，单选的话就一个选项，多选的话就是你选择几个就几个*
+**items** *选择的投票选项，单选的话就一个选项，多选的话就是你选择几个就几个，多个选项之间，用英文逗号分隔*
 
 **remark** *投票备注*
 
 ### 查看投票明细
 
 ```js
- Apifm.voteLogs(Map<String, String> params)
+Apifm.voteLogs(Map<String, String> params)
 ```
 
-> 查询某个投票项目所有的参与者名录、以及具体的投票选项
-> 
-> 具体参数详见接口文档
+查询某个投票项目所有的参与者名录、以及具体的投票选项
 
 ## 商品条码查询
 
 ```js
- Apifm.queryBarcode(barcode)
+Apifm.queryBarcode(String barcode)
 ```
-> barcode 为商品的条码，可以利用小程序的扫码api、扫码枪等实现快速识别条码
+
+barcode 为商品的条码，可以利用小程序的扫码api、扫码枪等实现快速识别条码
 
 
 ## 短链接服务
 
-> 将长链接生成短链接
-> ****
-> url 参数为原始的长链接地址
+```js
+Apifm.shortUrl(String url)
+```
 
-```
- Apifm.shortUrl(url)
-```
+将长链接生成短链接
+
+url 参数为原始的长链接地址
 
 ## 地图工具
 
 ### 计算2个坐标之间的距离
 
-```
- Apifm.mapDistance(lat1, lng1, lat2, lng2)
+```js
+Apifm.mapDistance(String lat1, String lng1, String lat2, String lng2)
 ```
 
 ### 将坐标地址转换为详细地址
 
-> 比如可将 30.274085,120.15507 这个坐标翻译成：
-> 
-> 浙江省杭州市拱墅区环城北路318号
+```js
+Apifm.mapQQAddress(String location, [int coord_type])
 ```
- Apifm.mapQQAddress(location, coord_type)
-```
+
+比如可将 30.274085,120.15507 这个坐标翻译成：
+
+浙江省杭州市拱墅区环城北路318号
 
 ### 地图上搜索
 
-```
- Apifm.mapQQSearch(Map<String, String> params)
+```js
+Apifm.mapQQSearch(Map<String, String> params)
 ```
 
-> 在地图上搜索地理位置，例如找肯德基，找星巴克等等;
-> 
-> 参数说明：
+在地图上搜索地理位置，例如找肯德基，找星巴克等等;
+
+参数说明：
 
 **keyword**
 
@@ -2696,12 +2554,12 @@ Apifm.nextMobileSegment(Map<String, String> params)
 ### 获取所有的队列
 
 ```js
- Apifm.queuingTypes(status)
+Apifm.queuingTypes(String status)
 ```
 
-> 获取所有的叫号队列
-> 
-> status 参数代表（0 正常 1 关闭 2 名额已满），不传该参数则获取所有的队列
+获取所有的叫号队列
+
+status 参数代表（0 正常 1 关闭 2 名额已满），不传该参数则获取所有的队列
 
 *比如餐饮里面的: 2人桌、4人桌、大圆桌；这3个队列是独立叫号的，用户根据自己的实际情况到对应的队列里面去取号排队；*
 
@@ -2710,24 +2568,24 @@ Apifm.nextMobileSegment(Map<String, String> params)
 ### 取号
 
 ```js
- Apifm.queuingGet(token, typeId, mobile)
+Apifm.queuingGet(String token, int typeId, [String mobile])
 ```
 
-> 用户需要登录后才能取号，所以请提供正确的 token
-> 
-> typeId 为你要取号的队列的id，请根据上面的方法获取
-> 
-> mobile 为取号手机号码，非必填，后续你可以向这个手机号码推送队列进度情况及排队提醒
+用户需要登录后才能取号，所以请提供正确的 token
+
+typeId 为你要取号的队列的id，请根据上面的方法获取
+
+mobile 为取号手机号码，非必填，后续你可以向这个手机号码推送队列进度情况及排队提醒
 
 ### 我的取号情况
 
 ```js
- Apifm.queuingMy(token, typeId, status)
+Apifm.queuingMy(String token, int typeId, int status)
 ```
 
-> typeId 为你要取号的队列的id，如果不传则获取所有队列的取号信息
-> 
-> status 代表（0 排队中 1 受理中 2 已处理 3 已过号）不传该参数则读取所有的取号记录
+typeId 为你要取号的队列的id，如果不传则获取所有队列的取号信息
+
+status 代表（0 排队中 1 受理中 2 已处理 3 已过号）不传该参数则读取所有的取号记录
 
 # 社交通讯
 
@@ -2736,49 +2594,45 @@ Apifm.nextMobileSegment(Map<String, String> params)
 ### 读取好友列表
 
 ```js
- Apifm.friendList(Map<String, String> params)
+Apifm.friendList(Map<String, String> params)
 ```
 
-> 拉取我的好友列表，分页展示
-> 
-> 具体参数请查阅接口文档
+拉取我的好友列表，分页展示
 
 ### 添加好友
 
 ```js
- Apifm.addFriend(token, uid)
+Apifm.addFriend(String token, int uid)
 ```
 
-> 添加 uid 指定用户编号的用户为好友
+添加 uid 指定用户编号的用户为好友
 
 ### 查看好友详情
 
 ```js
- Apifm.friendUserDetail(token, uid)
+Apifm.friendUserDetail(String token, int uid)
 ```
 
-> 查看 uid 指定用户编号的好友用户资料
-> 
-> 需要系统参数中开启 ALLOW_VIEW_FRIEND 参数才可查看
+查看 uid 指定用户编号的好友用户资料
+
+需要系统参数中开启 ALLOW_VIEW_FRIEND 参数才可查看
 
 ## 站内信管理
 
 ### 站内消息列表
 
 ```js
- Apifm.messageList(Map<String, String> params)
+Apifm.messageList(Map<String, String> params)
 ```
-
-> 具体参数请查阅接口文档
 
 ### 设置为已读
 
 ```js
- Apifm.messageRead(token, id)
+Apifm.messageRead(String token, int id)
 ```
 
 ### 删除站内信
 
 ```js
- Apifm.messageDelete(token, id)
+Apifm.messageDelete(String token, int id)
 ```
