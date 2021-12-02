@@ -149,12 +149,15 @@ checkToken (token) {
     'token': token
   });
 }
-// wxpay (data) {
-//   return request('/pay/wx/wxapp', true, 'post', data);
-// }
-// alipay (data) {
-//   return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
-// }
+payVariableUrl (url, data) {
+  return request(url, true, 'post', data);
+}
+wxpay (data) {
+  return request('/pay/wx/wxapp', true, 'post', data);
+}
+alipay (data) {
+  return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
+}
 loginUsername (username, pwd, deviceId, deviceName) {
   return request('/user/username/login', true, 'post', {
     'username': username,
@@ -215,6 +218,9 @@ goodsCategory () {
 goods ([data]) {
   return request('/shop/goods/list', true, 'post', data);
 }
+goodsv2 ([data]) {
+  return request('/shop/goods/list/v2', true, 'post', data);
+}
 goodsDetail (id) {
   return request('/shop/goods/detail', true, 'get', {
     'id': id
@@ -270,6 +276,15 @@ goodsFavDelete (token, {id = '', goodsId = ''}) {
     'token': token,
     'id': id,
     'goodsId': goodsId
+  });
+}
+goodsFavDeleteV2 (data) {
+  return request('/shop/goods/fav/delete', true, 'post', data);
+}
+goodsSeckillGrab (goodsId, seconds) {
+  return request('/goods/seckill/grab', false, 'post', {
+    'goodsId': goodsId,
+    'seconds': seconds
   });
 }
 coupons (data) {
@@ -565,6 +580,9 @@ cmsCategoryDetail (id) {
 cmsArticles (data) {
   return request('/cms/news/list', true, 'post', data);
 }
+cmsArticlesV2 (data) {
+  return request('/cms/news/list/v2', true, 'post', data);
+}
 cmsArticleUsefulLogs (data) {
   return request('/cms/news/useful/logs', true, 'post', data);
 }
@@ -730,12 +748,23 @@ mailValidateCodeCheck(mail, code) {
     'code': code
   });
 }
-mapDistance (lat1, lng1, lat2, lng2) {
+gpsDistance(data) {
+  return request('/common/map/qq/distance', false, 'post', data);
+}
+mapDistance(lat1, lng1, lat2, lng2) {
   return request('/common/map/distance', false, 'get', {
     'lat1': lat1,
     'lng1': lng1,
     'lat2': lat2,
     'lng2': lng2
+  });
+}
+mapDistanceNavigation(key, mode, from, to) {
+  return request('/common/map/qq/distance', false, 'post', { 
+    'key': key,
+    'mode': mode,
+    'from': from,
+    'to': to
   });
 }
 mapQQAddress (location, [coordType = '5']) {
