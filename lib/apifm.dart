@@ -155,6 +155,54 @@ payVariableUrl (url, data) {
 wxpay (data) {
   return request('/pay/wx/wxapp', true, 'post', data);
 }
+wxpayH5(data) {
+  return request('/pay/wx/h5', true, 'post', data);
+}
+wxpayJsapi(data) {
+  return request('/pay/wx/jsapi', true, 'post', data);
+}
+wxpayQrcode(data) {
+  return request('/pay/wx/qrcode', true, 'post', data);
+}
+wxpayFOMO(data) {
+  return request('/pay/fomo/wxapp', true, 'post', data);
+}
+payNow(data) {
+  return request('/pay/fomo/payNow', true, 'post', data);
+}
+fomoCheckout(data) {
+  return request('/pay/fomo/checkout', true, 'post', data);
+}
+wxpayFWS(data) {
+  return request('/pay/wxfws/wxapp', true, 'post', data);
+}
+ttpay(data) {
+  return request('/pay/tt/microapp', true, 'post', data);
+}
+ttEcpay(data) {
+  return request('/pay/tt/ecpay', true, 'post', data);
+}
+payQuery(token, outTradeId) {
+  return request('/pay/query', true, 'get', { token, outTradeId });
+}
+wxpaySaobei(data) {
+  return request('/pay/lcsw/wxapp', true, 'post', data);
+}
+wxpayWepayez(data) {
+  return request('/pay/wepayez/wxapp', true, 'post', data);
+}
+wxpayxpert(data) {
+  return request('/pay/payxpert/wxapp', true, 'post', data);
+}
+wxpayIPaynow(data) {
+  return request('/pay/ipaynow/wxapp', true, 'post', data);
+}
+wxpayAirwallex(data) {
+  return request('/pay/airwallex/wxapp', true, 'post', data);
+}
+paypalCheckout(data) {
+  return request('/pay/paypal/checkout', true, 'post', data);
+}
 alipay (data) {
   return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
 }
@@ -270,6 +318,9 @@ goodsFavCheck (token, goodsId) {
     'token': token,
     'goodsId': goodsId
   });
+}
+goodsFavCheckV2 (data) {
+  return request('/shop/goods/fav/check', true, 'get', data);
 }
 goodsFavDelete (token, {id = '', goodsId = ''}) {
   return request('/shop/goods/fav/delete', true, 'post', {
