@@ -6,6 +6,7 @@ import 'dart:math';
 
 var _API_BASE_URL = 'https://api.it120.cc';
 var _SUB_DOMAIN = 'tz';
+var _MERCHANT_ID = '0';
 
 // _mockHoldon() async {
 //   // 模拟接口等待5秒
@@ -21,7 +22,11 @@ init2(a, b) {
   _SUB_DOMAIN = b;
 }
 
-request(url, needSubDomain, method, [data = '']) async {
+setMerchantId(mchid) {
+  _MERCHANT_ID = mchid;
+}
+
+request(url, needSubDomain, method, [data]) async {
   if (data == null) {
     data = {};
   }
@@ -54,25 +59,28 @@ request(url, needSubDomain, method, [data = '']) async {
   throw Exception('error param method');
 }
 
+banners([data]) {
+  return request('/banner/list', true, 'get', data);
+}
 queryMobileLocation(mobile) {
   return request('/common/mobile-segment/location', false, 'get', {
     'mobile': mobile
   });
 }
-nextMobileSegment (data) {
+nextMobileSegment(data) {
   return request('/common/mobile-segment/next', false, 'post', data);
 }
-queryConfigValue (key) {
+queryConfigValue(key) {
   return request('/config/value', true, 'get', {
     'key': key
   });
 }
-queryConfigBatch (keys) {
+queryConfigBatch(keys) {
   return request('/config/values', true, 'get', {
     'keys': keys
   });
 }
-scoreRules ([data]) {
+scoreRules([data]) {
   return request('/score/send/rule', true, 'post', data);
 }
 scoreSignRules () {
@@ -117,7 +125,7 @@ kanjiaDetail (kjid, joiner) {
     'joiner': joiner
   });
 }
-kanjiaHelp (token, kjid, joiner, [remark = '']) {
+kanjiaHelp (token, kjid, joiner, [remark]) {
   return request('/shop/goods/kanjia/help', true, 'post', {
     'kjid': kjid,
     'joinerUser': joiner,
@@ -222,7 +230,7 @@ loginEmail(email, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
-bindUsername (token, username, [pwd = '']) {
+bindUsername (token, username, [pwd]) {
   return request('/user/username/bindUsername', true, 'post', {
     'token': token,
     'username': username,
@@ -257,9 +265,6 @@ registerUsername (data) {
 registerMobile (data) {
   return request('/user/m/register', true, 'post', data);
 }
-banners ([data]) {
-  return request('/banner/list', true, 'get', data);
-}
 goodsCategory () {
   return request('/shop/goods/category/all', true, 'get');
 }
@@ -274,7 +279,7 @@ goodsDetail (id) {
     'id': id
   });
 }
-goodsLimitations (goodsId, [priceId = '']) {
+goodsLimitations (goodsId, [priceId]) {
   return request('/shop/goods/limitation', true, 'get', {
     'goodsId': goodsId,
     'priceId': priceId
@@ -286,7 +291,7 @@ goodsPrice (goodsId, propertyChildIds) {
     'propertyChildIds': propertyChildIds
   });
 }
-goodsPriceDaily (goodsId, [priceId = '']) {
+goodsPriceDaily (goodsId, [priceId]) {
   return request('/shop/goods/price/day', true, 'get', {
     'goodsId': goodsId,
     'priceId': priceId
@@ -322,7 +327,7 @@ goodsFavCheck (token, goodsId) {
 goodsFavCheckV2 (data) {
   return request('/shop/goods/fav/check', true, 'get', data);
 }
-goodsFavDelete (token, {id = '', goodsId = ''}) {
+goodsFavDelete (token, {id, goodsId}) {
   return request('/shop/goods/fav/delete', true, 'post', {
     'token': token,
     'id': id,
@@ -365,7 +370,7 @@ exchangeCoupons (token, number, pwd) {
 noticeList (data) {
   return request('/notice/list', true, 'post', data);
 }
-noticeLastOne ([type = '']) {
+noticeLastOne ([type]) {
   return request('/notice/last-one', true, 'get', {
     'type': type
   });
@@ -430,7 +435,7 @@ pingtuanJoinUsers (tuanId) {
 pingtuanMyJoined (data) {
   return request('/shop/goods/pingtuan/my-join-list', true, 'post', data);
 }
-friendlyPartnerList ([type = '']) {
+friendlyPartnerList ([type]) {
   return request('/friendly-partner/list', true, 'post', {
     'type': type
   });
@@ -455,7 +460,7 @@ videoDetail (videoId) {
     'videoId': videoId
   });
 }
-bindMobileSms (token, mobile, code, [pwd = '']) {
+bindMobileSms (token, mobile, code, [pwd]) {
   return request('/user/m/bind-mobile', true, 'post', {
     'token': token,
     'mobile': mobile,
@@ -515,11 +520,6 @@ orderPay (token, orderId) {
 orderHX (hxNumber) {
   return request('/order/hx', true, 'post', {
     'hxNumber': hxNumber
-  });
-}
-orderStatistics (token) {
-  return request('/order/statistics', true, 'get', {
-    'token': token
   });
 }
 orderRefunds (token, orderId) {
@@ -600,7 +600,7 @@ uploadFileFromUrl (remoteFileUrl, ext) {
     'ext': ext
   });
 }
-uploadFileList ([path = '']) {
+uploadFileList ([path]) {
   return request('/dfs/upload/list', true, 'post', {
     'path': path
   });
@@ -714,7 +714,7 @@ commentList (data) {
 modifyUserInfo (data) {
   return request('/user/modify', true, 'post', data);
 }
-uniqueId ([type = '']) {
+uniqueId ([type]) {
   return request('/uniqueId/get', true, 'get', {
     'type': type
   });
@@ -750,7 +750,7 @@ jsonList ([data]) {
 jsonSet (data) {
   return request('/json/set', true, 'post', data);
 }
-jsonDelete (id, [token = '']) {
+jsonDelete (id, [token]) {
   return request('/json/delete', true, 'post', {
     'token': token,
     'id': id
@@ -775,7 +775,7 @@ shortUrl (url) {
     'url': url
   });
 }
-smsValidateCode (mobile, [key = '', picCode = '']) {
+smsValidateCode (mobile, [key, picCode]) {
   return request('/verification/sms/get', true, 'get', {
     'mobile': mobile,
     'key': key,
@@ -845,19 +845,19 @@ virtualTraderBuy (token, id) {
 virtualTraderMyBuyLogs (data) {
   return request('/virtualTrader/buy/logs', true, 'post', data);
 }
-queuingTypes ([status = '']) {
+queuingTypes ([status]) {
   return request('/queuing/types', true, 'get', {
     'status': status
   });
 }
-queuingGet (token, typeId, [mobile = '']) {
+queuingGet (token, typeId, [mobile]) {
   return request('/queuing/get', true, 'post', {
     'token': token,
     'typeId': typeId,
     'mobile': mobile
   });
 }
-queuingMy (token, [typeId = '', status = '']) {
+queuingMy (token, [typeId, status]) {
   return request('/queuing/my', true, 'get', {
     'token': token,
     'typeId': typeId,
@@ -889,7 +889,7 @@ userLevelPrices (levelId) {
     'levelId': levelId
   });
 }
-userLevelBuy (token, priceId, [isAutoRenew = false, remark = '']) {
+userLevelBuy (token, priceId, [isAutoRenew = false, remark]) {
   return request('/user/level/buy', true, 'post', {
     'token': token,
     'userLevelPriceId': priceId,
@@ -926,7 +926,7 @@ voteItemDetail (id) {
     'id': id
   });
 }
-vote (token, voteId, items, [remark = '']) {
+vote (token, voteId, items, [remark]) {
   return request('/vote/vote', true, 'post', {
     'token': token,
     'voteId': voteId,
@@ -1035,4 +1035,607 @@ bindWXOpenid (token, code) {
     'token': token,
     'code': code,
   });
+}
+goodsDynamic (type) {
+  return request('/site/goods/dynamic', true, 'get', { type });
+}
+usersDynamic (type) {
+  return request('/site/user/dynamic', true, 'get', { type });
+}
+fetchSubDomainByWxappAppid (appid) {
+  return request('/subdomain/appid/wxapp', false, 'get', { appid });
+}
+cmsArticleFavPut (token, newsId) {
+  return request('/cms/news/fav/add', true, 'post', { token, newsId });
+}
+cmsArticleFavCheck (token, newsId) {
+  return request('/cms/news/fav/check', true, 'get', { token, newsId });
+}
+cmsArticleFavList (data) {
+  return request('/cms/news/fav/list', true, 'post', data);
+}
+cmsArticleFavDeleteById (token, id) {
+  return request('/cms/news/fav/delete', true, 'post', { token, id });
+}
+cmsArticleFavDeleteByNewsId (token, newsId) {
+  return request('/cms/news/fav/delete', true, 'post', { token, newsId });
+}
+shippingCarInfo (token, type) {
+  return request('/shopping-cart/info', true, 'get', {
+    token, type
+  });
+}
+shippingCarInfoAddItem (token, goodsId, number, sku, addition, type) {
+  return request('/shopping-cart/add', true, 'post', {
+    'token': token,
+    'goodsId': goodsId,
+    'number': number,
+    'sku': (sku != null && sku.length > 0) ? convert.jsonEncode(sku) : '',
+    'addition': addition != null && addition.length > 0 ? convert.jsonEncode(addition) : '',
+    'type': type
+  });
+}
+shippingCarInfoModifyNumber (token, key, number, type) {
+  return request('/shopping-cart/modifyNumber', true, 'post', {
+    token, key, number, type
+  });
+}
+shippingCarInfoRemoveItem (token, key, type) {
+  return request('/shopping-cart/remove', true, 'post', {
+    token, key, type
+  });
+}
+shippingCartSelected (token, key, selected, type) {
+  return request('/shopping-cart/select', true, 'post', {
+    token, key, selected, type
+  });
+}
+shippingCarInfoRemoveAll (token, type) {
+  return request('/shopping-cart/empty', true, 'post', {
+    token, type
+  });
+}
+growthLogs (data) {
+  return request('/growth/logs', true, 'post', data);
+}
+exchangeScoreToGrowth (token, deductionScore) {
+  return request('/growth/exchange', true, 'post', {
+    token, deductionScore
+  });
+}
+wxaMpLiveRooms () {
+  return request('/wx/live/rooms', true, 'get');
+}
+wxaMpLiveRoomHisVedios (roomId) {
+  return request('/wx/live/his', true, 'get', {
+    roomId
+  });
+}
+peisonFeeList () {
+  return request('/fee/peisong/list', true, 'get');
+}
+peisongMembers (data) {
+  return request('/peisong/member/list', true, 'post', data);
+}
+peisongMemberInfo (token) {
+  return request('/peisong/member/info', true, 'get', {
+    token
+  });
+}
+peisongMemberChangeWorkStatus (token) {
+  return request('/peisong/member/change-work-status', true, 'post', {
+    token
+  });
+}
+peisongOrdersGrabbing (token) {
+  return request('/peisong/order/grabbing', true, 'get', { token });
+}
+peisongOrders (data) {
+  return request('/peisong/order/list', true, 'post', data);
+}
+peisongOrderGrab (data) {
+  return request('/peisong/order/grab', true, 'post', data);
+}
+peisongOrderDetail (token, id) {
+  return request('/peisong/order/detail', true, 'get', { token, id });
+}
+peisongOrderEstimatedCompletionTime (data) {
+  return request('/peisong/order/estimatedCompletionTime', true, 'post', data);
+}
+peisongStartService (data) {
+  return request('/peisong/order/start-service', true, 'post', data);
+}
+peisongEndService (data) {
+  return request('/peisong/order/end-service', true, 'post', data);
+}
+peisongOrderAllocation (token, id, uid) {
+  return request('/peisong/order/allocation', true, 'post', {
+    token, id, uid
+  });
+}
+siteStatistics () {
+  return request('/site/statistics', true, 'get');
+}
+orderStatistics (token) {
+  return request('/order/statistics', true, 'get', {
+    token
+  });
+}
+orderStatisticsv2(data) {
+  return request('/order/statistics', true, 'get', data);
+}
+siteStatisticsSaleroom (data) {
+  return request('/site/statistics/saleroom', true, 'get', data);
+}
+siteStatisticsSaleroomYear (year) {
+  return request('/site/statistics/saleroom/year', true, 'get', { year });
+}
+bonusLog (data) {
+  return request('/bonusLog/list', true, 'post', data);
+}
+mtjAsset (token) {
+  return request('/mtj/asset', true, 'get', { token });
+}
+mtjSetting () {
+  return request('/mtj/setting', true, 'get');
+}
+mtjLogs (data) {
+  return request('/mtj/logs', true, 'post', data);
+}
+mtjStatistics () {
+  return request('/site/statistics/mjt', true, 'get');
+}
+mtjTransfer (data) {
+  return request('/mtj/transfer', true, 'post', data);
+}
+mtjTransferLogs (data) {
+  return request('/mtj/transfer/logs', true, 'post', data);
+}
+wxOpenAuthorization (data) {
+  return request('/user/wxsns/authorization', true, 'post', data);
+}
+userAttentioncheck (token, uid) {
+  return request('/user/attention/check', true, 'get', {
+    token, uid
+  });
+}
+userAttentionAdd (token, uid) {
+  return request('/user/attention/add', true, 'post', {
+    token, uid
+  });
+}
+userAttentionRemove (token, uid) {
+  return request('/user/attention/remove', true, 'post', {
+    token, uid
+  });
+}
+userAttentionMeList (data) {
+  return request('/user/attention/attention-me', true, 'post', data);
+}
+userMyAttentionList (data) {
+  return request('/user/attention/my-attention', true, 'post', data);
+}
+userAttentionDetail (token, uid) {
+  return request('/user/attention/detail', true, 'get', {
+    token, uid
+  });
+}
+userAttentionStatistics (token) {
+  return request('/user/attention/statistics', true, 'get', {
+    token
+  });
+}
+cyTableToken (tableId, key) {
+  return request('/cyTable/token', true, 'post', {
+    'id': tableId,
+    'k': key
+  });
+}
+cyTableAddOrder(data) {
+  return request('/cyTable/add-order', true, 'post', data);
+}
+cyTablePayOrder(data) {
+  return request('/cyTable/pay-order', true, 'post', data);
+}
+goodsTimesSchedule (goodsId, propertyChildIds, brandId, categoryId) {
+  return request('/shop/goods/times/schedule', true, 'post', { goodsId, propertyChildIds, brandId, categoryId });
+}
+goodsTimesDays (goodsId, propertyChildIds) {
+  return request('/shop/goods/times/days', true, 'post', { goodsId, propertyChildIds });
+}
+goodsTimesDayItems (day, goodsId, propertyChildIds) {
+  return request('/shop/goods/times/items', true, 'post', { day, goodsId, propertyChildIds });
+}
+goodsBrandList(data) {
+  return request('/shop/goods/brand/list', true, 'post', data);
+}
+goodsBrandDetail(id) {
+  return request('/shop/goods/brand/detail', true, 'get', { id });
+}
+wxappServiceLogin(data) {
+  return request('/user/wxappService/login', true, 'post', data);
+}
+wxappServiceLoginWxaMobile(data) {
+  return request('/user/wxappService/login/mobile', true, 'post', data);
+}
+wxappServiceRegisterComplex(data) {
+  return request('/user/wxappService/register/complex', true, 'post', data);
+}
+wxappServiceRegisterSimple(data) {
+  return request('/user/wxappService/register/simple', true, 'post', data);
+}
+wxappServiceAuthorize(data) {
+  return request('/user/wxappService/authorize', true, 'post', data);
+}
+wxappServiceBindMobile(data) {
+  return request('/user/wxappService/bindMobile', true, 'post', data);
+}
+wxappServiceBindOpenid(data) {
+  return request('/user/wxappService/bindOpenid', true, 'post', data);
+}
+wxappServiceEncryptedData(data) {
+  return request('/user/wxappService/decode/encryptedData', true, 'post', data);
+}
+trtcUserSig(token) {
+  return request('/trtc/userSig', true, 'get', { token });
+}
+setPayPassword (token, pwd) {
+  return request('/user/paypwd/set', true, 'post', { token, pwd });
+}
+modifyPayPassword (token, pwdOld, pwdNew) {
+  return request('/user/paypwd/modify', true, 'post', { token, pwdOld, pwdNew });
+}
+resetPayPassword (mobile, code, pwd) {
+  return request('/user/paypwd/reset', true, 'post', { mobile, code, pwd });
+}
+adPosition(key) {
+  return request('/site/adPosition/info', true, 'get', { key });
+}
+adPositionBatch(keys) {
+  return request('/site/adPosition/batch', true, 'get', { keys });
+}
+goodsVisitLog(data) {
+  return request('/goods/visitLog', true, 'post', data);
+}
+goodsVisitLogAdd(data) {
+  return request('/goods/visitLog/add', true, 'post', data);
+}
+goodsVisitLogDelete(data) {
+  return request('/goods/visitLog/delete', true, 'post', data);
+}
+channelDataPush (key, content) {
+  return request('/channelData/push', true, 'post', { key, content });
+}
+channelDataPull (key) {
+  return request('/channelData/pull', true, 'get', { key });
+}
+bindPartner (token, partnerId) {
+  return request('/user/bindPartner', true, 'post', {
+    'token': token,
+    'uid': partnerId
+  });
+}
+partnerSetting () {
+  return request('/partner/setting', true, 'get');
+}
+partnerBindTeamLeader (token, uid) {
+  return request('/partner/bindTeamLeader', true, 'post', { token, uid });
+}
+partnerBuyTeamLeader(token) {
+  return request('/partner/buy', true, 'post', { token });
+}
+partnerMembersStatistics(token) {
+  return request('/partner/members/statistics', true, 'get', { token });
+}
+partnerMembers(data) {
+  return request('/partner/members', true, 'post', data);
+}
+myLiveRooms(data) {
+  return request('/liveRooms/my', true, 'post', data);
+}
+liveRooms(data) {
+  return request('/liveRooms/list', true, 'post', data);
+}
+myLiveRoomsInfo (token, id) {
+  return request('/liveRooms/my/info', true, 'get', { token, id });
+}
+liveRoomsInfo (token, id) {
+  return request('/liveRooms/info', true, 'get', { token, id });
+}
+liveRoomGoodsMainly(data) {
+  return request('/liveRooms/goods/mainly', true, 'post', data);
+}
+stopLiveRoom (token, id) {
+  return request('/liveRooms/my/stop', true, 'post', { token, id });
+}
+likeLiveRoom (token, id) {
+  return request('/liveRooms/like', true, 'post', { token, id });
+}
+liveRoomOnlineUsers (token, roomId) {
+  return request('/websocket/rest/liveRoom/onlines', false, 'get', { token, roomId });
+}
+liveRoomKickOutUser (token, roomId, uid) {
+  return request('/websocket/rest/liveRoom/kickOut', false, 'post', { token, roomId, uid });
+}
+mockApi (groupName, apiName, method) {
+  return request('/mock/'+ groupName +'/' + apiName, true, method);
+}
+tourJourneyList (type, refId) {
+  return request('/tourJourney/list', true, 'get', { type, refId });
+}
+userBankSelectBanks () {
+  return request('/userBank/banks', true, 'get');
+}
+userBankInfo(token) {
+  return request('/userBank/info', true, 'get', { token });
+}
+userBankBind(data) {
+  return request('/userBank/bind', true, 'post', data);
+}
+userBankUnBind(token) {
+  return request('/userBank/unbind', true, 'post', { token });
+}
+// 京东VOP相关接口
+jdvopGoodsList(data) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/goods/list', false, 'post', data);
+}
+jdvopGoodsCheckCanBuy(data) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/goods/checkCanBuy', false, 'post', data);
+}
+jdvopGoodsDetail(goodsId) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/goods/detail', false, 'get', {
+    'skuId': goodsId,
+    'queryExts': 'wxintroduction'
+  });
+}
+jdvopGoodsSkuImages(goodsId) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/goods/skuImages', false, 'get', {
+    'skuId': goodsId
+  });
+}
+jdvopCartInfo(token) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/info', false, 'get', {
+    token
+  });
+}
+jdvopCartAdd(data) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/add', false, 'post', data);
+}
+jdvopCartModifyNumber (token, key, number) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/modifyNumber', false, 'post', {
+    token, key, number
+  });
+}
+jdvopCartSelect (token, key, selected) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/select', false, 'post', {
+    token, key, selected
+  });
+}
+jdvopCartRemove (token, key) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/remove', false, 'post', {
+    token, key
+  });
+}
+jdvopCartEmpty(token) {
+  return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/empty', false, 'post', {
+    token
+  });
+}
+// 商家从区管进货
+jdvopJinhuoGoods(data) {
+  return request('/vop/goods/list', true, 'post', data);
+}
+jdvopJinhuoGoodsDetail (token, skuId) {
+  return request('/vop/goods/detail', true, 'get', { token, skuId });
+}
+// cps
+cpsJdGoodsCategory (parentId, grade) {
+  return request('/cpsJdGoods/category', true, 'get', { parentId, grade });
+}
+cpsJdGoodsSearch(data) {
+  return request('/cpsJdGoods/search', true, 'post', data);
+}
+cpsJdGoodsDetail(data) {
+  return request('/cpsJdGoods/detail', true, 'get', data);
+}
+cpsJdGoodsSetExt(data) {
+  return request('/cpsJdGoods/ext/set', true, 'post', data);
+}
+cpsJdGoodsQueryExt(skuId) {
+  return request('/cpsJdGoods/ext/query', true, 'get', { skuId });
+}
+cpsJdGoodsShotUrl (token, skuId) {
+  return request('/cpsJdGoods/shotUrl', true, 'get', { token, skuId });
+}
+cpsJdGoodsShotUrlSite (token, materialUrl, couponUrl) {
+  return request('/cpsJdGoods/shotUrl/site', true, 'post', { token, materialUrl, couponUrl });
+}
+cpsJdOrders(data) {
+  return request('/cpsJdOrder/list', true, 'post', data);
+}
+cpsJdOrderDetail (token, id) {
+  return request('/cpsJdOrder/detail', true, 'get', { token, id });
+}
+cpsPddBeian(token) {
+  return request('/cpsPddGoods/beian', true, 'get', { token });
+}
+cpsPddGoodsDetail(data) {
+  return request('/cpsPddGoods/detail', true, 'get', data);
+}
+cpsPddGoodsShotUrl (token, goodsSign) {
+  return request('/cpsPddGoods/shotUrl', true, 'get', { token, goodsSign });
+}
+cpsPddOrders(data) {
+  return request('/cpsPddOrder/list', true, 'post', data);
+}
+cpsPddOrderDetail (token, id) {
+  return request('/cpsPddOrder/detail', true, 'get', { token, id });
+}
+cpsTaobaoGoodsDetail(data) {
+  return request('/cpsTaobaoGoods/detail', true, 'get', data);
+}
+cpsTaobaoGoodsShotUrl (token, content) {
+  return request('/cpsTaobaoGoods/shotUrl', true, 'post', { token, content });
+}
+cpsTaobaoGoodsKouling (token, content) {
+  return request('/cpsTaobaoGoods/kouling', true, 'post', { token, content });
+}
+// 回收
+recycleOrders(data) {
+  return request('/recycleOrder/list', true, 'post', data);
+}
+recycleOrderApply(data) {
+  return request('/recycleOrder/apply', true, 'post', data);
+}
+recycleOrderDetail (token, id) {
+  return request('/recycleOrder/detail', true, 'get', { token, id });
+}
+recycleOrderFahuo(data) {
+  return request('/recycleOrder/fahuo', true, 'post', data);
+}
+recycleOrderClose (token, id) {
+  return request('/recycleOrder/close', true, 'post', { token, id });
+}
+recycleOrderDelete (token, id) {
+  return request('/recycleOrder/del', true, 'post', { token, id });
+}
+// 会员卡
+cardList(data) {
+  return request('/card/list', true, 'post', data);
+}
+cardInfo(id) {
+  return request('/card/info', true, 'get', { id });
+}
+cardBuy (token, id) {
+  return request('/card/buy', true, 'post', { token, id });
+}
+cardMyList(token) {
+  return request('/card/my', true, 'get', { token });
+}
+cardMyLogs(data) {
+  return request('/card/logs', true, 'post', data);
+}
+// 收藏卡片
+collectCardHis(data) {
+  return request('/collectCard/del', true, 'post', data);
+}
+collectCardInfo (number) {
+  return request('/collectCard/cardInfo', true, 'get', { number });
+}
+collectCardHisInfo (token, id) {
+  return request('/collectCard/hisInfo', true, 'get', { token, id });
+}
+collectCardBind(data) {
+  return request('/collectCard/bind', true, 'post', data);
+}
+collectCardUnBind (token, id, smsCode) {
+  return request('/collectCard/bind', true, 'post', { token, id, smsCode });
+}
+// 其他
+bengenSaleTongjiList(data) {
+  return request('/bengenSaleTongji/list', true, 'post', data);
+}
+bengenSaleTongjiRank(data) {
+  return request('/bengenSaleTongji/rank', true, 'get', data);
+}
+// 购买课程
+courseInfoList(data) {
+  return request('/courseInfo/list', true, 'post', data);
+}
+courseInfo(id) {
+  return request('/courseInfo/info', true, 'get', { id });
+}
+courseBuyLogPublic(data) {
+  return request('/courseBuyLog/public', true, 'post', data);
+}
+courseBuyLogMy(data) {
+  return request('/courseBuyLog/my', true, 'post', data);
+}
+courseInfoBuy(data) {
+  return request('/courseBuyLog/buy', true, 'post', data);
+}
+courseInfoBuyLogPay (token, orderId) {
+  return request('/courseBuyLog/pay', true, 'post', { token, orderId });
+}
+courseInfoBuyLogDetail (token, id, hxNumber) {
+  return request('/courseBuyLog/detail', true, 'get', { token, id, hxNumber });
+}
+courseInfoBuyLogClose (token, orderId) {
+  return request('/courseBuyLog/close', true, 'post', { token, orderId });
+}
+courseInfoBuyLogDelete (token, orderId) {
+  return request('/courseBuyLog/del', true, 'post', { token, orderId });
+}
+// 橱窗
+chuchuanSettingInfo(uid) {
+  return request('/chuchuan/info', true, 'get', { uid });
+}
+chuchuanSettingModify(data) {
+  return request('/chuchuan/modify', true, 'post', data);
+}
+chuchuanGoodsList(data) {
+  return request('/chuchuanGoods/list', true, 'post', data);
+}
+chuchuanGoodsAdd(data) {
+  return request('/chuchuanGoods/add', true, 'post', data);
+}
+chuchuanGoodsRemove (token, goodsId) {
+  return request('/chuchuanGoods/remove', true, 'post', { token, goodsId });
+}
+chuchuanGoodsCheck (token, goodsId) {
+  return request('/chuchuanGoods/check', true, 'get', { token, goodsId });
+}
+// 寄存
+jicunGoodsList(data) {
+  return request('/jicunGoods/list', true, 'post', data);
+}
+jicunGoodsDetail(data) {
+  return request('/jicunGoods/detail', true, 'get', data);
+}
+// ocr
+ocrBusinessLicense(imageUrl) {
+  return request('/ocr/businessLicense', true, 'post', { imageUrl });
+}
+ocrIdcard(imageUrl) {
+  return request('/ocr/idcard', true, 'post', { imageUrl });
+}
+ocrBankcard(imageUrl) {
+  return request('/ocr/bankcard', true, 'post', { imageUrl });
+}
+ocrDriverLicense(imageUrl) {
+  return request('/ocr/driverLicense', true, 'post', { imageUrl });
+}
+// 朋友圈
+momentsPublish(data) {
+  return request('/user/moments/publish', true, 'post', data);
+}
+momentsList(data) {
+  return request('/user/moments/list', true, 'get', data);
+}
+momentsDetail (token, momentsId) {
+  return request('/user/moments/detail', true, 'get', { token, momentsId });
+}
+momentsDelete (token, momentsId) {
+  return request('/user/moments/del', true, 'post', { token, momentsId });
+}
+momentsDeleteComment (token, commentId) {
+  return request('/user/moments/delCommon', true, 'post', { token, commentId });
+}
+momentsLike (token, momentsId) {
+  return request('/user/moments/like', true, 'post', { token, momentsId });
+}
+momentsComment (token, momentsId, uid, content) {
+  return request('/user/moments/comment', true, 'post', { token, momentsId, uid, content });
+}
+momentsCommentLogs(data) {
+  return request('/user/moments/logs', true, 'get', data);
+}
+momentsLogsRead (token, logsIds) {
+  return request('/user/moments/logRead', true, 'post', { token, logsIds });
+}
+bottleMsgPublish(data) {
+  return request('/bottleMsg/publish', true, 'post', data);
+}
+bottleMsgSalvage(token) {
+  return request('/bottleMsg/salvage', true, 'get', { token });
 }
