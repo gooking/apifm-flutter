@@ -691,13 +691,16 @@ depositInfo (token, id) {
     'id': id
   });
 }
-depositBackApply (token, id) {
+depositBackApply(token, id) {
   return request('/deposit/back/apply', true, 'post', {
     'token': token,
     'id': id
   });
 }
-fetchShops (data) {
+fetchShopsCities() {
+  return request('/shop/subshop/cities', true, 'get');
+}
+fetchShops(data) {
   return request('/shop/subshop/list', true, 'post', data);
 }
 shopSubdetail (id) {
