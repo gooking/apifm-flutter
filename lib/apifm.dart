@@ -572,25 +572,85 @@ payBill (token, money) {
 vipLevel () {
   return request('/config/vipLevel', true, 'get');
 }
-fxApply (token, name, mobile) {
+fxApply(token, name, mobile) {
   return request('/saleDistribution/apply', true, 'post', {
     'token': token,
     'name': name,
     'mobile': mobile
   });
 }
-fxApplyProgress (token) {
+fxApplyV2(data) {
+  return request('/saleDistribution/apply/v2', true, 'post', data);
+}
+fxSetting() {
+  return request('/saleDistribution/setting', true, 'get');
+}
+fxBuy(token) {
+  return request('/saleDistribution/buy', true, 'post', { token });
+}
+fxApplyProgress(token) {
   return request('/saleDistribution/apply/progress', true, 'get', {
     'token': token
   });
 }
-fxMembers (data) {
+fxApplyProgressV2(token) {
+  return request('/saleDistribution/apply/progress/v2', true, 'get', { 'token': token });
+}
+fxMembers(data) {
   return request('/saleDistribution/members', true, 'post', data);
 }
-fxCommisionLog (data) {
+fxCommisionLog(data) {
   return request('/saleDistribution/commision/log', true, 'post', data);
 }
-uploadFile (token, tempFilePath) {
+fxCommisionFreezeAmount(token) {
+  return request('/saleDistribution/commission/freeze', true, 'get', { token });
+}
+fxSaleroomRankTotal(page, pageSize) {
+  return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+    page, pageSize
+  });
+}
+fxSaleroomRankDaily(page, pageSize, day) {
+  return request('/saleDistribution/sale-room-rank/daily', true, 'get', {
+    page, pageSize, day
+  });
+}
+fxMembersStatistics(token) {
+  return request('/saleDistribution/members/statistics', true, 'get', { token });
+}
+fxMyCommisionStatistics(token, days) {
+  return request('/saleDistribution/my/commision', true, 'get', { token, days });
+}
+fxGoods(data) {
+  return request('/saleDistribution/goods', true, 'post', data);
+}
+fxTeamReport(data) {
+  return request('/saleDistribution/team/report', true, 'post', data);
+}
+fxCities(token) {
+  return request('/saleDistribution/city/list', true, 'get', { token });
+}
+fxCityReport(data) {
+  return request('/saleDistribution/city/report', true, 'post', data);
+}
+goodsSellNumberStatistics(page, pageSize, [goodsId]) {
+  return request('/site/goods/statistics', true, 'get', {
+    page, pageSize, goodsId
+  });
+}
+wxaQrcode(data) {
+  return request('/qrcode/wxa/unlimit', true, 'post', data);
+}
+ttaQrcode(paramsJson, expireHours) {
+  return request('/user/tt/microapp/qrcode', true, 'post', {
+    'content': convert.jsonEncode(paramsJson),
+    'expireHours': expireHours
+  });
+}
+commonQrcode(data) {
+  return request('/qrcode/content', true, 'post', data);
+}
+uploadFile(token, tempFilePath) {
   // TODO
   print('请联系我们完善该功能');
 }
