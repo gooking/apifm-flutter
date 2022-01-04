@@ -70,6 +70,9 @@ queryMobileLocation(mobile) {
 nextMobileSegment(data) {
   return request('/common/mobile-segment/next', false, 'post', data);
 }
+forexRate(fromCode, toCode) {
+  return request('/forex/rate', true, 'get', { fromCode, toCode });
+}
 queryConfigValue(key) {
   return request('/config/value', true, 'get', {
     'key': key
@@ -279,13 +282,18 @@ goodsDetail (id) {
     'id': id
   });
 }
-goodsLimitations (goodsId, [priceId]) {
+goodsLimitations(goodsId, [priceId]) {
   return request('/shop/goods/limitation', true, 'get', {
     'goodsId': goodsId,
     'priceId': priceId
   });
 }
-goodsPrice (goodsId, propertyChildIds) {
+goodsLimitationsV2(goodsId, [propertyChildIds]) {
+  return request('/shop/goods/limitation', true, 'get', {
+    goodsId, propertyChildIds
+  })
+}
+goodsPrice(goodsId, propertyChildIds) {
   return request('/shop/goods/price', true, 'post', {
     'goodsId': goodsId,
     'propertyChildIds': propertyChildIds
