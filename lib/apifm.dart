@@ -291,7 +291,7 @@ goodsLimitations(goodsId, [priceId]) {
 goodsLimitationsV2(goodsId, [propertyChildIds]) {
   return request('/shop/goods/limitation', true, 'get', {
     goodsId, propertyChildIds
-  })
+  });
 }
 goodsPrice(goodsId, propertyChildIds) {
   return request('/shop/goods/price', true, 'post', {
