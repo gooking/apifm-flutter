@@ -765,6 +765,15 @@ depositBackApply(token, id) {
     'id': id
   });
 }
+shopAreaCities() {
+  return request('/shopArea/cities', true, 'get');
+}
+shopAreaList(data) {
+  return request('/shopArea/list', true, 'post', data);
+}
+shopAreaDetail(id) {
+  return request('/shopArea/detail', true, 'get', { id });
+}
 fetchShopsCities() {
   return request('/shop/subshop/cities', true, 'get');
 }
