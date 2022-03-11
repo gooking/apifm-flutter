@@ -214,10 +214,13 @@ wxpayAirwallex(data) {
 paypalCheckout(data) {
   return request('/pay/paypal/checkout', true, 'post', data);
 }
-alipay (data) {
+alipay(data) {
   return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
 }
-loginUsername (username, pwd, deviceId, deviceName) {
+alipayAPP(data) {
+  return request('/pay/alipay/gate/app', true, 'post', data);
+}
+loginUsername(username, pwd, deviceId, deviceName) {
   return request('/user/username/login', true, 'post', {
     'username': username,
     'pwd': pwd,
@@ -255,23 +258,32 @@ resetPwdUseMobileCode (mobile, pwd, code) {
     'code': code
   });
 }
-resetPwdUseEmailCode (email, pwd, code) {
+resetPwdUseEmailCode(email, pwd, code) {
   return request('/user/email/reset-pwd', true, 'post', {
     'email': email,
     'pwd': pwd,
     'code': code
   });
 }
-registerUsername (data) {
+wxmpAuth(data) {
+  return request('/user/wxmp/auth', true, 'post', data);
+}
+registerUsername(data) {
   return request('/user/username/register', true, 'post', data);
 }
-registerMobile (data) {
+registerMobile(data) {
   return request('/user/m/register', true, 'post', data);
 }
-goodsCategory () {
+goodsCategory() {
   return request('/shop/goods/category/all', true, 'get');
 }
-goods ([data]) {
+goodsCategoryV2([shopId]) {
+  return request('/shop/goods/category/all', true, 'get', { shopId });
+}
+goodsCategoryDetail(id) {
+  return request('/shop/goods/category/info', true, 'get', { id });
+}
+goods([data]) {
   return request('/shop/goods/list', true, 'post', data);
 }
 goodsv2 ([data]) {
@@ -368,12 +380,21 @@ fetchCoupons (data) {
 sendCoupons (data) {
   return request('/discounts/send', true, 'post', data);
 }
-exchangeCoupons (token, number, pwd) {
+exchangeCoupons(token, number, pwd) {
   return request('/discounts/exchange', true, 'post', {
     'token': token,
     'number': number,
     'pwd': pwd
   });
+}
+couponsShareOpen(token, id) {
+  return request('/discounts/share/open', true, 'post', { token, id });
+}
+couponsShareClose(token, id) {
+  return request('/discounts/share/close', true, 'post', { token, id });
+}
+couponsShareFetch(token, id, shareToken) {
+  return request('/discounts/share/fetch', true, 'post', { token, id, shareToken });
 }
 noticeList (data) {
   return request('/notice/list', true, 'post', data);
@@ -615,6 +636,11 @@ fxCommisionFreezeAmount(token) {
 }
 fxSaleroomRankTotal(page, pageSize) {
   return request('/saleDistribution/sale-room-rank/total', true, 'get', {
+    page, pageSize
+  });
+}
+fxSaleroomRankTotalTeam(page, pageSize) {
+  return request('/saleDistribution/sale-room-rank/team/total', true, 'get', {
     page, pageSize
   });
 }
@@ -1110,16 +1136,19 @@ loginWX(code) {
     'code': code,
   });
 }
-bindWXOpenid (token, code) {
+bindWXOpenid(token, code) {
   return request('/user/wxsns/bindOpenid', true, 'post', {
     'token': token,
     'code': code,
   });
 }
-goodsDynamic (type) {
+goodsDynamic(type) {
   return request('/site/goods/dynamic', true, 'get', { type });
 }
-usersDynamic (type) {
+goodsDynamicV2(data) {
+  return request('/site/goods/dynamic', true, 'get', data);
+}
+usersDynamic(type) {
   return request('/site/user/dynamic', true, 'get', { type });
 }
 fetchSubDomainByWxappAppid (appid) {
@@ -1710,7 +1739,7 @@ momentsComment (token, momentsId, uid, content) {
 momentsCommentLogs(data) {
   return request('/user/moments/logs', true, 'get', data);
 }
-momentsLogsRead (token, logsIds) {
+momentsLogsRead(token, logsIds) {
   return request('/user/moments/logRead', true, 'post', { token, logsIds });
 }
 bottleMsgPublish(data) {
@@ -1718,4 +1747,13 @@ bottleMsgPublish(data) {
 }
 bottleMsgSalvage(token) {
   return request('/bottleMsg/salvage', true, 'get', { token });
+}
+userInvoiceInfo(token) {
+  return request('/userInvoice/info', true, 'get', { token });
+}
+userInvoiceUnbind(token) {
+  return request('/userInvoice/unbind', true, 'post', { token });
+}
+userInvoiceBind(data) {
+  return request('/userInvoice/bind', true, 'post', data);
 }
