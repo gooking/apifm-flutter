@@ -76,7 +76,7 @@ Apifm.queryMobileLocation("13500000000").then((res) {
 
 [「5分钟上手教程」](https://blog.csdn.net/abccba9978/article/category/9329782)
 [「Demo程序」](https://github.com/gooking/apifm-flutter-demo)
-[「功能说明文档」](instructions.md)
+[「功能说明文档」](https://www.yuque.com/apifm/nu0f75/vkifm4)
 [「api接口文档」](https://api.it120.cc/doc.html)
 
 # 授权协议

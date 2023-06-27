@@ -50,7 +50,7 @@ request(url, needSubDomain, method, [data]) async {
     throw Exception('api server response error with statusCode ${response.statusCode}');
   }
   if (method.toLowerCase() == 'post') {
-    var response = await http.post(_url, body: data);
+    var response = await http.post(_url, body(data));
     if (response.statusCode == 200) {
       return convert.jsonDecode(response.body);
     }
@@ -111,7 +111,16 @@ scoreExchange (token, number) {
 scoreLogs (data) {
   return request('/score/logs', true, 'post', data);
 }
-kanjiaSet (goodsId) {
+scoreDeductionRules() {
+  return request('/score/deduction/rules', true, 'get');
+}
+scoreTaskList(token) {
+  return request('/score/taskList', true, 'get', { token });
+}
+scoreTaskSuccess(token, type) {
+  return request('/score/taskSuccess', true, 'post', { token, type });
+}
+kanjiaSet(goodsId) {
   return request('/shop/goods/kanjia/set', true, 'get', {
     'goodsId': goodsId
   });
@@ -175,6 +184,9 @@ wxpayJsapi(data) {
 wxpayQrcode(data) {
   return request('/pay/wx/qrcode', true, 'post', data);
 }
+wxpayCode(data) {
+  return request('/pay/wx/paymentCode', true, 'post', data);
+}
 wxpayApp(data) {
   return request('/pay/wx/app', true, 'post', data);
 }
@@ -225,6 +237,12 @@ alipayMP(data) {
 }
 alipayAPP(data) {
   return request('/pay/alipay/gate/app', true, 'post', data);
+}
+alipayQrcode(data) {
+  return request('/pay/alipay/gate/qrcode', true, 'post', data);
+}
+alipayQrcode2(data) {
+  return request('/pay/alipay/gate/paymentCode', true, 'post', data);
 }
 login_wx(code) {
   return request('/user/wxapp/login', true, 'post', {
@@ -318,11 +336,15 @@ goods([data]) {
 goodsv2 ([data]) {
   return request('/shop/goods/list/v2', true, 'post', data);
 }
-goodsDetail (id) {
+goodsDetail(id, [token]) {
   return request('/shop/goods/detail', true, 'get', {
-    'id': id
+    'id': id,
+    'token', token
   });
 }
+goodsDetailV2(data) {
+    return request('/shop/goods/detail', true, 'get', data);
+  }
 goodsLimitations(goodsId, [priceId]) {
   return request('/shop/goods/limitation', true, 'get', {
     'goodsId': goodsId,
@@ -332,6 +354,21 @@ goodsLimitations(goodsId, [priceId]) {
 goodsLimitationsV2(goodsId, [propertyChildIds]) {
   return request('/shop/goods/limitation', true, 'get', {
     goodsId, propertyChildIds
+  });
+}
+goodsAddition(goodsId) {
+  return request('/shop/goods/goodsAddition', true, 'get', {
+    goodsId
+  });
+}
+goodsVideoEpisodesList(goodsId, [token]) {
+  return request('/goodsVideoEpisodes/list', true, 'get', {
+    goodsId, token
+  });
+}
+goodsVideoEpisodesBuy(goodsId, number, token) {
+  return request('/goodsVideoEpisodes/buy', true, 'post', {
+    goodsId, number, token
   });
 }
 goodsPrice(goodsId, propertyChildIds) {
@@ -642,6 +679,9 @@ regionInfo(id) {
     id
   });
 }
+regionSearch(data) {
+  return request('/common/region/v2/search', false, 'post', data);
+}
 cashLogs(data) {
   return request('/user/cashLog', true, 'post', data);
 }
@@ -756,12 +796,15 @@ uploadFileFromUrl (remoteFileUrl, ext) {
     'ext': ext
   });
 }
-uploadFileList ([path]) {
+uploadFileList([path]) {
   return request('/dfs/upload/list', true, 'post', {
     'path': path
   });
 }
-refundApply (data) {
+galleryList(data) {
+  return request('/dfs/gallery', true, 'post', data);
+}
+refundApply(data) {
   return request('/order/refundApply/apply', true, 'post', data);
 }
 refundApplyDetail (token, orderId) {
@@ -936,7 +979,16 @@ delComment(data) {
 modifyUserInfo(data) {
   return request('/user/modify', true, 'post', data);
 }
-uniqueId ([type]) {
+bindSaleman(data) {
+    return request('/user/bindSaleman', true, 'post', data);
+  }
+  modifyUserPassword(token, pwdOld, pwdNew) {
+    return request('/user/modify/password', true, 'post', { token, pwdOld, pwdNew });
+  }
+  modifyUserPasswordByUserName(data) {
+    return request('/user/username/modifyPassword', true, 'post', data);
+  }
+uniqueId([type]) {
   return request('/uniqueId/get', true, 'get', {
     'type': type
   });
@@ -1106,6 +1158,9 @@ userDelete(token) {
     'token': token
   });
 }
+dynamicUserCode(token) {
+  return request('/user/dynamicUserCode', true, 'get', { 'token': token });
+}
 userLevelList(data) {
   return request('/user/level/list', true, 'post', data);
 }
@@ -1144,9 +1199,6 @@ messageDelete (token, id) {
     'token': token,
     'id': id
   });
-}
-scoreDeductionRules () {
-  return request('/score/deduction/rules', true, 'get');
 }
 voteItems (data) {
   return request('/vote/items', true, 'post', data);
@@ -1245,7 +1297,7 @@ registerEmail(data) {
   return request('/user/email/register', true, 'post', data);
 }
 bindEmail(token, email, code, [pwd]) {
-  return request('/user/email/bindUsername', true, 'post', {
+  return request('/user/email/bindEmail', true, 'post', {
     'token': token,
     'email': email,
     'code': code,
@@ -1451,9 +1503,18 @@ mtjTransfer (data) {
 mtjTransferLogs (data) {
   return request('/mtj/transfer/logs', true, 'post', data);
 }
-wxOpenAuthorization (data) {
+wxOpenAuthorization(data) {
   return request('/user/wxsns/authorization', true, 'post', data);
 }
+wxOpenRegister(data) {
+    return request('/user/wxsns/register', true, 'post', data);
+  }
+  wxOpenBindOpenid(data) {
+    return request('/user/wxsns/bindOpenid/v2', true, 'post', data);
+  }
+  wxOpenLogin(data) {
+    return request('/user/wxsns/login', true, 'post', data);
+  }
 userAttentioncheck (token, uid) {
   return request('/user/attention/check', true, 'get', {
     token, uid
@@ -1566,7 +1627,10 @@ goodsVisitLogAdd(data) {
 goodsVisitLogDelete(data) {
   return request('/goods/visitLog/delete', true, 'post', data);
 }
-channelDataPush (key, content) {
+goodsVisitLogClear(token) {
+  return request('/goods/visitLog/clear', true, 'post', { token });
+}
+channelDataPush(key, content) {
   return request('/channelData/push', true, 'post', { key, content });
 }
 channelDataPull (key) {
@@ -1764,7 +1828,7 @@ recycleOrderDelete (token, id) {
 }
 // 会员卡
 cardList(data) {
-  return request('/card/list', true, 'post', data);
+  return request('/card/list', true, 'get', data);
 }
 cardInfo(id) {
   return request('/card/info', true, 'get', { id });
@@ -1923,6 +1987,61 @@ commonDatetime() {
 commonDays([startDay], [days]) {
   return request('/common/days', false, 'get', { startDay, days });
 }
+// 企业应用 组织/成员/网盘
+organizePrices() {
+  return request('/organizeInfo/prices', true, 'get');
+}
+organizeCreate(data) {
+  return request('/organizeInfo/create', true, 'post', data);
+}
+organizeUpgrade(data) {
+  return request('/organizeInfo/upgrade', true, 'post', data);
+}
+organizeModify(data) {
+  return request('/organizeInfo/modify', true, 'post', data);
+}
+organizeJoinKey(data) {
+  return request('/organizeInfo/joinKey', true, 'get', data);
+}
+organizeJoin(data) {
+  return request('/organizeInfo/join', true, 'post', data);
+}
+organizeGrantAdmin(data) {
+  return request('/organizeInfo/grantAdmin', true, 'post', data);
+}
+organizeKick(data) {
+  return request('/organizeInfo/kick', true, 'post', data);
+}
+organizeKickAllMembers(data) {
+  return request('/organizeInfo/kickAllMembers', true, 'post', data);
+}
+organizeKickSelf(data) {
+  return request('/organizeInfo/kickSelf', true, 'post', data);
+}
+organizeNick(data) {
+  return request('/organizeInfo/nick', true, 'post', data);
+}
+organizeDelete(data) {
+  return request('/organizeInfo/deleteOrganize', true, 'post', data);
+}
+organizeMyOrganizeInfo(data) {
+  return request('/organizeInfo/myOrganizeInfo', true, 'post', data);
+}
+organizeDetail(data) {
+  return request('/organizeInfo/organizeDetail', true, 'get', data);
+}
+organizeMembers(data) {
+  return request('/organizeInfo/members', true, 'post', data);
+}
+newsExtFieldList(token, organizeId, newsId) {
+  return request('/newsExtField/extFields', true, 'get', { token, organizeId, newsId });
+}
+newsExtFieldDynamic(token, newsId) {
+  return request('/newsExtField/dynamic', true, 'get', { token, newsId });
+}
+newsExtFieldSet(data) {
+  return request('/newsExtField/setField', true, 'post', data);
+}
 // 支付宝小程序
 aliappUserRegister(data) {
   return request('/user/aliapp/register', true, 'post', data);
@@ -1948,7 +2067,40 @@ userAttendantDetail(id, [token]) {
 userAttendantGoods(id) {
   return request('/user/attendant/goods', true, 'get', { id });
 }
-shopCategory() {
+userAttendantGoodsSet(token, ids) {
+  return request('/user/attendant/goodsSet', true, 'post', { token, ids });
+}
+userAttendantBindShop(token, shopId) {
+  return request('/user/attendant/bindShop', true, 'post', { shopId, token });
+}
+userAttendantUnBindShop(token) {
+  return request('/user/attendant/unbindShop', true, 'post', { token });
+}
+userAttendantChangeStatus(data) {
+  return request('/user/attendant/changeStatus', true, 'post', data);
+}
+userAttendantDaysTimesAttendant(goodsId, day) {
+  return request('/user/attendant/daysTimesAttendant', true, 'get', { goodsId, day });
+}
+userAttendantDaysTimesAttendantSetQuery(token, day) {
+  return request('/user/attendant/daysTimesAttendant/set/query', true, 'get', { token, day });
+}
+userAttendantDaysTimesAttendantSet(data) {
+  return request('/user/attendant/daysTimesAttendant/set', true, 'post', data);
+}
+userAttendantListReputation(data) {
+  return request('/user/attendant/listReputation', true, 'post', data);
+}
+userAttendantShowPics(id) {
+  return request('/user/attendant/showPics', true, 'get', { id });
+}
+userAttendantShowPicsAdd(token, url) {
+  return request('/user/attendant/showPicsAdd', true, 'post', { token, url });
+}
+userAttendantUpdate(data) {
+  return request('/user/attendant/update', true, 'post', data);
+}
+shopCategory(){
   return request('/shopCategory/all', true, 'get');
 }
 shopCategoryDetail(id) {
