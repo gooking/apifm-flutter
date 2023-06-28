@@ -1374,7 +1374,7 @@ shippingCarInfo (token, type) {
     token, type
   });
 }
-shippingCarInfoAddItem (token, goodsId, number, sku, addition, type) {
+shippingCarInfoAddItem(token, goodsId, number, sku, addition, type) {
   return request('/shopping-cart/add', true, 'post', {
     'token': token,
     'goodsId': goodsId,
@@ -1384,6 +1384,9 @@ shippingCarInfoAddItem (token, goodsId, number, sku, addition, type) {
     'type': type
   });
 }
+shippingCarInfoAddItemV2(data) {
+    return request('/shopping-cart/add', true, 'post', data);
+  }
 shippingCarInfoModifyNumber (token, key, number, type) {
   return request('/shopping-cart/modifyNumber', true, 'post', {
     token, key, number, type
