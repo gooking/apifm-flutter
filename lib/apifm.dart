@@ -58,7 +58,9 @@ request(url, needSubDomain, method, [data]) async {
   }
   throw Exception('error param method');
 }
-
+bannerTypes() {
+    return request('/banner/types', true, 'get');
+  }
 banners([data]) {
   return request('/banner/list', true, 'get', data);
 }
@@ -663,10 +665,13 @@ withDrawDetail (token, id) {
     'id': id
   });
 }
-withDrawLogs (data) {
+withDrawLogs(data) {
   return request('/user/withDraw/list', true, 'post', data);
 }
-province () {
+withDrawSetting() {
+  return request('/user/withDraw/setting', true, 'get');
+}
+province() {
   return request('/common/region/v2/province', false, 'get');
 }
 nextRegion(pid) {
@@ -2108,4 +2113,7 @@ shopCategory(){
 }
 shopCategoryDetail(id) {
   return request('/shopCategory/info', true, 'get', { id });
+}
+contactList() {
+  return request('/contact/list', true, 'get');
 }
