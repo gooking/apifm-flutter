@@ -806,6 +806,9 @@ uploadFileList([path]) {
     'path': path
   });
 }
+uploadFileListV2(data) {
+  return request('/dfs/upload/list/v2', true, 'post', data);
+}
 galleryList(data) {
   return request('/dfs/gallery', true, 'post', data);
 }
@@ -1087,6 +1090,9 @@ mailValidateCodeCheck(mail, code) {
 gpsDistance(data) {
   return request('/common/map/qq/distance', false, 'post', data);
 }
+commonIP([ip]) {
+    return request('/common/ip', false, 'get', { ip });
+  }
 mapDistance(lat1, lng1, lat2, lng2) {
   return request('/common/map/distance', false, 'get', {
     'lat1': lat1,
@@ -2004,6 +2010,9 @@ commonDatetime() {
 commonDays([startDay], [days]) {
   return request('/common/days', false, 'get', { startDay, days });
 }
+commonDiffMillis([d1], [d2]) {
+    return request('/common/diffMillis', false, 'get', { d1, d2 });
+  }
 // 企业应用 组织/成员/网盘
 organizePrices() {
   return request('/organizeInfo/prices', true, 'get');
@@ -2125,4 +2134,10 @@ shopCategoryDetail(id) {
 }
 contactList() {
   return request('/contact/list', true, 'get');
+}
+distributedLock(key, seconds) {
+  return request('/distributedLock/lock', true, 'get', { key, seconds });
+}
+distributedLockRelease(key) {
+  return request('/distributedLock/lock', true, 'get', { key });
 }
