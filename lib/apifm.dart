@@ -1058,12 +1058,18 @@ graphValidateCodeCheck (key, code) {
     'code': code
   });
 }
-shortUrl (url) {
+shortUrl(url) {
   return request('/common/short-url/shorten', false, 'post', {
     'url': url
   });
 }
-smsValidateCode (mobile, [key, picCode]) {
+shortUrlV2(content) {
+    return request('/common/short-url/shorten/v2', false, 'post', { content });
+  }
+  shortUrlExpand(suffix) {
+    return request('/common/short-url/expand', false, 'post', { suffix });
+  }
+smsValidateCode(mobile, [key, picCode]) {
   return request('/verification/sms/get', true, 'get', {
     'mobile': mobile,
     'key': key,
@@ -2140,4 +2146,19 @@ distributedLock(key, seconds) {
 }
 distributedLockRelease(key) {
   return request('/distributedLock/lock', true, 'get', { key });
+}
+communitySetting() {
+  return request('/community/setting', true, 'get');
+}
+communityLeaderApply(data) {
+  return request('/communityLeader/apply', true, 'post', data);
+}
+communityLeaderApplyInfo(token) {
+  return request('/communityLeader/apply/info', true, 'get', { token });
+}
+communityLeaderBuy(token) {
+  return request('/communityLeader/buy', true, 'post', { token });
+}
+communityOrderFahuo(data) {
+  return request('/communityOrder/fahuo', true, 'post', data);
 }
