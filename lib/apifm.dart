@@ -1590,7 +1590,13 @@ cyTableAddOrder(data) {
 cyTablePayOrder(data) {
   return request('/cyTable/pay-order', true, 'post', data);
 }
-goodsTimesSchedule (goodsId, propertyChildIds, brandId, categoryId) {
+cyTableInfo(id) {
+  return request('/cyTable/info', true, 'get', { id });
+}
+cyTableList(data) {
+  return request('/cyTable/list', true, 'post', data);
+}
+goodsTimesSchedule(goodsId, propertyChildIds, brandId, categoryId) {
   return request('/shop/goods/times/schedule', true, 'post', { goodsId, propertyChildIds, brandId, categoryId });
 }
 goodsTimesDays (goodsId, propertyChildIds) {
@@ -1788,7 +1794,7 @@ jdvopJinhuoGoodsDetail (token, skuId) {
   return request('/vop/goods/detail', true, 'get', { token, skuId });
 }
 // cps
-cpsJdGoodsCategory (parentId, grade) {
+cpsJdGoodsCategory(parentId, grade) {
   return request('/cpsJdGoods/category', true, 'get', { parentId, grade });
 }
 cpsJdGoodsSearch(data) {
@@ -2170,4 +2176,34 @@ communityOrderFahuo(data) {
 }
 wxmpOpenid(code) {
   return request('/user/wxmp/openid', true, 'get', { code });
+}
+listingSet() {
+  return request('/listingSet/info', true, 'get');
+}
+listingMyListing(token) {
+  return request('/listingInfo/myListing', true, 'get', { token });
+}
+listingSave(data) {
+  return request('/listingInfo/save', true, 'post', data);
+}
+listingDetail(id) {
+  return request('/listingInfo/detail', true, 'get', { id });
+}
+listingCancel(token, id) {
+  return request('/listingInfo/cancel', true, 'post', { token, id });
+}
+listingSuccess(token, id) {
+  return request('/listingInfo/success', true, 'post', { token, id });
+}
+listingDelete(token, id) {
+  return request('/listingInfo/delete', true, 'post', { token, id });
+}
+listingAddGoods(data) {
+  return request('/listingInfo/addGoods', true, 'post', data);
+}
+listingRemoveGoods(data) {
+  return request('/listingInfo/removeGoods', true, 'post', data);
+}
+listingJoinList(data) {
+  return request('/listingInfo/joinList', true, 'post', data);
 }
