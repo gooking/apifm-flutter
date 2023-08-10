@@ -116,6 +116,9 @@ scoreLogs (data) {
 scoreDeductionRules() {
   return request('/score/deduction/rules', true, 'get');
 }
+scoreDailyFixedNum(token) {
+  return request('/score/dailyFixedNum', true, 'post', { token });
+}
 scoreTaskList(token) {
   return request('/score/taskList', true, 'get', { token });
 }
