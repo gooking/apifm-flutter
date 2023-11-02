@@ -43,14 +43,16 @@ request(url, needSubDomain, method, [data]) async {
         }
       });
     }
-    var response = await http.get(_url);
+    // https://pub.dev/packages/http
+    var response = await http.get(Uri.parse(_url));
     if (response.statusCode == 200) {
       return convert.jsonDecode(response.body);
     }
     throw Exception('api server response error with statusCode ${response.statusCode}');
   }
   if (method.toLowerCase() == 'post') {
-    var response = await http.post(_url, body(data));
+    // https://pub.dev/packages/http
+    var response = await http.post(Uri.parse(_url), body: data);
     if (response.statusCode == 200) {
       return convert.jsonDecode(response.body);
     }
@@ -118,6 +120,12 @@ scoreDeductionRules() {
 }
 scoreDailyFixedNum(token) {
   return request('/score/dailyFixedNum', true, 'post', { token });
+}
+scoreRank(data) {
+  return request('/score/rank', true, 'get', data);
+}
+scoreRankBydate(data) {
+  return request('/score/rankBydate', true, 'get', data);
 }
 scoreTaskList(token) {
   return request('/score/taskList', true, 'get', { token });
@@ -228,6 +236,9 @@ wxpayxpert(data) {
 wxpayIPaynow(data) {
   return request('/pay/ipaynow/wxapp', true, 'post', data);
 }
+ccvvPayWxapp(data) {
+  return request('/pay/ccvv/wxapp', true, 'post', data);
+}
 wxpayAirwallex(data) {
   return request('/pay/airwallex/wxapp', true, 'post', data);
 }
@@ -263,19 +274,19 @@ hmpayJsapi(data) {
 }
 login_wx(code) {
   return request('/user/wxapp/login', true, 'post', {
-    code,
-    type: 2
+    'code': code,
+    'type': 2
   });
 }
 login_tt(code) {
   return request('/user/tt/microapp/login', true, 'post', {
-    code
+    'code': code
   });
 }
 login_q(code) {
   return request('/user/q/login', true, 'post', {
-    code,
-    type: 2
+    'code': code,
+    'type': 2
   });
 }
 loginWxaMobileV2(data) {
@@ -356,7 +367,7 @@ goodsv2 ([data]) {
 goodsDetail(id, [token]) {
   return request('/shop/goods/detail', true, 'get', {
     'id': id,
-    'token', token
+    'token': token
   });
 }
 goodsDetailV2(data) {
@@ -417,7 +428,7 @@ goodsFavList(data) {
 }
 goodsFavListV2(data) {
   return request('/shop/goods/fav/list/v2', true, 'post', data);
-},
+}
 goodsFavPut(token, goodsId) {
   return request('/shop/goods/fav/add', true, 'post', {
     'token': token,
@@ -708,6 +719,11 @@ regionInfo(id) {
     id
   });
 }
+regionInfoBatch(ids) {
+  return request('/common/region/v2/infoBatch', false, 'get', {
+    ids
+  });
+}
 regionSearch(data) {
   return request('/common/region/v2/search', false, 'post', data);
 }
@@ -909,16 +925,16 @@ cmsTags() {
 }
 cmsNewsSignUsers(data) {
   return request('/newsSign/signUsers', true, 'post', data);
-},
+}
 cmsNewsSignOnline(data) {
   return request('/newsSign/signOnline', true, 'post', data);
-},
+}
 cmsNewsSignOffline(data) {
   return request('/newsSign/signOffline', true, 'post', data);
-},
+}
 cmsNewsSignCheck(token, newsId) {
   return request('/newsSign/check', true, 'get', { token, newsId });
-},
+}
 invoiceList(data) {
   return request('/invoice/list', true, 'post', data);
 }
@@ -2046,12 +2062,12 @@ tempDataGet(key) {
 commonDatetime() {
   return request('/common/datetime', true, 'get');
 }
-commonDays([startDay], [days]) {
+commonDays(startDay, days) {
   return request('/common/days', false, 'get', { startDay, days });
 }
-commonDiffMillis([d1], [d2]) {
-    return request('/common/diffMillis', false, 'get', { d1, d2 });
-  }
+commonDiffMillis(d1, d2) {
+  return request('/common/diffMillis', false, 'get', { d1, d2 });
+}
 // 企业应用 组织/成员/网盘
 organizePrices() {
   return request('/organizeInfo/prices', true, 'get');
