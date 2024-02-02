@@ -112,9 +112,12 @@ scoreExchange (token, number) {
     'token': token
   });
 }
-scoreLogs (data) {
+scoreLogs(data) {
   return request('/score/logs', true, 'post', data);
 }
+scoreDynamics() {
+  return request('/score/dynamics', true, 'get');
+},
 scoreDeductionRules() {
   return request('/score/deduction/rules', true, 'get');
 }
@@ -606,6 +609,11 @@ userDetail(token) {
     'token': token
   });
 }
+randomNick([len]) {
+  return request('/user/randomNick', true, 'get', {
+    'len': len
+  });
+}
 userDetailSpreadUser(token, uid) {
   return request('/user/detail/spreadUser', true, 'get', {
     token, uid
@@ -1045,6 +1053,9 @@ bindSaleman(data) {
   modifyUserPasswordByUserName(data) {
     return request('/user/username/modifyPassword', true, 'post', data);
   }
+  anonymousUserInfo(id) {
+    return request('/user/anonymous/info', true, 'get', { 'id': id });
+  }
 uniqueId([type]) {
   return request('/uniqueId/get', true, 'get', {
     'type': type
@@ -1213,6 +1224,12 @@ idcardCheck (token, name, idCardNo) {
     'name': name,
     'idCardNo': idCardNo
   });
+}
+idcardCheckManualReview(data) {
+  return request('/user/idcard/manualReview', true, 'post', data);
+}
+idcardCheckManualReviewInfo(token) {
+  return request('/user/idcard/manualReview/info', true, 'get', { 'token': token });
 }
 loginout(token) {
   return request('/user/loginout', true, 'get', {
@@ -2330,4 +2347,94 @@ shopIotCmds(data) {
 }
 shopIotExecute(data) {
   return request('/shopIot/execute', true, 'post', data);
+}
+wxTemplateNumberList(token) {
+  return request('/wxTemplateNumber/list', true, 'get', { 'token': token });
+}
+wxTemplateNumberSubscribe(data) {
+  return request('/wxTemplateNumber/subscribe', true, 'post', data);
+}
+errandsTaskPublish(data) {
+  return request('/errandsTask/publish', true, 'post', data);
+}
+errandsTaskPay(data) {
+  return request('/errandsTask/pay', true, 'post', data);
+}
+errandsTaskAccept(data) {
+  return request('/errandsTask/accept', true, 'post', data);
+}
+errandsTaskFinish(data) {
+  return request('/errandsTask/finish', true, 'post', data);
+}
+errandsTaskSuccess(data) {
+  return request('/errandsTask/success', true, 'post', data);
+}
+activityVoteInfoList(data) {
+  return request('/activityVoteInfo/list', true, 'post', data);
+}
+activityVoteInfoJoinList(data) {
+  return request('/activityVoteInfo/joinList', true, 'post', data);
+}
+activityVoteInfoDetail(id) {
+  return request('/activityVoteInfo/detail', true, 'get', { 'id': id });
+}
+activityVoteInfoJoinDetail(joinId) {
+  return request('/activityVoteInfo/joinDetail', true, 'get', { 'joinId': joinId });
+}
+activityVoteInfoScoreToVotes(activityId) {
+  return request('/activityVoteInfo/scoreToVotes', true, 'get', { 'activityId': activityId });
+}
+activityVoteInfoFetchVoteNumber(data) {
+  return request('/activityVoteInfo/fetchVoteNumber', true, 'post', data);
+}
+activityVoteInfoJoin(data) {
+  return request('/activityVoteInfo/join', true, 'post', data);
+}
+activityVoteInfoVote(data) {
+  return request('/activityVoteInfo/vote', true, 'post', data);
+}
+activityVoteBlance(token, activityId) {
+  return request('/activityVoteInfo/balance', true, 'get', { 'token': token, 'activityId': activityId });
+}
+stringsToPlainText(content, [len]) {
+  return request('/common/strings/plainText', true, 'post', { 'content': content, 'len': len });
+}
+blindBoxFriendsMatch(data) {
+  return request('/blindBoxFriends/match', true, 'post', data);
+}
+blindBoxFriendsPush(data) {
+  return request('/blindBoxFriends/push', true, 'post', data);
+}
+blindBoxFriendsPay(data) {
+  return request('/blindBoxFriends/pay', true, 'post', data);
+}
+blindBoxFriendsChangeStatus(data) {
+  return request('/blindBoxFriends/changeStatus', true, 'post', data);
+}
+blindBoxFriendsDelete(data) {
+  return request('/blindBoxFriends/delete', true, 'post', data);
+}
+blindBoxFriendsPullLogs(data) {
+  return request('/blindBoxFriends/pullLogs', true, 'post', data);
+}
+blindBoxFriendsPushLogs(data) {
+  return request('/blindBoxFriends/pushLogs', true, 'post', data);
+}
+blindBoxFriendsRechargeRule() {
+  return request('/blindBoxFriends/rechargeRule', true, 'get');
+}
+blindBoxFriendsBuyPullTimes(data) {
+  return request('/blindBoxFriends/buyPullTimes', true, 'post', data);
+}
+blindBoxFriendsUnlock(data) {
+  return request('/blindBoxFriends/unlock', true, 'post', data);
+}
+blindBoxFriendsBalance(token) {
+  return request('/blindBoxFriends/balance', true, 'get', { 'token': token })
+}
+cpactivityInfoDetail(id) {
+  return request('/cpactivityInfo/detail', true, 'get', { id });
+}
+cpactivityJoin(data) {
+  return request('/cpactivityInfo/join', true, 'post', data);
 }
