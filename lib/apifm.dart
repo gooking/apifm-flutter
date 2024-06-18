@@ -843,11 +843,14 @@ uploadFile(token, tempFilePath) {
   // TODO
   print('请联系我们完善该功能');
 }
-uploadFileFromUrl (remoteFileUrl, ext) {
+uploadFileFromUrl(remoteFileUrl, ext) {
   return request('/dfs/upload/url', true, 'post', {
     'remoteFileUrl': remoteFileUrl,
     'ext': ext
   });
+}
+uploadFileFromUrlV2(data) {
+  return request('https://oss.apifm.com/uploadByUrl', false, 'post', { ...data, subDomain });
 }
 uploadFileList([path]) {
   return request('/dfs/upload/list', true, 'post', {
@@ -889,6 +892,9 @@ cmsArticles (data) {
 cmsArticlesV2 (data) {
   return request('/cms/news/list/v2', true, 'post', data);
 }
+cmsArticlesV3(data) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/list/v2', true, 'post', data);
+}
 cmsArticleUsefulLogs (data) {
   return request('/cms/news/useful/logs', true, 'post', data);
 }
@@ -900,13 +906,22 @@ cmsArticleDetail(id) {
 cmsArticleDetailV2(id, [token]) {
   return request('/cms/news/detail/v2', true, 'get', { id, token });
 }
+cmsArticleDetailV3(data) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/detail/v2', true, 'get', data);
+}
 cmsArticlePreNext(id) {
   return request('/cms/news/preNext', true, 'get', {
     'id': id
   });
 }
-cmsArticleCreate (data) {
+cmsArticlePreNextV2(id) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/preNext', true, 'get', { id });
+}
+cmsArticleCreate(data) {
   return request('/cms/news/put', true, 'post', data);
+}
+cmsArticleCreateV2(data) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/put', true, 'post', data);
 }
 cmsArticleDelete (token, id) {
   return request('/cms/news/del', true, 'post', {
@@ -914,15 +929,21 @@ cmsArticleDelete (token, id) {
     'id': id
   });
 }
+cmsArticleDeleteV2(token, id) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/del', true, 'post', { token, id });
+}
 cmsArticleUseless(data) {
   return request('/cms/news/useful', true, 'post', data);
 }
 cmsArticleModifyExtNumber(data) {
-    return request('/cms/news/modifyExtNumber', true, 'post', data);
-  }
-  newsOwnerUserViewStatistics(data) {
-    return request('/newsOwnerUserViewStatistics/list', true, 'post', data);
-  }
+  return request('/cms/news/modifyExtNumber', true, 'post', data);
+}
+cmsArticleModifyExtNumberV2(data) {
+  return request('https://cms.apifm.com/{merchantId}/cms/news/modifyExtNumber', true, 'post', data);
+}
+newsOwnerUserViewStatistics(data) {
+  return request('/newsOwnerUserViewStatistics/list', true, 'post', data);
+}
 cmsPage(key) {
   return request('/cms/page/info', true, 'get', {
     'key': key
@@ -2435,6 +2456,15 @@ blindBoxFriendsBalance(token) {
 cpactivityInfoDetail(id) {
   return request('/cpactivityInfo/detail', true, 'get', { id });
 }
+cpactivityJoinDetail(data) {
+  return request('/cpactivityInfo/join', true, 'get', data);
+}
 cpactivityJoin(data) {
   return request('/cpactivityInfo/join', true, 'post', data);
+}
+cpactivityJoinDynamics(cpactivityId) {
+  return request('/cpactivityInfo/joinDynamics', true, 'get', { 'cpactivityId': cpactivityId });
+}
+cpactivityPay(data) {
+  return request('/cpactivityInfo/pay', true, 'post', data);
 }
