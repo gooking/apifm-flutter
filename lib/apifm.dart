@@ -1257,6 +1257,9 @@ loginout(token) {
     'token': token
   });
 }
+userLogedList(token) {
+  return request('/user/logedUserList', true, 'get', { 'token': token });
+}
 userDelete(token) {
   return request('/user/delete', true, 'post', {
     'token': token
