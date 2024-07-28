@@ -952,6 +952,9 @@ cmsPage(key) {
 cmsTags() {
   return request('/cms/tags/list', true, 'get', {});
 }
+cmsTagsV2(data) {
+  return request('https://cms.apifm.com/' + merchantId + '/newsTag/list', true, 'post', data);
+}
 cmsNewsSignUsers(data) {
   return request('/newsSign/signUsers', true, 'post', data);
 }
