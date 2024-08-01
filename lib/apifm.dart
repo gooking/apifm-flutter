@@ -497,7 +497,10 @@ couponsShareClose(token, id) {
 couponsShareFetch(token, id, shareToken) {
   return request('/discounts/share/fetch', true, 'post', { token, id, shareToken });
 }
-noticeList (data) {
+couponsHX(data) {
+  return request('/discounts/hx', true, 'post', data);
+}
+noticeList(data) {
   return request('/notice/list', true, 'post', data);
 }
 noticeLastOne ([type]) {
