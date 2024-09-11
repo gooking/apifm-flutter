@@ -1398,11 +1398,17 @@ yuyueJoinUpdate(token, joinId, extJsonStr) {
     'extJsonStr': extJsonStr
   });
 }
+yuyueLike(data) {
+  return request('/yuyue/like', true, 'post', data);
+}
 yuyueJoinDelete(token, joinId) {
   return request('/yuyue/delJoin', true, 'post', {
     'token': token,
     'id': joinId
   });
+}
+yuyueServered(data) {
+  return request('/yuyue/servered', true, 'post', data);
 }
 yuyueMyJoinInfo(token, joinId) {
   return request('/yuyue/join/info', true, 'post', {
@@ -1424,11 +1430,8 @@ yuyueTeamDetail (teamId) {
 yuyueTeamMembers (data) {
   return request('/yuyue/info/team/members', true, 'post', data);
 }
-yuyueTeamDeleteMember (token, joinId) {
-  return request('/yuyue/info/team/members/del', true, 'post', {
-    'token': token,
-    'joinId': joinId
-  });
+yuyueTeamDeleteMember data {
+  return request('/yuyue/info/team/members/del', true, 'post', data);
 }
 registerEmail(data) {
   return request('/user/email/register', true, 'post', data);
