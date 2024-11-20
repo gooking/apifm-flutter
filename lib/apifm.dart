@@ -861,7 +861,7 @@ goodsSellNumberStatistics(page, pageSize, [goodsId]) {
   });
 }
 wxaQrcode(data) {
-  return request('/qrcode/wxa/unlimit', true, 'post', data);
+  return request('https://oss.apifm.com/' + subDomain + '/qrcode/wxa/unlimit', true, 'post', data);
 }
 ttaQrcode(paramsJson, expireHours) {
   return request('/user/tt/microapp/qrcode', true, 'post', {
@@ -870,7 +870,7 @@ ttaQrcode(paramsJson, expireHours) {
   });
 }
 commonQrcode(data) {
-  return request('/qrcode/content', true, 'post', data);
+  return request('https://oss.apifm.com/' + subDomain + '/qrcode/content', true, 'post', data);
 }
 uploadFile(token, tempFilePath) {
   // TODO
