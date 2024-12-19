@@ -332,6 +332,9 @@ loginMobile (mobile, pwd, deviceId, deviceName) {
     'deviceName': deviceName,
   });
 }
+loginMobileV2(data) {
+  return request('/user/m/login', true, 'post', data);
+}
 resetPwdUseMobileCode (mobile, pwd, code) {
   return request('/user/m/reset-pwd', true, 'post', {
     'mobile': mobile,
@@ -404,6 +407,21 @@ goodsVideoEpisodesBuy(goodsId, number, token) {
   return request('/goodsVideoEpisodes/buy', true, 'post', {
     goodsId, number, token
   });
+}
+goodsStatistics(data) {
+  return request('/shop/goods/statistics/days', true, 'post', data);
+}
+goodsUseless(data) {
+  return request('/shop/goods/useful', true, 'post', data);
+}
+pushNewGoods(data) {
+  return request('/shop/goods/putOrUpdate', true, 'post', data);
+}
+mygoods(data) {
+  return request('/shop/goods/mygoods', true, 'post', data);
+}
+deleteMyGoods(token, id) {
+  return request('/shop/goods/del', true, 'post', { token, id });
 }
 goodsPrice(goodsId, propertyChildIds) {
   return request('/shop/goods/price', true, 'post', {
@@ -2249,6 +2267,18 @@ newsExtFieldDynamic(token, newsId) {
 newsExtFieldSet(data) {
   return request('/newsExtField/setField', true, 'post', data);
 }
+newsExtFieldInit(data) {
+  return request('https://cms.apifm.com/' + subDomain + '/newsExtField/initFields', true, 'post', data);
+}
+newsExtFieldListV2(data) {
+  return request('https://cms.apifm.com/' + subDomain + '/newsExtField/extFields', true, 'get', data);
+}
+newsExtFieldDynamicV2(data) {
+  return request('https://cms.apifm.com/' + subDomain + '/newsExtField/dynamic', true, 'get', data);
+}
+newsExtFieldSetV2(data) {
+  return request('https://cms.apifm.com/' + subDomain + '/newsExtField/setField', true, 'post', data);
+},
 // 支付宝小程序
 aliappUserRegister(data) {
   return request('/user/aliapp/register', true, 'post', data);
