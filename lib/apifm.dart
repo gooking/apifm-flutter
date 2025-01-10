@@ -1161,8 +1161,11 @@ luckyInfoJoinMy (token, id) {
 luckyInfoJoinLogs (data) {
   return request('/luckyInfo/join/logs', true, 'post', data);
 }
-jsonList ([data]) {
+jsonList([data]) {
   return request('/json/list', true, 'post', data);
+}
+jsonListV2([data]) {
+  return request('/json/list/v2', true, 'post', data);
 }
 jsonSet (data) {
   return request('/json/set', true, 'post', data);
@@ -1226,8 +1229,11 @@ gpsDistance(data) {
   return request('/common/map/qq/distance', false, 'post', data);
 }
 commonIP([ip]) {
-    return request('/common/ip', false, 'get', { ip });
-  }
+  return request('/common/ip', false, 'get', { ip });
+}
+commonIPV2([ip]) {
+  return request('https://common.apifm.com/' + subDomain + '/common/ip', false, 'get', { ip });
+}
 mapDistance(lat1, lng1, lat2, lng2) {
   return request('/common/map/distance', false, 'get', {
     'lat1': lat1,
