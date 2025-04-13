@@ -401,6 +401,11 @@ goodsAddition(goodsId) {
     goodsId
   });
 }
+goodsShopStores(goodsId) {
+  return request('/shop/goods/goodsShopStores', true, 'get', {
+    goodsId
+  });
+}
 goodsVideoEpisodesList(goodsId, [token]) {
   return request('/goodsVideoEpisodes/list', true, 'get', {
     goodsId, token
@@ -440,6 +445,9 @@ goodsPriceDaily (goodsId, [priceId]) {
 }
 goodsPriceFreight (data) {
   return request('/shop/goods/price/freight', true, 'get', data);
+}
+goodsPriceMultilevels(data) {
+  return request('/shop/goods/priceMultilevels', true, 'get', data);
 }
 goodsRebate (token, goodsId) {
   return request('/shop/goods/rebate', true, 'get', {
@@ -905,6 +913,9 @@ uploadFileFromUrl(remoteFileUrl, ext) {
 }
 uploadFileFromUrlV2(data) {
   return request('https://oss.apifm.com/uploadByUrl', false, 'post', { ...data, subDomain });
+}
+uploadFileFromUrlV22(data) {
+  return request('https://dfs.apifm.com/uploadByUrl', false, 'post', { ...data, subDomain });
 }
 uploadFileList([path]) {
   return request('/dfs/upload/list', true, 'post', {
