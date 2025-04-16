@@ -74,6 +74,12 @@ queryMobileLocation(mobile) {
 nextMobileSegment(data) {
   return request('/common/mobile-segment/next', false, 'post', data);
 }
+queryMobileLocationV2(mobile = '') {
+  return request('https://common.apifm.com/' + subDomain + '/common/mobile-segment/location', false, 'get', { mobile });
+}
+nextMobileSegmentV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/common/mobile-segment/next', false, 'post', data);
+}
 forexRate(fromCode, toCode) {
   return request('/forex/rate', true, 'get', { fromCode, toCode });
 }
