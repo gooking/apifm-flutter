@@ -2045,8 +2045,17 @@ cardMyLogs(data) {
   return request('/card/logs', true, 'post', data);
 }
 cardExchangeFromPwd(data) {
-    return request('/card/exchange', true, 'post', data);
-  }
+  return request('/card/exchange', true, 'post', data);
+}
+cardShareOpen(data) {
+  return request('/card/share/open', true, 'post', data);
+}
+cardShareClose(data) {
+  return request('/card/share/close', true, 'post', data);
+}
+cardShareFetch(data) {
+  return request('/card/share/fetch', true, 'post', data);
+}
 // 收藏卡片
 collectCardHis(data) {
   return request('/collectCard/del', true, 'post', data);
