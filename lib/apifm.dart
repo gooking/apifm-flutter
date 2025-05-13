@@ -806,6 +806,9 @@ regionInfoBatchV2(ids) {
 regionSearchV2(data) {
   return request('https://common.apifm.com/' + subDomain + '/region/search', false, 'post', data);
 }
+regionAnalysis(address) {
+  return request('https://common.apifm.com/' + subDomain + '/region/analysis', false, 'post', { address });
+},
 cashLogs(data) {
   return request('/user/cashLog', true, 'post', data);
 }
@@ -1085,6 +1088,9 @@ fetchShopsCities() {
 }
 fetchShops(data) {
   return request('/shop/subshop/list', true, 'post', data);
+}
+fetchShopsV2(data) {
+  return request('/shop/subshop/list/v2', true, 'post', data);
 }
 shopSubdetail(id) {
   return request('/shop/subshop/detail/v2', true, 'get', {
@@ -1492,12 +1498,24 @@ yuyueTeamDetail (teamId) {
     'teamId': teamId
   });
 }
-yuyueTeamMembers (data) {
+yuyueTeamMembers(data) {
   return request('/yuyue/info/team/members', true, 'post', data);
 }
-yuyueTeamDeleteMember data {
+yuyueTeamDeleteMember(data) {
   return request('/yuyue/info/team/members/del', true, 'post', data);
 }
+yuyueFavList: (data) {
+  return request('/yuyue/fav/list', true, 'post', data);
+},
+yuyueFavAdd: (data) {
+  return request('/yuyue/fav/add', true, 'post', data);
+},
+yuyueFavDelete: (data) {
+  return request('/yuyue/fav/delete', true, 'post', data);
+},
+yuyueFavCheck: (data) {
+  return request('/yuyue/fav/check', true, 'get', data);
+},
 registerEmail(data) {
   return request('/user/email/register', true, 'post', data);
 }
@@ -1554,7 +1572,7 @@ goodsDynamicV2(data) {
   return request('/site/goods/dynamic', true, 'get', data);
 }
 usersDynamic(type) {
-  return request('/site/user/dynamic', true, 'get', { type });
+  return request('https://common.apifm.com/' + subDomain + '/site/user/dynamic', false, 'get', { type });
 }
 fetchSubDomainByWxappAppid (appid) {
   return request('/subdomain/appid/wxapp', false, 'get', { appid });
@@ -1866,10 +1884,10 @@ partnerBuyTeamLeader(token) {
   return request('/partner/buy', true, 'post', { token });
 }
 partnerMembersStatistics(token) {
-  return request('/partner/members/statistics', true, 'get', { token });
+  return request('https://common.apifm.com/' + subDomain + '/partner/members/statistics', false, 'get', { token });
 }
 partnerMembers(data) {
-  return request('/partner/members', true, 'post', data);
+  return request('https://common.apifm.com/' + subDomain + '/partner/members', false, 'post', data);
 }
 myLiveRooms(data) {
   return request('/liveRooms/my', true, 'post', data);
