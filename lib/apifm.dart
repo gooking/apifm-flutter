@@ -1208,6 +1208,21 @@ jsonDelete (id, [token]) {
     'id': id
   });
 }
+jsonListV3(data) {
+  return request('https://common.apifm.com/' + subDomain + '/json/list', true, 'post', data);
+}
+jsonSetV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/json/set', true, 'post', data);
+}
+jsonDeleteV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/json/delete', true, 'post', data);
+}
+jsonTopv2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/json/top', true, 'post', data);
+}
+jsonHighlightv2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/json/highlight', true, 'post', data);
+}
 graphValidateCodeUrl () {
   var key = Random().nextDouble().toString();
   var imageUrl = _API_BASE_URL + '/' + _SUB_DOMAIN + '/verification/pic/get?key=' + key;
@@ -1947,10 +1962,21 @@ jdvopGoodsDetail(goodsId) {
     'queryExts': 'wxintroduction'
   });
 }
+jdvopGoodsDetailV3(data) {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/v2/detail', false, 'get', data);
+}
 jdvopGoodsSkuImages(goodsId) {
-  return request('/jdvop/'+ _MERCHANT_ID +'/goods/skuImages', false, 'get', {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/skuImages', false, 'get', {
     'skuId': goodsId
   });
+}
+jdvopGoodsSkuImagesV2(goodsId) {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/v2/skuImages', false, 'get', {
+    skuId: goodsId
+  });
+}
+jdVopSkuGoodsSaleRule(skuId) {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/v2/checkSkuSaleList', false, 'get', { skuId });
 }
 jdvopCartInfo(token) {
   return request('/jdvop/'+ _MERCHANT_ID +'/shopping-cart/info', false, 'get', {
