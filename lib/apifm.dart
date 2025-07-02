@@ -1281,6 +1281,9 @@ commonIP([ip]) {
 commonIPV2([ip]) {
   return request('https://common.apifm.com/' + subDomain + '/common/ip', false, 'get', { ip });
 }
+commonIPV3([ip]) {
+  return request('https://common.apifm.com/' + subDomain + '/common/ip/v2', false, 'get', { ip });
+}
 mapDistance(lat1, lng1, lat2, lng2) {
   return request('/common/map/distance', false, 'get', {
     'lat1': lat1,
