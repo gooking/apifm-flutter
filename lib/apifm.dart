@@ -139,6 +139,9 @@ scoreRankBydate(data) {
 scoreMyStatistics(data) {
   return request('/score/myStatistics', true, 'get', data);
 }
+expireScorestatistics(data) {
+  return request('/score/expireScorestatistics', true, 'post', data);
+}
 scoreTaskList(token) {
   return request('/score/taskList', true, 'get', { token });
 }
@@ -678,6 +681,11 @@ userAmount(token) {
     'token': token
   });
 }
+userAmountV2(token) {
+  return request('https://common.apifm.com/' + subDomain + '/user/amount', false, 'get', {
+    token
+  });
+}
 orderCreate (data) {
   return request('/order/create', true, 'post', data);
 }
@@ -954,6 +962,9 @@ refundApplyCancel (token, orderId) {
     'token': token,
     'orderId': orderId
   });
+}
+refundApplySetBackLogistics(data) {
+  return request('/order/refundApply/setBackLogistics', true, 'post', data);
 }
 cmsCategories () {
   return request('/cms/category/list', true, 'get', {});
