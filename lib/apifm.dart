@@ -820,6 +820,9 @@ regionAnalysis(address) {
 cashLogs(data) {
   return request('/user/cashLog', true, 'post', data);
 }
+cashLogsV3(data) {
+  return request('https://common.apifm.com/' + subDomain + '/user/cashLog/v2', false, 'post', data);
+}
 payLogs (data) {
   return request('/user/payLogs', true, 'post', data);
 }
