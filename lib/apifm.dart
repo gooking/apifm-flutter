@@ -1088,6 +1088,21 @@ depositBackApply(token, id) {
     'id': id
   });
 }
+depositListV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/deposit/list', false, 'post', data);
+}
+payDepositV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/deposit/pay', false, 'post', data);
+}
+payStatusDepositV2(data) {
+  return request('https://common.apifm.com/' + subDomain + '/deposit/payStatus', false, 'post', data);
+}
+depositInfoV2(token, id) {
+  return request('https://common.apifm.com/' + subDomain + '/deposit/info', false, 'get', { token, id });
+}
+depositBackApplyV2(token, id) {
+  return request('https://common.apifm.com/' + subDomain + '/deposit/back/apply', false, 'post', { token, id });
+}
 shopAreaCities() {
   return request('/shopArea/cities', true, 'get');
 }
