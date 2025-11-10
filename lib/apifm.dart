@@ -1719,6 +1719,12 @@ exchangeScoreToGrowth (token, deductionScore) {
     token, deductionScore
   });
 }
+growthLogsV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/growthLog/logs', true, 'post', data);
+}
+exchangeScoreToGrowthV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/growthLog/exchange', true, 'post', data);
+}
 wxaMpLiveRooms () {
   return request('/wx/live/rooms', true, 'get');
 }
@@ -2514,6 +2520,9 @@ aliappWebUserAuthorize(data) {
 }
 aliappQrcode(content) {
   return request('/user/aliapp/qrcode', true, 'post', { content });
+}
+aliappMiniappBindMobile(data) {
+  return request('/user/aliapp/bindMobile', true, 'post', data);
 }
 userAttendantList(data) {
   return request('/user/attendant/list', true, 'post', data);
