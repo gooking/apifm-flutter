@@ -839,6 +839,9 @@ cashLogs(data) {
 cashLogsV3(data) {
   return request(COMMON_BASE_URL + subDomain + '/user/cashLog/v2', false, 'post', data);
 }
+statisticsComingOutV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/user/statisticsComingOut', false, 'post', data);
+}
 payLogs (data) {
   return request('/user/payLogs', true, 'post', data);
 }
