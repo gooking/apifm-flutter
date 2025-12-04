@@ -468,8 +468,19 @@ goodsRebate (token, goodsId) {
     'goodsId': goodsId
   });
 }
-goodsReputation (data) {
+goodsReputation(data) {
   return request('/shop/goods/reputation', true, 'post', data);
+}
+goodsReputationV2(data) {
+  return request('/shop/goods/reputation/v2', true, 'post', data);
+}
+myBuyGoodsHisV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/his/list', false, 'post', data);
+}
+myBuyGoodsHisDeleteV2(token, id = '', goodsId = '') {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/his/delete', false, 'post', {
+    token, id, goodsId
+  });
 }
 goodsFavList(data) {
   return request('/shop/goods/fav/list', true, 'post', data);
