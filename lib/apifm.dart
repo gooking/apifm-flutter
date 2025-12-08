@@ -1509,22 +1509,22 @@ messageRead (token, id) {
     'id': id
   });
 }
-messageDelete (token, id) {
+messageDelete(token, id) {
   return request('/user/message/del', true, 'post', {
     'token': token,
     'id': id
   });
 }
-voteItems (data) {
-  return request('/vote/items', true, 'post', data);
+voteItems(data) {
+  return request(COMMON_BASE_URL + subDomain + '/vote/items', false, 'post', data);
 }
 voteItemDetail (id) {
-  return request('/vote/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/vote/info', false, 'get', {
     'id': id
   });
 }
 vote(token, voteId, items, [remark]) {
-  return request('/vote/vote', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote', false, 'post', {
     'token': token,
     'voteId': voteId,
     'items': items,
@@ -1532,96 +1532,96 @@ vote(token, voteId, items, [remark]) {
   });
 }
 voteCategory(data) {
-  return request('/vote/vote/category', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote/category', false, 'post', data);
 }
 myVote(token, voteId) {
-  return request('/vote/vote/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote/info', false, 'get', {
     'token': token,
     'voteId': voteId,
   });
 }
 voteLogs(data) {
-  return request('/vote/vote/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote/list', false, 'post', data);
 }
 voteGroups(data) {
-  return request('/vote/vote/groups', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote/groups', false, 'post', data);
 }
 voteGroupsDetail(data) {
-  return request('/vote/vote/groups/detail', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/vote/vote/groups/detail', false, 'get', data);
 }
 myInviteVoteJoinList(data) {
-  return request('/vote/myInviteLoinList', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/vote/myInviteLoinList', false, 'post', data);
 }
 yuyueItems(data) {
-  return request('/yuyue/items', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/items', false, 'post', data);
 }
 yuyueItemDetail (id) {
-  return request('/yuyue/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/info', false, 'get', {
     'id': id
   });
 }
 yuyueJoin (data) {
-  return request('/yuyue/join', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/join', false, 'post', data);
 }
 yuyueJoinPay (token, joinId) {
-  return request('/yuyue/pay', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/pay', false, 'post', {
     'token': token,
     'joinId': joinId
   });
 }
 yuyueJoinUpdate(token, joinId, extJsonStr) {
-  return request('/yuyue/join/update', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/join/update', false, 'post', {
     'token': token,
     'joinId': joinId,
     'extJsonStr': extJsonStr
   });
 }
 yuyueLike(data) {
-  return request('/yuyue/like', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/like', false, 'post', data);
 }
 yuyueJoinDelete(token, joinId) {
-  return request('/yuyue/delJoin', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/delJoin', false, 'post', {
     'token': token,
     'id': joinId
   });
 }
 yuyueServered(data) {
-  return request('/yuyue/servered', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/servered', false, 'post', data);
 }
 yuyueMyJoinInfo(token, joinId) {
-  return request('/yuyue/join/info', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/join/info', false, 'post', {
     'token': token,
     'joinId': joinId
   });
 }
 yuyueMyJoinLogs (data) {
-  return request('/yuyue/join/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/join/list', false, 'post', data);
 }
 yuyueTeams (data) {
-  return request('/yuyue/info/teams', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/info/teams', false, 'post', data);
 }
 yuyueTeamDetail (teamId) {
-  return request('/yuyue/info/team', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/info/team', false, 'get', {
     'teamId': teamId
   });
 }
 yuyueTeamMembers(data) {
-  return request('/yuyue/info/team/members', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/info/team/members', false, 'post', data);
 }
 yuyueTeamDeleteMember(data) {
-  return request('/yuyue/info/team/members/del', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/info/team/members/del', false, 'post', data);
 }
 yuyueFavList: (data) {
-  return request('/yuyue/fav/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/fav/list', false, 'post', data);
 },
 yuyueFavAdd: (data) {
-  return request('/yuyue/fav/add', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/fav/add', false, 'post', data);
 },
 yuyueFavDelete: (data) {
-  return request('/yuyue/fav/delete', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/fav/delete', false, 'post', data);
 },
 yuyueFavCheck: (data) {
-  return request('/yuyue/fav/check', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/yuyue/fav/check', false, 'get', data);
 },
 registerEmail(data) {
   return request('/user/email/register', true, 'post', data);
