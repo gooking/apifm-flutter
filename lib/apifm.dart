@@ -119,6 +119,12 @@ scoreExchange (token, number) {
     'token': token
   });
 }
+scoreExchangeCash(token, deductionScore) {
+  return request(COMMON_BASE_URL + subDomain + '/score/exchange/cash', false, 'post', {
+    deductionScore,
+    token
+  });
+}
 scoreLogs(data) {
   return request('/score/logs', true, 'post', data);
 }
@@ -126,7 +132,7 @@ scoreDynamics() {
   return request('/score/dynamics', true, 'get');
 },
 scoreDeductionRules() {
-  return request('/score/deduction/rules', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/score/deduction/rules', false, 'get');
 }
 scoreDailyFixedNum(token) {
   return request('/score/dailyFixedNum', true, 'post', { token });
@@ -882,7 +888,7 @@ fxApplyV2(data) {
   return request('/saleDistribution/apply/v2', true, 'post', data);
 }
 fxSetting() {
-  return request('/saleDistribution/setting', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/saleDistribution/setting', true, 'get');
 }
 fxBuy(token) {
   return request('/saleDistribution/buy', true, 'post', { token });
