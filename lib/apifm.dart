@@ -85,12 +85,12 @@ forexRate(fromCode, toCode) {
   return request('/forex/rate', true, 'get', { fromCode, toCode });
 }
 queryConfigValue(key) {
-  return request('/config/value', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/config/value', true, 'get', {
     'key': key
   });
 }
 queryConfigBatch(keys) {
-  return request('/config/values', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/config/values', true, 'get', {
     'keys': keys
   });
 }
@@ -1072,7 +1072,7 @@ newsOwnerUserViewStatistics(data) {
   return request('/newsOwnerUserViewStatistics/list', true, 'post', data);
 }
 cmsPage(key) {
-  return request('/cms/page/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/cms/page/info', true, 'get', {
     'key': key
   });
 }
@@ -2090,8 +2090,14 @@ userBankUnBind(token) {
 jdvopGoodsList(data) {
   return request('/jdvop/'+ _MERCHANT_ID +'/goods/list', false, 'post', data);
 }
+jdvopGoodsListV3(data) {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/v2/list', false, 'post', data);
+}
 jdvopGoodsCheckCanBuy(data) {
   return request('/jdvop/'+ _MERCHANT_ID +'/goods/checkCanBuy', false, 'post', data);
+}
+jdvopGoodsCheckCanBuyV3(data) {
+  return request('https://jdvop.apifm.com/jdvop/'+ _MERCHANT_ID +'/goods/v2/getSkusAllSaleState', false, 'post', data);
 }
 jdvopGoodsDetail(goodsId) {
   return request('/jdvop/'+ _MERCHANT_ID +'/goods/detail', false, 'get', {
