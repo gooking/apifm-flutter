@@ -304,7 +304,7 @@ login_wx(code) {
   });
 }
 login_tt(code) {
-  return request('/user/tt/microapp/login', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/login', false, 'post', {
     'code': code
   });
 }
@@ -952,7 +952,7 @@ wxaQrcode(data) {
   return request('https://oss.apifm.com/' + subDomain + '/qrcode/wxa/unlimit', true, 'post', data);
 }
 ttaQrcode(paramsJson, expireHours) {
-  return request('/user/tt/microapp/qrcode', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/tt/miniapp/qrcode', false, 'post', {
     'content': convert.jsonEncode(paramsJson),
     'expireHours': expireHours
   });
@@ -1480,7 +1480,7 @@ userDelete(token) {
   });
 }
 dynamicUserCode(token) {
-  return request('/user/dynamicUserCode', true, 'get', { 'token': token });
+  return request(COMMON_BASE_URL + subDomain + '/user/dynamicUserCode', false, 'get', { 'token': token });
 }
 userLevelList(data) {
   return request('/user/level/list', true, 'post', data);
