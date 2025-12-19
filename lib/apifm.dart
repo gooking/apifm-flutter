@@ -309,7 +309,7 @@ login_tt(code) {
   });
 }
 login_q(code) {
-  return request('/user/q/login', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/q/login', false, 'post', {
     'code': code,
     'type': 2
   });
@@ -1641,23 +1641,23 @@ bindEmail(token, email, code, [pwd]) {
   });
 }
 registerQQConnect(data) {
-  return request('/user/qqconnect/register', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/qqconnect/register', false, 'post', data);
 }
 qqAuthorize(data) {
-  return request('/user/q/authorize', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/q/authorize', false, 'post', data);
 }
 qqQrcode(content){
-  return request('/user/q/qrcode', true, 'post', { content });
+  return request(COMMON_BASE_URL + subDomain + '/user/q/qrcode', false, 'post', { content });
 }
 loginQQConnect(oauthConsumerKey, openid, accessToken) {
-  return request('/user/qqconnect/login', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/qqconnect/login', false, 'post', {
     'oauthConsumerKey': oauthConsumerKey,
     'openid': openid,
     'accessToken': accessToken,
   });
 }
 bindQQConnectOpenid (token, oauthConsumerKey, openid, accessToken) {
-  return request('/user/qqconnect/bindOpenid', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/qqconnect/bindOpenid', false, 'post', {
     'token': token,
     'oauthConsumerKey': oauthConsumerKey,
     'openid': openid,
