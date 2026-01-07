@@ -921,15 +921,21 @@ fxSaleroomRankTotalTeam(page, pageSize) {
   });
 }
 fxSaleroomRankDaily(page, pageSize, day) {
-  return request('/saleDistribution/sale-room-rank/daily', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/saleDistribution/sale-room-rank/daily', false, 'get', {
     page, pageSize, day
   });
+}
+fxStatisticsDays(data) {
+  return request(COMMON_BASE_URL + subDomain + '/saleDistribution/statistics/days', false, 'get', data);
+}
+fxUpgrade(token) {
+  return request(COMMON_BASE_URL + subDomain + '/saleDistribution/upgrade', false, 'post', { token });
 }
 fxMembersStatistics(token) {
   return request('/saleDistribution/members/statistics', true, 'get', { token });
 }
 fxMyCommisionStatistics(token, days) {
-  return request('/saleDistribution/my/commision', true, 'get', { token, days });
+  return request(COMMON_BASE_URL + subDomain + '/saleDistribution/my/commision', false, 'get', { token, days });
 }
 fxGoods(data) {
   return request('/saleDistribution/goods', true, 'post', data);
@@ -1822,16 +1828,16 @@ orderStatisticsv2(data) {
   return request('/order/statistics', true, 'get', data);
 }
 siteStatisticsSaleroom (data) {
-  return request('/site/statistics/saleroom', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/site/statistics/saleroom', false, 'get', data);
 }
 siteStatisticsSaleroomYear (year) {
-  return request('/site/statistics/saleroom/year', true, 'get', { year });
+  return request(COMMON_BASE_URL + subDomain + '/site/statistics/saleroom/year', false, 'get', { year });
 }
 bonusLog (data) {
   return request('/bonusLog/list', true, 'post', data);
 }
 bonusLogV2(data) {
-  return request(COMMON_BASE_URL + subDomain + '/bonusLog/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/bonusLog/list', false, 'post', data);
 }
 mtjAsset (token) {
   return request('/mtj/asset', true, 'get', { token });
@@ -2374,16 +2380,16 @@ stripeCharge(data) {
 }
 // ocr
 ocrBusinessLicense(imageUrl) {
-  return request('/ocr/businessLicense', true, 'post', { imageUrl });
+  return request(COMMON_BASE_URL + subDomain + '/ocr/businessLicense', false, 'post', { imageUrl });
 }
 ocrIdcard(imageUrl) {
-  return request('/ocr/idcard', true, 'post', { imageUrl });
+  return request(COMMON_BASE_URL + subDomain + '/ocr/idcard', false, 'post', { imageUrl });
 }
 ocrBankcard(imageUrl) {
-  return request('/ocr/bankcard', true, 'post', { imageUrl });
+  return request(COMMON_BASE_URL + subDomain + '/ocr/bankcard', false, 'post', { imageUrl });
 }
 ocrDriverLicense(imageUrl) {
-  return request('/ocr/driverLicense', true, 'post', { imageUrl });
+  return request(COMMON_BASE_URL + subDomain + '/ocr/driverLicense', false, 'post', { imageUrl });
 }
 // 朋友圈
 momentsPublish(data) {
