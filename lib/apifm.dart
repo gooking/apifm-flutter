@@ -1239,6 +1239,9 @@ uniqueId([type]) {
     'type': type
   });
 }
+sequence(type, [defValue]) {
+  return request(COMMON_BASE_URL + subDomain + '/uniqueId/sequence', false, 'get', { type, defValue });
+}
 queryBarcode (barcode) {
   return request('/barcode/info', true, 'get', {
     'barcode': barcode
@@ -1817,7 +1820,7 @@ peisongOrderAllocation(token, id, uid) {
   });
 }
 siteStatistics () {
-  return request('/site/statistics', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/site/statistics', false, 'get');
 }
 orderStatistics (token) {
   return request('/order/statistics', true, 'get', {
