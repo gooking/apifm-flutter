@@ -657,7 +657,7 @@ friendUserDetail (token, uid) {
   });
 }
 videoDetail (videoId) {
-  return request('/media/video/detail', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/media/video/detail', false, 'get', {
     'videoId': videoId
   });
 }
@@ -1012,10 +1012,10 @@ refundApplySetBackLogistics(data) {
   return request('/order/refundApply/setBackLogistics', true, 'post', data);
 }
 cmsCategories () {
-  return request('/cms/category/list', true, 'get', {});
+  return request(COMMON_BASE_URL + subDomain + '/cms/category/list', false, 'get', {});
 }
 cmsCategoryDetail (id) {
-  return request('/cms/category/detail', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/cms/category/detail', false, 'get', {
     'id': id
   });
 }
