@@ -950,7 +950,7 @@ fxCityReport(data) {
   return request('/saleDistribution/city/report', true, 'post', data);
 }
 goodsSellNumberStatistics(page, pageSize, [goodsId]) {
-  return request('/site/goods/statistics', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/site/goods/statistics', false, 'get', {
     page, pageSize, goodsId
   });
 }
@@ -1029,7 +1029,7 @@ cmsArticlesV3(data) {
   return request('https://cms.apifm.com/' + merchantId + '/cms/news/list/v2', true, 'post', data);
 }
 cmsArticleUsefulLogs (data) {
-  return request('/cms/news/useful/logs', true, 'post', data);
+  return request('https://cms.apifm.com/' + merchantId + '/cms/news/useful/logs', false, 'post', data);
 }
 cmsArticleDetail(id) {
   return request('/cms/news/detail', true, 'get', {
@@ -1066,7 +1066,7 @@ cmsArticleDeleteV2(token, id) {
   return request('https://cms.apifm.com/' + merchantId + '/cms/news/del', true, 'post', { token, id });
 }
 cmsArticleUseless(data) {
-  return request('/cms/news/useful', true, 'post', data);
+  return request('https://cms.apifm.com/' + merchantId + '/cms/news/useful', false, 'post', data);
 }
 cmsArticleModifyExtNumber(data) {
   return request('/cms/news/modifyExtNumber', true, 'post', data);
