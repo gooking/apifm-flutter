@@ -469,8 +469,8 @@ goodsPriceFreight (data) {
 goodsPriceMultilevels(data) {
   return request('/shop/goods/priceMultilevels', true, 'get', data);
 }
-goodsRebate (token, goodsId) {
-  return request('/shop/goods/rebate', true, 'get', {
+goodsRebate(token, goodsId) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/rebate', false, 'get', {
     'token': token,
     'goodsId': goodsId
   });
@@ -1496,20 +1496,20 @@ dynamicUserCode(token) {
   return request(COMMON_BASE_URL + subDomain + '/user/dynamicUserCode', false, 'get', { 'token': token });
 }
 userLevelList(data) {
-  return request('/user/level/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/level/list', false, 'post', data);
 }
 userLevelDetail (levelId) {
-  return request('/user/level/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/user/level/info', false, 'get', {
     'id': levelId
   });
 }
 userLevelPrices (levelId) {
-  return request('/user/level/prices', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/user/level/prices', false, 'get', {
     'levelId': levelId
   });
 }
 userLevelBuy (token, priceId, [isAutoRenew = false, remark]) {
-  return request('/user/level/buy', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/level/buy', false, 'post', {
     'token': token,
     'userLevelPriceId': priceId,
     'isAutoRenew': isAutoRenew,
@@ -1517,7 +1517,7 @@ userLevelBuy (token, priceId, [isAutoRenew = false, remark]) {
   });
 }
 userLevelBuyLogs (data) {
-  return request('/user/level/buyLogs', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/level/buyLogs', false, 'post', data);
 }
 messageList (data) {
   return request('/user/message/list', true, 'post', data);
