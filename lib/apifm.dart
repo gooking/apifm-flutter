@@ -1209,16 +1209,16 @@ userAttendantFavDelete(token, attendantId) {
   return request('/userAttendantFav/delete', true, 'post', { token, attendantId });
 }
 addComment(data) {
-  return request('/comment/add', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/comment/add', false, 'post', data);
 }
 commentList(data) {
   return request('/comment/list', true, 'post', data);
 }
 commentListV2(data) {
-  return request('/comment/list/v2', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/comment/list/v2', false, 'post', data);
 }
 delComment(data) {
-  return request('/comment/del', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/comment/del', false, 'post', data);
 }
 modifyUserInfo(data) {
   return request('/user/modify', true, 'post', data);
@@ -1471,7 +1471,7 @@ idcardCheckManualReviewInfo(token) {
   return request('/user/idcard/manualReview/info', true, 'get', { 'token': token });
 }
 userTagList(data) {
-  return request('/userTag/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/userTag/list', false, 'post', data);
 }
 userTagCertificateQuery(token) {
   return request('/userTag/certificate/query', true, 'get', { token });
