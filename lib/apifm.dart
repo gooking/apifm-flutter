@@ -1695,7 +1695,7 @@ goodsDynamic(type) {
   return request(COMMON_BASE_URL + subDomain + '/site/goods/dynamic', false, 'get', { type });
 }
 goodsDynamicV2(data) {
-  return request(COMMON_BASE_URL + subDomain + '/site/goods/dynamic', false, 'get', data);
+  return request('/site/goods/dynamic/v2', true, 'get', data);
 }
 usersDynamic(type) {
   return request(COMMON_BASE_URL + subDomain + '/site/user/dynamic', false, 'get', { type });
@@ -2463,7 +2463,7 @@ commonDiffMillis(d1, d2) {
   return request('/common/diffMillis', false, 'get', { d1, d2 });
 }
 // 企业应用 组织/成员/网盘
-organizePrices: () => {
+organizePrices: () {
   return request(CMS_BASE_URL + subDomain + '/organizeInfo/prices', true, 'get');
 }
 organizeCreate(data) {
@@ -2862,4 +2862,55 @@ volcesArkCreateChatCompletion(message) {
 }
 volcesArkChatCompletionResult(key) {
   return request(COMMON_BASE_URL + subDomain + '/volcesArk/result', false, 'get', { key });
+}
+fsmSetting() {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/setting', false, 'get');
+}
+fsmDeviceModels() {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/deviceModels', false, 'get');
+}
+fsmSaleOrderSubmit(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/saleOrder/submit', false, 'post', data);
+}
+fsmSaleOrderLeftNumber(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/saleOrder/leftNumber', false, 'get', data);
+}
+fsmSaleOrderList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/saleOrder/list', false, 'post', data);
+}
+fsmSaleOrderInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/saleOrder/info', false, 'get', data);
+}
+fsmCheck(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/check', false, 'post', data);
+}
+installOrderSubmit(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/installOrder/submit', false, 'post', data);
+}
+installOrderList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/installOrder/list', false, 'post', data);
+}
+installOrderInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/installOrder/info', false, 'get', data);
+}
+fsmReadProduct(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsm/readProduct', false, 'get', data);
+}
+fsmRepairSubmit(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/submit', false, 'post', data);
+}
+fsmRepairList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/list', false, 'post', data);
+}
+fsmRepairInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/info', false, 'get', data);
+}
+fsmRepairClose(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/close', false, 'post', data);
+}
+fsmRepairAdditionalInformation(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/additionalInformation', false, 'post', data);
+}
+fsmRepairUpload(data) {
+  return request(COMMON_BASE_URL + subDomain + '/fsmRepair/upload', false, 'post', data);
 }
