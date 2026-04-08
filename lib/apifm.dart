@@ -2567,22 +2567,22 @@ newsExtFieldSetV2(data) {
 },
 // 支付宝小程序
 aliappUserRegister(data) {
-  return request('/user/aliapp/register', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/aliapp/register', false, 'post', data);
 }
 aliappUserLogin(data) {
-  return request('/user/aliapp/login', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/aliapp/login', false, 'post', data);
 }
 aliappUserAuthorize(data) {
-  return request('/user/aliapp/authorize', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/aliapp/authorize', false, 'post', data);
 }
 aliappWebUserAuthorize(data) {
   return request('/user/aliappweb/authorize', true, 'post', data);
 }
 aliappQrcode(content) {
-  return request('/user/aliapp/qrcode', true, 'post', { content });
+  return request(COMMON_BASE_URL + subDomain + '/user/aliapp/qrcode', false, 'post', { content });
 }
 aliappMiniappBindMobile(data) {
-  return request('/user/aliapp/bindMobile', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/aliapp/bindMobile', false, 'post', data);
 }
 userAttendantList(data) {
   return request(COMMON_BASE_URL + subDomain + '/user/attendant/list', false, 'post', data);
@@ -2931,4 +2931,7 @@ fsmRepairUpload(data) {
 }
 fsmRepairReturnFactory(data) {
   return request(COMMON_BASE_URL + subDomain + '/fsmRepair/returnFactory', false, 'post', data);
+}
+activityMallInfoInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/activityMallInfo/info', false, 'get', data)
 }
