@@ -608,12 +608,12 @@ addressDetail (token, id) {
   });
 }
 pingtuanSet (goodsId) {
-  return request('/shop/goods/pingtuan/set', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/set', false, 'get', {
     'goodsId': goodsId
   });
 }
 pingtuanSets(goodsIds) {
-  return request('/shop/goods/pingtuan/sets', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/sets', false, 'get', {
     'goodsId': goodsIds
   });
 }
@@ -633,12 +633,12 @@ pingtuanList(data) {
   return request('/shop/goods/pingtuan/list/v2', true, 'post', data);
 }
 pingtuanJoinUsers (tuanId) {
-  return request('/shop/goods/pingtuan/joiner', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/joiner', false, 'get', {
     'tuanId': tuanId
   });
 }
 pingtuanMyJoined (data) {
-  return request('/shop/goods/pingtuan/my-join-list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/my-join-list', false, 'post', data);
 }
 friendlyPartnerList ([type]) {
   return request('/friendly-partner/list', true, 'post', {
@@ -1176,7 +1176,7 @@ shopSubApply(data) {
   return request('/shop/subshop/apply', true, 'post', data);
 }
 pickPoints(data) {
-  return request('/shop/subshop/pickPoints', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/shop/subshop/pickPoints', false, 'post', data);
 }
 shopReputationList(data) {
   return request('/shop/subshop/listReputation', true, 'post', data);
@@ -2082,7 +2082,7 @@ liveRoomKickOutUser (token, roomId, uid) {
   return request('/websocket/rest/liveRoom/kickOut', false, 'post', { token, roomId, uid });
 }
 mockApi (groupName, apiName, method) {
-  return request('/mock/'+ groupName +'/' + apiName, true, method);
+  return request(COMMON_BASE_URL + subDomain + '/mock/'+ groupName +'/' + apiName, false, method);
 }
 tourJourneyList (type, refId) {
   return request('/tourJourney/list', true, 'get', { type, refId });
