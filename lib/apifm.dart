@@ -617,6 +617,16 @@ pingtuanSets(goodsIds) {
     'goodsId': goodsIds
   });
 }
+goodsDefaultPingtuan(goodsId) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/default', false, 'get', {
+    goodsId
+  });
+}
+pingtuanMultilevel(goodsId) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/pingtuanMultilevel', true, 'get', {
+    goodsId
+  });
+}
 pingtuanOpen(token, goodsId, [extJsonStr]) {
   return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/open', false, 'post', {
     'goodsId': goodsId,
@@ -2941,6 +2951,9 @@ coachInfoList(data) {
 coachInfoListReputation(data) {
   return request(COMMON_BASE_URL + subDomain + '/coachInfo/listReputation', false, 'post', data);
 }
+coachInfoMy(data) {
+  return request(COMMON_BASE_URL + subDomain + '/coachInfo/my', false, 'get', data);
+}
 coachStudentList(data) {
   return request(COMMON_BASE_URL + subDomain + '/coachStudent/list', false, 'post', data);
 }
@@ -3027,4 +3040,70 @@ tournamentMatchChart(data) {
 }
 tournamentSubmitScore(data) {
   return request(COMMON_BASE_URL + subDomain + '/tournament/submitScore', false, 'post', data);
+}
+tournamentUpdateScore(data) {
+  return request(COMMON_BASE_URL + subDomain + '/tournament/updateScore', false, 'post', data);
+}
+teacherInfoMy(data) {
+  return request(COMMON_BASE_URL + subDomain + '/teacherInfo/my', false, 'get', data);
+}
+teacherStudentList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/teacherStudent/list', false, 'post', data);
+}
+teacherStudentSignLogsList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/teacherStudent/myStudentSignLogs', false, 'post', data);
+}
+roomInfoList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/roomInfo/list', false, 'post', data);
+}
+roomInfoInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/roomInfo/info', false, 'get', data);
+}
+roomInfoSave(data) {
+  return request(COMMON_BASE_URL + subDomain + '/roomInfo/save', false, 'post', data);
+}
+roomInfoDel(data) {
+  return request(COMMON_BASE_URL + subDomain + '/roomInfo/del', false, 'post', data);
+}
+workDietList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workDiet/list', false, 'post', data);
+}
+workDietInfo(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workDiet/info', false, 'get', data);
+}
+workDietSave(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workDiet/save', false, 'post', data);
+}
+workDietDel(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workDiet/del', false, 'post', data);
+}
+workManageOtherList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workManageOther/list', false, 'post', data);
+}
+workManageOtherAdd(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workManageOther/add', false, 'post', data);
+}
+workManageOtherDel(data) {
+  return request(COMMON_BASE_URL + subDomain + '/workManageOther/del', false, 'post', data);
+}
+parentInfoMy(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentInfo/my', false, 'get', data);
+}
+parentInfoJoinKey(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentInfo/joinKey', false, 'get', data);
+}
+parentInfoJoin(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentInfo/join', false, 'post', data);
+}
+parentStudentList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentStudent/list', false, 'post', data);
+}
+parentStudentSignLogsList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentStudent/myStudentSignLogs', false, 'post', data);
+}
+parentStudentDetail(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentStudent/detail', false, 'get', data);
+}
+parentStudentMyParents(data) {
+  return request(COMMON_BASE_URL + subDomain + '/parentStudent/myParents', false, 'post', data);
 }
