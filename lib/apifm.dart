@@ -1005,7 +1005,7 @@ uploadFileListV2(data) {
   return request('/dfs/upload/list/v2', true, 'post', data);
 }
 galleryList(data) {
-  return request('/dfs/gallery', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/dfs/gallery', false, 'post', data);
 }
 refundApply(data) {
   return request('/order/refundApply/apply', true, 'post', data);
@@ -2052,11 +2052,14 @@ bindPartner (token, partnerId) {
 partnerSetting () {
   return request('/partner/setting', true, 'get');
 }
-partnerBindTeamLeader (token, uid) {
+partnerBindTeamLeader(token, uid) {
   return request('/partner/bindTeamLeader', true, 'post', { token, uid });
 }
 partnerBuyTeamLeader(token) {
   return request('/partner/buy', true, 'post', { token });
+}
+partnerBuyyPartner(token) {
+  return request('/partner/buyPartner', true, 'post', { token });
 }
 partnerMembersStatistics(token) {
   return request(COMMON_BASE_URL + subDomain + '/partner/members/statistics', false, 'get', { token });
@@ -3106,4 +3109,13 @@ parentStudentDetail(data) {
 }
 parentStudentMyParents(data) {
   return request(COMMON_BASE_URL + subDomain + '/parentStudent/myParents', false, 'post', data);
+}
+gameNumberBombBegin(data) {
+  return request(COMMON_BASE_URL + subDomain + '/gameNumberBomb/begin', false, 'post', data);
+}
+gameNumberBombGuess(data) {
+  return request(COMMON_BASE_URL + subDomain + '/gameNumberBomb/guess', false, 'post', data);
+}
+gameNumberBombLogs(data) {
+  return request(COMMON_BASE_URL + subDomain + '/gameNumberBomb/logs', false, 'post', data);
 }
