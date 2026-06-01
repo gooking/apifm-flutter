@@ -330,7 +330,7 @@ loginUsername(username, pwd, deviceId, deviceName) {
   });
 }
 loginEmail(email, pwd, deviceId, deviceName) {
-  return request('/user/email/login', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/email/login', false, 'post', {
     'email': email,
     'pwd': pwd,
     'deviceId': deviceId,
@@ -363,7 +363,7 @@ resetPwdUseMobileCode (mobile, pwd, code) {
   });
 }
 resetPwdUseEmailCode(email, pwd, code) {
-  return request('/user/email/reset-pwd', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/email/reset-pwd', false, 'post', {
     'email': email,
     'pwd': pwd,
     'code': code
@@ -1350,12 +1350,12 @@ smsValidateCodeCheck (mobile, code) {
   });
 }
 mailValidateCode(mail) {
-  return request('/verification/mail/get', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/verification/mail/get', false, 'get', {
     'mail': mail
   });
 }
 mailValidateCodeCheck(mail, code) {
-  return request('/verification/mail/check', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/verification/mail/check', false, 'post', {
     'mail': mail,
     'code': code
   });
@@ -1653,10 +1653,10 @@ yuyueFavCheck: (data) {
   return request(COMMON_BASE_URL + subDomain + '/yuyue/fav/check', false, 'get', data);
 },
 registerEmail(data) {
-  return request('/user/email/register', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/email/register', false, 'post', data);
 }
 bindEmail(token, email, code, [pwd]) {
-  return request('/user/email/bindEmail', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/email/bindEmail', false, 'post', {
     'token': token,
     'email': email,
     'code': code,
@@ -2044,22 +2044,22 @@ channelDataPull (key) {
   return request('/channelData/pull', true, 'get', { key });
 }
 bindPartner (token, partnerId) {
-  return request('/user/bindPartner', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/bindPartner', false, 'post', {
     'token': token,
     'uid': partnerId
   });
 }
 partnerSetting () {
-  return request('/partner/setting', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/partner/setting', false, 'get');
 }
 partnerBindTeamLeader(token, uid) {
-  return request('/partner/bindTeamLeader', true, 'post', { token, uid });
+  return request(COMMON_BASE_URL + subDomain + '/partner/bindTeamLeader', false, 'post', { token, uid });
 }
 partnerBuyTeamLeader(token) {
-  return request('/partner/buy', true, 'post', { token });
+  return request(COMMON_BASE_URL + subDomain + '/partner/buy', false, 'post', { token });
 }
 partnerBuyyPartner(token) {
-  return request('/partner/buyPartner', true, 'post', { token });
+  return request(COMMON_BASE_URL + subDomain + '/partner/buyPartner', false, 'post', { token });
 }
 partnerMembersStatistics(token) {
   return request(COMMON_BASE_URL + subDomain + '/partner/members/statistics', false, 'get', { token });
