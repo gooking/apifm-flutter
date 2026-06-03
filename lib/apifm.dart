@@ -650,10 +650,13 @@ pingtuanJoinUsers (tuanId) {
 pingtuanMyJoined (data) {
   return request(COMMON_BASE_URL + subDomain + '/shop/goods/pingtuan/my-join-list', false, 'post', data);
 }
-friendlyPartnerList ([type]) {
+friendlyPartnerList([type]) {
   return request('/friendly-partner/list', true, 'post', {
     'type': type
   });
+}
+friendlyPartnerListV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/friendly-partner/list', false, 'post', data);
 }
 friendList (data) {
   return request('/user/friend/list', true, 'post', data);
@@ -1337,14 +1340,17 @@ shortUrlV2(content) {
     return request('/common/short-url/expand', false, 'post', { suffix });
   }
 smsValidateCode(mobile, [key, picCode]) {
-  return request('/verification/sms/get', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/verification/sms/get', false, 'get', {
     'mobile': mobile,
     'key': key,
     'picCode': picCode
   });
 }
+smsValidateCodeByToken(token) {
+  return request(COMMON_BASE_URL + subDomain + '/verification/sms/get-by-token', false, 'get', { token });
+}
 smsValidateCodeCheck (mobile, code) {
-  return request('/verification/sms/check', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/verification/sms/check', false, 'post', {
     'mobile': mobile,
     'code': code
   });
