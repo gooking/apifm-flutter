@@ -1969,10 +1969,10 @@ goodsTimesDayItems (day, goodsId, propertyChildIds) {
   return request('/shop/goods/times/items', true, 'post', { day, goodsId, propertyChildIds });
 }
 goodsBrandList(data) {
-  return request('/shop/goods/brand/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/list', false, 'post', data);
 }
 goodsBrandDetail(id) {
-  return request('/shop/goods/brand/detail', true, 'get', { id });
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/detail', false, 'get', { id });
 }
 wxappServiceLogin(data) {
   return request('/user/wxappService/login', true, 'post', data);
@@ -3142,4 +3142,16 @@ gameNumberBombGuess(data) {
 }
 gameNumberBombLogs(data) {
   return request(COMMON_BASE_URL + subDomain + '/gameNumberBomb/logs', false, 'post', data);
+}
+goodsBrandFavList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/fav/list', false, 'post', data);
+}
+goodsBrandFavAdd(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/fav/add', false, 'post', data);
+}
+goodsBrandFavCheck(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/fav/check', false, 'get', data);
+}
+goodsBrandFavDelete(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/fav/delete', false, 'post', data);
 }
