@@ -2817,31 +2817,31 @@ errandsTaskSuccess(data) {
   return request('/errandsTask/success', true, 'post', data);
 }
 activityVoteInfoList(data) {
-  return request('/activityVoteInfo/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/list', false, 'post', data);
 }
 activityVoteInfoJoinList(data) {
-  return request('/activityVoteInfo/joinList', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/joinList', false, 'post', data);
 }
 activityVoteInfoDetail(id) {
-  return request('/activityVoteInfo/detail', true, 'get', { 'id': id });
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/detail', false, 'get', { 'id': id });
 }
 activityVoteInfoJoinDetail(joinId) {
-  return request('/activityVoteInfo/joinDetail', true, 'get', { 'joinId': joinId });
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/joinDetail', false, 'get', { 'joinId': joinId });
 }
 activityVoteInfoScoreToVotes(activityId) {
-  return request('/activityVoteInfo/scoreToVotes', true, 'get', { 'activityId': activityId });
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/scoreToVotes', false, 'get', { 'activityId': activityId });
 }
 activityVoteInfoFetchVoteNumber(data) {
-  return request('/activityVoteInfo/fetchVoteNumber', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/fetchVoteNumber', false, 'post', data);
 }
 activityVoteInfoJoin(data) {
-  return request('/activityVoteInfo/join', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/join', false, 'post', data);
 }
 activityVoteInfoVote(data) {
-  return request('/activityVoteInfo/vote', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/vote', false, 'post', data);
 }
 activityVoteBlance(token, activityId) {
-  return request('/activityVoteInfo/balance', true, 'get', { 'token': token, 'activityId': activityId });
+  return request(COMMON_BASE_URL + subDomain + '/activityVoteInfo/balance', false, 'get', { 'token': token, 'activityId': activityId });
 }
 stringsToPlainText(content, [len]) {
   return request('/common/strings/plainText', true, 'post', { 'content': content, 'len': len });
@@ -3172,4 +3172,31 @@ trainingItemCategoryList(data) {
 }
 trainingItemCategoryDetail(id) {
   return request(COMMON_BASE_URL + subDomain + '/trainingItemCategory/info', false, 'get', { id });
+}
+goodsOutofstockRegistration(data) {
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/outofstockRegistration', false, 'post', data);
+}
+ventrataProducts(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/products', false, 'get', data);
+}
+ventrataProductDetail(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/productDetail', false, 'get', data);
+}
+ventrataAvailability(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/availability', false, 'post', data);
+}
+ventrataBookings(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/bookings', false, 'post', data);
+}
+ventrataBookingsCancel(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/bookingsCancel', false, 'post', data);
+}
+ventrataBookingsConfirm(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/bookingsConfirm', false, 'post', data);
+}
+ventrataBookingsDetail(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/bookingsDetail', false, 'get', data);
+}
+ventrataBookingsUpdate(data) {
+  return request(COMMON_BASE_URL + subDomain + '/ventrata/bookingsUpdate', false, 'post', data);
 }
