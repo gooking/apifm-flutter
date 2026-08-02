@@ -83,15 +83,15 @@ nextMobileSegmentV2(data) {
   return request(COMMON_BASE_URL + subDomain + '/common/mobile-segment/next', false, 'post', data);
 }
 forexRate(fromCode, toCode) {
-  return request('/forex/rate', true, 'get', { fromCode, toCode });
+  return request(COMMON_BASE_URL + subDomain + '/forex/rate', false, 'get', { fromCode, toCode });
 }
 queryConfigValue(key) {
-  return request(COMMON_BASE_URL + subDomain + '/config/value', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/config/value', false, 'get', {
     'key': key
   });
 }
 queryConfigBatch(keys) {
-  return request(COMMON_BASE_URL + subDomain + '/config/values', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/config/values', false, 'get', {
     'keys': keys
   });
 }
@@ -269,7 +269,7 @@ wxpayAirwallex(data) {
   return request('/pay/airwallex/wxapp', true, 'post', data);
 }
 paypalCheckout(data) {
-  return request('/pay/paypal/checkout', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/pay/paypal/checkout', false, 'post', data);
 }
 alipay(data) {
   return request('/pay/alipay/semiAutomatic/payurl', true, 'post', data);
@@ -1274,24 +1274,24 @@ queryBarcode (barcode) {
   });
 }
 luckyInfo (id) {
-  return request('/luckyInfo/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/luckyInfo/info/v2', false, 'get', {
     'id': id
   });
 }
 luckyInfoJoin (token, id) {
-  return request('/luckyInfo/join', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/luckyInfo/join', false, 'post', {
     'id': id,
     'token': token
   });
 }
 luckyInfoJoinMy (token, id) {
-  return request('/luckyInfo/join/my', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/luckyInfo/join/my', false, 'get', {
     'id': id,
     'token': token
   });
 }
 luckyInfoJoinLogs (data) {
-  return request('/luckyInfo/join/logs', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/luckyInfo/join/logs', false, 'post', data);
 }
 jsonList([data]) {
   return request('/json/list', true, 'post', data);
@@ -2613,7 +2613,7 @@ aliappUserAuthorize(data) {
   return request(COMMON_BASE_URL + subDomain + '/user/aliapp/authorize', false, 'post', data);
 }
 aliappWebUserAuthorize(data) {
-  return request('/user/aliappweb/authorize', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/aliappweb/authorize', false, 'post', data);
 }
 aliappQrcode(content) {
   return request(COMMON_BASE_URL + subDomain + '/user/aliapp/qrcode', false, 'post', { content });
@@ -2877,7 +2877,10 @@ blindBoxFriendsUnlock(data) {
   return request(COMMON_BASE_URL + subDomain + '/blindBoxFriends/unlock', false, 'post', data);
 }
 blindBoxFriendsBalance(token) {
-  return request(COMMON_BASE_URL + subDomain + '/blindBoxFriends/balance', false, 'get', { 'token': token })
+  return request(COMMON_BASE_URL + subDomain + '/blindBoxFriends/balance', false, 'get', { 'token': token });
+}
+blindBoxFriendsSetting() {
+  return request(COMMON_BASE_URL + subDomain + '/blindBoxFriends/setting', false, 'get');
 }
 cpactivityInfoDetail(id) {
   return request(COMMON_BASE_URL + subDomain + '/cpactivityInfo/detail', false, 'get', { id });
