@@ -528,21 +528,27 @@ goodsSeckillGrab(token, goodsId, seconds) {
   });
 }
 coupons(data) {
-  return request('/discounts/coupons', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/discounts/coupons', false, 'get', data);
 }
 couponDetail (id) {
-  return request('/discounts/detail', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/discounts/detail', false, 'get', {
     'id': id
   });
 }
-myCoupons (data) {
-  return request('/discounts/my', true, 'get', data);
+myCoupons(data) {
+  return request(COMMON_BASE_URL + subDomain + '/discounts/my', false, 'get', data);
 }
-fetchCoupons (data) {
-  return request('/discounts/fetch', true, 'post', data);
+mergeCouponsRules() {
+  return request(COMMON_BASE_URL + subDomain + '/discounts/merge/list', false, 'get');
+}
+mergeCoupons(data) {
+  return request(COMMON_BASE_URL + subDomain + '/discounts/merge', false, 'post', data);
+}
+fetchCoupons(data) {
+  return request(COMMON_BASE_URL + subDomain + '/discounts/fetch', false, 'post', data);
 }
 sendCoupons (data) {
-  return request('/discounts/send', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/discounts/send', false, 'post', data);
 }
 exchangeCoupons(token, number, pwd) {
   return request(COMMON_BASE_URL + subDomain + '/discounts/exchange', false, 'post', {
@@ -552,16 +558,16 @@ exchangeCoupons(token, number, pwd) {
   });
 }
 couponsShareOpen(token, id) {
-  return request('/discounts/share/open', true, 'post', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/discounts/share/open', false, 'post', { token, id });
 }
 couponsShareClose(token, id) {
-  return request('/discounts/share/close', true, 'post', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/discounts/share/close', false, 'post', { token, id });
 }
 couponsShareFetch(token, id, shareToken) {
-  return request('/discounts/share/fetch', true, 'post', { token, id, shareToken });
+  return request(COMMON_BASE_URL + subDomain + '/discounts/share/fetch', false, 'post', { token, id, shareToken });
 }
 couponsHX(data) {
-  return request('/discounts/hx', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/discounts/hx', false, 'post', data);
 }
 noticeList(data) {
   return request('/notice/list', true, 'post', data);
