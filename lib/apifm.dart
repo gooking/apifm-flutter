@@ -712,7 +712,7 @@ randomNick([len]) {
   });
 }
 userDetailSpreadUser(token, uid) {
-  return request('/user/detail/spreadUser', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/user/detail/spreadUser', false, 'get', {
     token, uid
   });
 }
@@ -1489,17 +1489,17 @@ queuingMy (token, [typeId, status]) {
   });
 }
 idcardCheck (token, name, idCardNo) {
-  return request('/user/idcard', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/user/idcard', false, 'post', {
     'token': token,
     'name': name,
     'idCardNo': idCardNo
   });
 }
 idcardCheckManualReview(data) {
-  return request('/user/idcard/manualReview', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/idcard/manualReview', false, 'post', data);
 }
 idcardCheckManualReviewInfo(token) {
-  return request('/user/idcard/manualReview/info', true, 'get', { 'token': token });
+  return request(COMMON_BASE_URL + subDomain + '/user/idcard/manualReview/info', false, 'get', { 'token': token });
 }
 userTagList(data) {
   return request(COMMON_BASE_URL + subDomain + '/userTag/list', false, 'post', data);
@@ -2316,19 +2316,19 @@ cardShareFetch(data) {
 }
 // 收藏卡片
 collectCardHis(data) {
-  return request('/collectCard/del', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/collectCard/del', false, 'post', data);
 }
 collectCardInfo (number) {
-  return request('/collectCard/cardInfo', true, 'get', { number });
+  return request(COMMON_BASE_URL + subDomain + '/collectCard/cardInfo', false, 'get', { number });
 }
 collectCardHisInfo (token, id) {
-  return request('/collectCard/hisInfo', true, 'get', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/collectCard/hisInfo', false, 'get', { token, id });
 }
 collectCardBind(data) {
-  return request('/collectCard/bind', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/collectCard/bind', false, 'post', data);
 }
 collectCardUnBind (token, id, smsCode) {
-  return request('/collectCard/bind', true, 'post', { token, id, smsCode });
+  return request(COMMON_BASE_URL + subDomain + '/collectCard/unbind', false, 'post', { token, id, smsCode });
 }
 // 其他
 bengenSaleTongjiList(data) {
