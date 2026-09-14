@@ -1275,7 +1275,7 @@ sequence(type, [defValue]) {
   return request(COMMON_BASE_URL + subDomain + '/uniqueId/sequence', false, 'get', { type, defValue });
 }
 queryBarcode (barcode) {
-  return request('/barcode/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/barcode/info', false, 'get', {
     'barcode': barcode
   });
 }
@@ -2413,10 +2413,10 @@ chuchuanGoodsCheck (token, goodsId) {
 }
 // 寄存
 jicunGoodsList(data) {
-  return request('/jicunGoods/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/jicunGoods/list', false, 'post', data);
 }
 jicunGoodsDetail(data) {
-  return request('/jicunGoods/detail', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/jicunGoods/detail', false, 'get', data);
 }
 // stripe
 stripeAddCard(data) {
@@ -3232,4 +3232,19 @@ yaduoBasicLogin(data) {
 }
 yaduoUnbind(data) {
   return request(COMMON_BASE_URL + subDomain + '/yaduo/unbind', false, 'post', data);
+}
+photoList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/photo/list', false, 'post', data);
+}
+photoBuyLogs(data) {
+  return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs', false, 'post', data);
+}
+photoBuyLogsLogs(data) {
+  return request(COMMON_BASE_URL + subDomain + '/photo/buyLogs/logs', false, 'get', data);
+}
+photoBuy(data) {
+  return request(COMMON_BASE_URL + subDomain + '/photo/buy', false, 'post', data);
+}
+photoPay(data) {
+  return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data);
 }
