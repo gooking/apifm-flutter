@@ -1178,13 +1178,13 @@ depositBackApplyV2(token, id) {
   return request(COMMON_BASE_URL + subDomain + '/deposit/back/apply', false, 'post', { token, id });
 }
 shopAreaCities() {
-  return request('/shopArea/cities', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/shopArea/cities', false, 'get');
 }
 shopAreaList(data) {
-  return request('/shopArea/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/shopArea/list', false, 'post', data);
 }
 shopAreaDetail(id) {
-  return request('/shopArea/detail', true, 'get', { id });
+  return request(COMMON_BASE_URL + subDomain + '/shopArea/detail', false, 'get', { id });
 }
 fetchShopsCities() {
   return request('/shop/subshop/cities', true, 'get');
@@ -2062,10 +2062,10 @@ goodsVisitLogClearV2(token) {
   return request(COMMON_BASE_URL + subDomain + '/goods/visitLog/clear', false, 'post', { token });
 }
 channelDataPush(key, content) {
-  return request('/channelData/push', true, 'post', { key, content });
+  return request(COMMON_BASE_URL + subDomain + '/channelData/push', false, 'post', { key, content });
 }
 channelDataPull (key) {
-  return request('/channelData/pull', true, 'get', { key });
+  return request(COMMON_BASE_URL + subDomain + '/channelData/pull', false, 'get', { key });
 }
 bindPartner (token, partnerId) {
   return request(COMMON_BASE_URL + subDomain + '/user/bindPartner', false, 'post', {
@@ -2760,10 +2760,10 @@ userAttendantOrderServing(token, orderId) {
   return request('/order/serving', true, 'post', { token, orderId });
 }
 shansongCourierInfo(data) {
-  return request('/order/shansongCourierInfo', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/order/shansongCourierInfo', false, 'get', data);
 }
 shansongOrderInfo(data) {
-  return request('/order/shansongOrderInfo', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/order/shansongOrderInfo', false, 'get', data);
 }
 userAttendantOrderStatistics(data) {
   return request('/order/statisticsJishi', true, 'get', data);
