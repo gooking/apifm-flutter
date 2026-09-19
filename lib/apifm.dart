@@ -257,13 +257,13 @@ wxpayWepayez(data) {
   return request('/pay/wepayez/wxapp', true, 'post', data);
 }
 wxpayxpert(data) {
-  return request('/pay/payxpert/wxapp', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/pay/payxpert/wxapp', false, 'post', data);
 }
 wxpayIPaynow(data) {
   return request('/pay/ipaynow/wxapp', true, 'post', data);
 }
 ccvvPayWxapp(data) {
-  return request('/pay/ccvv/wxapp', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/pay/ccvv/wxapp', false, 'post', data);
 }
 wxpayAirwallex(data) {
   return request('/pay/airwallex/wxapp', true, 'post', data);
@@ -296,7 +296,7 @@ kasipayH5(data) {
   return request('/pay/kasipay/h5', true, 'post', data);
 }
 hmpayJsapi(data) {
-  return request('/pay/sandpay/hmpay/jsapi', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/pay/sandpay/hmpay/jsapi', false, 'post', data);
 }
 login_wx(code) {
   return request('/user/wxapp/login', true, 'post', {
@@ -2269,22 +2269,22 @@ cpsTaobaoGoodsKouling (token, content) {
 }
 // 回收
 recycleOrders(data) {
-  return request('/recycleOrder/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/list', false, 'post', data);
 }
 recycleOrderApply(data) {
-  return request('/recycleOrder/apply', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/apply', false, 'post', data);
 }
 recycleOrderDetail (token, id) {
-  return request('/recycleOrder/detail', true, 'get', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/detail', false, 'get', { token, id });
 }
 recycleOrderFahuo(data) {
-  return request('/recycleOrder/fahuo', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/fahuo', false, 'post', data);
 }
 recycleOrderClose (token, id) {
-  return request('/recycleOrder/close', true, 'post', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/close', false, 'post', { token, id });
 }
 recycleOrderDelete (token, id) {
-  return request('/recycleOrder/del', true, 'post', { token, id });
+  return request(COMMON_BASE_URL + subDomain + '/recycleOrder/del', false, 'post', { token, id });
 }
 // 会员卡
 cardList(data) {
@@ -2494,10 +2494,10 @@ tempDataGet(key) {
   return request('/tempData/get', true, 'get', { key });
 }
 tempDataSetV2(key, content) {
-  return request(COMMON_BASE_URL + merchantId + '/tempData/set', true, 'post', { key, content });
+  return request(COMMON_BASE_URL + merchantId + '/tempData/set', false, 'post', { key, content });
 }
 tempDataGetV2(key) {
-  return request(COMMON_BASE_URL + merchantId + '/tempData/get', true, 'get', { key });
+  return request(COMMON_BASE_URL + merchantId + '/tempData/get', false, 'get', { key });
 }
 commonDatetime() {
   return request('/common/datetime', true, 'get');
@@ -2691,10 +2691,10 @@ contactList() {
   return request(COMMON_BASE_URL + subDomain + '/contact/list', false, 'get');
 }
 distributedLock(key, seconds) {
-  return request('/distributedLock/lock', true, 'get', { key, seconds });
+  return request(COMMON_BASE_URL + subDomain + '/distributedLock/lock', false, 'get', { key, seconds });
 }
 distributedLockRelease(key) {
-  return request('/distributedLock/lock', true, 'get', { key });
+  return request(COMMON_BASE_URL + subDomain + '/distributedLock/lock', false, 'get', { key });
 }
 communitySetting() {
   return request(COMMON_BASE_URL + subDomain + '/community/setting', false, 'get');
