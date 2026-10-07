@@ -427,12 +427,12 @@ goodsShopStores(goodsId) {
   });
 }
 goodsVideoEpisodesList(goodsId, [token]) {
-  return request('/goodsVideoEpisodes/list', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/list', false, 'get', {
     goodsId, token
   });
 }
 goodsVideoEpisodesBuy(goodsId, number, token) {
-  return request('/goodsVideoEpisodes/buy', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/goodsVideoEpisodes/buy', false, 'post', {
     goodsId, number, token
   });
 }
@@ -440,7 +440,7 @@ goodsStatistics(data) {
   return request('/shop/goods/statistics/days', true, 'post', data);
 }
 goodsUseless(data) {
-  return request('/shop/goods/useful', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/useful', false, 'post', data);
 }
 pushNewGoods(data) {
   return request('/shop/goods/putOrUpdate', true, 'post', data);
@@ -1816,15 +1816,15 @@ peisonFeeList () {
   return request('/fee/peisong/list', true, 'get');
 }
 peisongMembers (data) {
-  return request('/peisong/member/list', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/peisong/member/list', false, 'post', data);
 }
 peisongMemberInfo (token) {
-  return request('/peisong/member/info', true, 'get', {
+  return request(COMMON_BASE_URL + subDomain + '/peisong/member/info', false, 'get', {
     token
   });
 }
 peisongMemberChangeWorkStatus (token) {
-  return request('/peisong/member/change-work-status', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/peisong/member/change-work-status', false, 'post', {
     token
   });
 }
@@ -2131,7 +2131,7 @@ mockApi (groupName, apiName, method) {
   return request(COMMON_BASE_URL + subDomain + '/mock/'+ groupName +'/' + apiName, false, method);
 }
 tourJourneyList (type, refId) {
-  return request('/tourJourney/list', true, 'get', { type, refId });
+  return request(COMMON_BASE_URL + subDomain + '/tourJourney/list', false, 'get', { type, refId });
 }
 userBankSelectBanks () {
   return request(COMMON_BASE_URL + subDomain + '/userBank/banks', false, 'get');
@@ -2446,37 +2446,37 @@ ocrDriverLicense(imageUrl) {
 }
 // 朋友圈
 momentsPublish(data) {
-  return request('/user/moments/publish', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/publish', false, 'post', data);
 }
 momentsList(data) {
-  return request('/user/moments/list', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/list', false, 'post', data);
 }
 momentsDetail (token, momentsId) {
-  return request('/user/moments/detail', true, 'get', { token, momentsId });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/detail', false, 'get', { token, momentsId });
 }
 momentsDelete (token, momentsId) {
-  return request('/user/moments/del', true, 'post', { token, momentsId });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/del', false, 'post', { token, momentsId });
 }
 momentsDeleteComment (token, commentId) {
-  return request('/user/moments/delCommon', true, 'post', { token, commentId });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/delCommon', false, 'post', { token, commentId });
 }
 momentsLike (token, momentsId) {
-  return request('/user/moments/like', true, 'post', { token, momentsId });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/like', false, 'post', { token, momentsId });
 }
 momentsComment (token, momentsId, uid, content) {
-  return request('/user/moments/comment', true, 'post', { token, momentsId, uid, content });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/comment', false, 'post', { token, momentsId, uid, content });
 }
 momentsCommentLogs(data) {
-  return request('/user/moments/logs', true, 'get', data);
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/logs', false, 'post', data);
 }
 momentsLogsRead(token, logsIds) {
-  return request('/user/moments/logRead', true, 'post', { token, logsIds });
+  return request(COMMON_BASE_URL + subDomain + '/user/moments/logRead', false, 'post', { token, logsIds });
 }
 bottleMsgPublish(data) {
-  return request('/bottleMsg/publish', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/bottleMsg/publish', false, 'post', data);
 }
 bottleMsgSalvage(token) {
-  return request('/bottleMsg/salvage', true, 'get', { token });
+  return request(COMMON_BASE_URL + subDomain + '/bottleMsg/salvage', false, 'get', { token });
 }
 userInvoiceInfo(token) {
   return request(COMMON_BASE_URL + subDomain + '/userInvoice/info', false, 'get', { token });
@@ -2486,6 +2486,12 @@ userInvoiceUnbind(token) {
 }
 userInvoiceBind(data) {
   return request(COMMON_BASE_URL + subDomain + '/userInvoice/bind', false, 'post', data);
+}
+goodsLendsList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/goodsLends/list', false, 'post', data);
+}
+goodsLendsLogs(data) {
+  return request(COMMON_BASE_URL + subDomain + '/goodsLends/logs', false, 'post', data);
 }
 tempDataSet(key, content) {
   return request('/tempData/set', true, 'post', { key, content });
@@ -2500,13 +2506,13 @@ tempDataGetV2(key) {
   return request(COMMON_BASE_URL + merchantId + '/tempData/get', false, 'get', { key });
 }
 commonDatetime() {
-  return request('/common/datetime', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/common/datetime', false, 'get');
 }
 commonDays(startDay, days) {
-  return request('/common/days', false, 'get', { startDay, days });
+  return request(COMMON_BASE_URL + subDomain + '/common/days', false, 'get', { startDay, days });
 }
 commonDiffMillis(d1, d2) {
-  return request('/common/diffMillis', false, 'get', { d1, d2 });
+  return request(COMMON_BASE_URL + subDomain + '/common/diffMillis', false, 'get', { d1, d2 });
 }
 // 企业应用 组织/成员/网盘
 organizePrices: () {
@@ -3247,4 +3253,10 @@ photoBuy(data) {
 }
 photoPay(data) {
   return request(COMMON_BASE_URL + subDomain + '/photo/pay', false, 'post', data);
+}
+tournamentScoreList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/tournamentScore/list', false, 'post', data);
+}
+tournamentScoreLogList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/tournamentScore/logs', false, 'post', data);
 }
