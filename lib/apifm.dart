@@ -96,7 +96,7 @@ queryConfigBatch(keys) {
   });
 }
 scoreRules([data]) {
-  return request('/score/send/rule', true, 'post', data);
+  return request(COMMON_BASE_URL + subDomain + '/score/send/rule', false, 'post', data);
 }
 scoreSignRules () {
   return request('/score/sign/rules', true, 'get');
@@ -898,13 +898,16 @@ rechargeSendRules () {
   return request('/user/recharge/send/rule', true, 'get');
 }
 payBillDiscounts () {
-  return request('/payBill/discounts', true, 'get');
+  return request(COMMON_BASE_URL + subDomain + '/payBill/discounts', false, 'get');
 }
 payBill (token, money) {
-  return request('/payBill/pay', true, 'post', {
+  return request(COMMON_BASE_URL + subDomain + '/payBill/pay', false, 'post', {
     'token': token,
     'money': money
   });
+}
+payBillV2(data) {
+  return request(COMMON_BASE_URL + subDomain + '/payBill/pay', false, 'post', data);
 }
 vipLevel () {
   return request('/config/vipLevel', true, 'get');
@@ -1828,6 +1831,9 @@ peisongMemberChangeWorkStatus (token) {
     token
   });
 }
+peisongMemberStatistics (data) {
+  return request(COMMON_BASE_URL + subDomain + '/peisong/member/statistics', false, 'post', data);
+}
 peisongOrdersGrabbing (token) {
   return request('/peisong/order/grabbing', true, 'get', { token });
 }
@@ -1978,13 +1984,13 @@ cyTableList(data) {
   return request('/cyTable/list', true, 'post', data);
 }
 goodsTimesSchedule(goodsId, propertyChildIds, brandId, categoryId) {
-  return request('/shop/goods/times/schedule', true, 'post', { goodsId, propertyChildIds, brandId, categoryId });
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/schedule', false, 'post', { goodsId, propertyChildIds, brandId, categoryId });
 }
 goodsTimesDays (goodsId, propertyChildIds) {
-  return request('/shop/goods/times/days', true, 'post', { goodsId, propertyChildIds });
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/days', false, 'post', { goodsId, propertyChildIds });
 }
 goodsTimesDayItems (day, goodsId, propertyChildIds) {
-  return request('/shop/goods/times/items', true, 'post', { day, goodsId, propertyChildIds });
+  return request(COMMON_BASE_URL + subDomain + '/shop/goods/times/items', false, 'post', { day, goodsId, propertyChildIds });
 }
 goodsBrandList(data) {
   return request(COMMON_BASE_URL + subDomain + '/shop/goods/brand/list', false, 'post', data);
@@ -3014,6 +3020,9 @@ coachInfoMy(data) {
 coachStudentList(data) {
   return request(COMMON_BASE_URL + subDomain + '/coachStudent/list/v2', false, 'post', data);
 }
+coachStudentPublicList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/coachStudent/publicList', false, 'post', data);
+}
 coachStudentMyCoachs(data) {
   return request(COMMON_BASE_URL + subDomain + '/coachStudent/myCoachs', false, 'post', data);
 }
@@ -3022,6 +3031,9 @@ coachStudentDetail(data) {
 }
 trainingList(data) {
   return request(COMMON_BASE_URL + subDomain + '/training/list', false, 'post', data);
+}
+trainingPublicList(data) {
+  return request(COMMON_BASE_URL + subDomain + '/training/publicList', false, 'post', data);
 }
 trainingSet(data) {
   return request(COMMON_BASE_URL + subDomain + '/training/set', false, 'post', data);
@@ -3073,6 +3085,9 @@ riskAliyunGreenCheckPic(data) {
 }
 vodBaseAuthAndAddress(data) {
   return request(COMMON_BASE_URL + subDomain + '/vodBase/authAndAddress', false, 'post', data);
+}
+tournamentGroups(data) {
+  return request(COMMON_BASE_URL + subDomain + '/tournament/groups', false, 'get', data);
 }
 tournamentList(data) {
   return request(COMMON_BASE_URL + subDomain + '/tournament/list', false, 'post', data);
